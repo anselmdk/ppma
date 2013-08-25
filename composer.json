@@ -1,5 +1,14 @@
 {
+    "autoload": {
+        "psr-0": {
+            "ppma": "src/"
+        }
+    },
+
     "require": {
-        "silex/silex": "1.*"
+        "silex/silex": "1.*",
+        "vlucas/spot": "dev-master",
+        "psamatt/spot-service-provider": "dev-master",
+        "filp/whoops": "1.*"
     }
 }
