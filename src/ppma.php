@@ -19,6 +19,11 @@ class ppma
      */
     protected static $instance;
 
+    /**
+     * @var Twig_Environment
+     */
+    protected $twig;
+
 
     /**
      * @return \ppma
@@ -35,7 +40,15 @@ class ppma
         $app->register(new Psamatt\Silex\SpotServiceProvider('mysql://root:bitnami@localhost/ppma'));
         $this->db = $app['spot'];
 
+        // register Twig
+        $app->register(new Silex\Provider\TwigServiceProvider(), [
+            'twig.path' => __DIR__ . '/../views',
+        ]);
+        $this->twig = $app['twig'];
+
         // register routes
+        $app->get('/app',            '\ppma\Controller\App::home');
+        $app->get('/app/login',      '\ppma\Controller\App::login');
         $app->get('/entries',        '\ppma\Controller\Entries::all');
         $app->get('/entries/recent', '\ppma\Controller\Entries::recent');
 
@@ -50,6 +63,7 @@ class ppma
     {
         return self::instance()->getApp();
     }
+
 
     /**
      * @return \Silex\Application
@@ -70,11 +84,11 @@ class ppma
 
 
     /**
-     * @return \ppma
+     * @return \Twig_Environment
      */
-    public static function getInstance()
+    public function getTwig()
     {
-        return self::$instance;
+        return $this->twig;
     }
 
 
