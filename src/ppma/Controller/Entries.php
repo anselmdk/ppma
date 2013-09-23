@@ -7,7 +7,7 @@ use Silex\Application;
 use Spot\Query;
 use Symfony\Component\HttpFoundation\Request;
 
-class Entries extends Controller
+class Entries
 {
 
     /**
@@ -31,11 +31,8 @@ class Entries extends Controller
             ];
         }
 
-        return \ppma::app()->json($data);
+        return \ppma::silex()->json($data);
     }
-
-
-
 
 
     /**
@@ -59,7 +56,7 @@ class Entries extends Controller
             ];
         }
 
-        return \ppma::app()->json($data);
+        return \ppma::silex()->json($data);
     }
 
 }

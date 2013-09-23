@@ -3,16 +3,17 @@
 
 namespace ppma\Controller;
 
-use Keboola\Encryption\AesEncryptor;
+
 use PHPassLib\Hash\BCrypt;
+use ppma\Application\JsonTrait;
+use ppma\Application\ViewTrait;
 use ppma\Controller;
 use ppma\Entity\User;
-use Rych\Random\Random;
 use Symfony\Component\HttpFoundation\Request;
 
-
-class Login extends Controller
+class Login
 {
+    use JsonTrait, ViewTrait;
 
     /**
      * @return string
@@ -64,12 +65,11 @@ class Login extends Controller
         }
 
         // create user for session
-        $user->password = md5($password);
-        \ppma\Session\User::instance($user);
+        \ppma::instance()->user()->setEntitiy($user, md5($password));
 
         // all fine
         $response['error']     = false;
-        $response['forwardTo'] = \ppma::app()['url_generator']->generate('home');
+        $response['forwardTo'] = \ppma::silex()['url_generator']->generate('home');
         return $this->json($response);
     }
 

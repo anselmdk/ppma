@@ -5,6 +5,7 @@ namespace ppma\Session;
 
 
 use Keboola\Encryption\AesEncryptor;
+use Silex\Application;
 
 class User
 {
@@ -45,25 +46,6 @@ class User
      * @var User
      */
     protected static $instance;
-
-
-    /**
-     * @param \ppma\Entity\User $user
-     */
-    protected function __construct(\ppma\Entity\User $user)
-    {
-        $this->id           = $user->id;
-        $this->username     = $user->username;
-        $this->password     = $user->password;
-        $this->isAdmin      = $user->isAdmin;
-
-        // decrypt and save encryption key
-        $crypter            = new AesEncryptor($this->password);
-        $this->encrptionKey = $crypter->decrypt(base64_decode($user->encryptionKey));
-
-        // set instance to session
-        \ppma::instance()->session()->set(self::SESSION_NAME, $this);
-    }
 
 
     /**
@@ -112,35 +94,31 @@ class User
 
 
     /**
-     * @param \ppma\Entity\User $user
-     * @return User
-     * @throws \RuntimeException
+     * @return boolean
      */
-    public static function instance(\ppma\Entity\User $user = null)
+    public function hasAccess()
     {
-        // create instance if $user setted
-        if ($user instanceof \ppma\Entity\User)
-        {
-            self::$instance = new User($user);
-        }
+        return $this->id != null;
+    }
 
-        // check of exist an instance
-        if (!(self::$instance instanceof User))
-        {
-            // try to get user from session
-            $user = \ppma::instance()->session()->get(self::SESSION_NAME, false);
 
-            if (!$user)
-            {
-                throw new \RuntimeException();
-            }
-            else
-            {
-                self::$instance = $user;
-            }
-        }
+    /**
+     * @param \ppma\Entity\User $user
+     * @param string            $password
+     */
+    public function setEntitiy(\ppma\Entity\User $user, $password)
+    {
+        $this->id           = $user->id;
+        $this->username     = $user->username;
+        $this->password     = $password;
+        $this->isAdmin      = $user->isAdmin;
 
-        return self::$instance;
+        // decrypt and save encryption key
+        $crypter            = new AesEncryptor($this->password);
+        $this->encrptionKey = $crypter->decrypt(base64_decode($user->encryptionKey));
+
+        // set instance to session
+        \ppma::instance()->session()->set(self::SESSION_NAME, $this);
     }
 
 }

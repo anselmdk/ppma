@@ -30,6 +30,9 @@ class ppma
         $app->register(new Silex\Provider\SessionServiceProvider());
         $app['session.storage.save_path'] = realpath(__DIR__ . '/../tmp/sessions');
 
+        // register WebUserProvider
+        $app->register(new \ppma\Provider\WebUser());
+
         // register Whoops
         $app->register(new Whoops\Provider\Silex\WhoopsServiceProvider());
 
@@ -48,15 +51,6 @@ class ppma
 
 
     /**
-     * @return \Silex\Application
-     */
-    public static function app()
-    {
-        return self::instance()->getApp();
-    }
-
-
-    /**
      * Alias for getDatabase
      *
      * @return \Spot\Mapper
@@ -64,15 +58,6 @@ class ppma
     public function database()
     {
         return $this->getDatabase();
-    }
-
-
-    /**
-     * @return \Silex\Application
-     */
-    public function getApp()
-    {
-        return $this->app;
     }
 
 
@@ -91,6 +76,24 @@ class ppma
     public function getSession()
     {
         return $this->app['session'];
+    }
+
+
+    /**
+     * @return \Silex\Application
+     */
+    public function getSilex()
+    {
+        return $this->app;
+    }
+
+
+    /**
+     * @return \ppma\Session\User
+     */
+    public function getUser()
+    {
+        return $this->app['user'];
     }
 
 
@@ -116,6 +119,26 @@ class ppma
     public function session()
     {
         return $this->getSession();
+    }
+
+
+    /**
+     * @return \Silex\Application
+     */
+    public static function silex()
+    {
+        return self::instance()->getSilex();
+    }
+
+
+    /**
+     * Alias for getUser()
+     *
+     * @return \ppma\Session\User
+     */
+    public function user()
+    {
+        return $this->getUser();
     }
 
 }
