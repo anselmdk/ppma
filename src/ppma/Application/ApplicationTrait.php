@@ -22,7 +22,7 @@ trait ApplicationTrait
      */
     public function getApplication()
     {
-        return \ppma::instance();
+        return \ppma::app();
     }
 
 }

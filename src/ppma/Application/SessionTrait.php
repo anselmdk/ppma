@@ -12,7 +12,7 @@ trait SessionTrait
      */
     public function getSession()
     {
-        return \ppma::instance()->silex()['session'];
+        return \ppma::app()->silex()['session'];
     }
 
 

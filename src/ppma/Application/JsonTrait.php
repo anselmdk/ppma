@@ -15,7 +15,7 @@ trait JsonTrait
      */
     public function json($data = array(), $status = 200, $headers = array())
     {
-        return \ppma::instance()->silex()->json($data, $status, $headers);
+        return \ppma::app()->silex()->json($data, $status, $headers);
     }
 
 }

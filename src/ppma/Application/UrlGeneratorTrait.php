@@ -17,7 +17,7 @@ trait UrlGeneratorTrait
      */
     public function path($route, $parameters = array())
     {
-        return \ppma::instance()->silex()['url_generator']->generate($route, $parameters, false);
+        return \ppma::app()->silex()['url_generator']->generate($route, $parameters, false);
     }
 
     /**
@@ -30,7 +30,7 @@ trait UrlGeneratorTrait
      */
     public function url($route, $parameters = array())
     {
-        return \ppma::instance()->silex()['url_generator']->generate($route, $parameters, true);
+        return \ppma::app()->silex()['url_generator']->generate($route, $parameters, true);
     }
 
 

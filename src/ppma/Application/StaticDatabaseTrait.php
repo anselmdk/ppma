@@ -22,7 +22,7 @@ trait StaticDatabaseTrait
      */
     public static function getDatabase()
     {
-        return \ppma::instance()->silex()['spot'];
+        return \ppma::app()->silex()['spot'];
     }
 
 }

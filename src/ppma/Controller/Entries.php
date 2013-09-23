@@ -16,7 +16,7 @@ class Entries
     public function all()
     {
         /* @var Query $query */
-        $query  = \ppma::instance()->getDatabase()->all('\ppma\Entity\Entry');
+        $query  = \ppma::app()->getDatabase()->all('\ppma\Entity\Entry');
         $models = $query->order(['id' => 'desc']);
         $data   = [];
 
@@ -41,7 +41,7 @@ class Entries
     public function recent()
     {
         /* @var Query $query */
-        $query = \ppma::instance()->getDatabase()->all('\ppma\Entity\Entry');
+        $query = \ppma::app()->getDatabase()->all('\ppma\Entity\Entry');
         $models = $query->order(['id' => 'desc'])->limit(1);
         $data   = [];
 

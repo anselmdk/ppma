@@ -12,7 +12,7 @@ trait UserTrait
      */
     public function getUser()
     {
-        return \ppma::instance()->silex()['user'];
+        return \ppma::app()->silex()['user'];
     }
 
 

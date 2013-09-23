@@ -63,7 +63,7 @@ class ppma
     /**
      * @return \ppma
      */
-    public static function instance()
+    public static function app()
     {
         if (self::$instance == null)
         {
