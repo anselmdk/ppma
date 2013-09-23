@@ -12,8 +12,8 @@ use Spot\Entity;
  * @property int     id
  * @property string  username
  * @property string  password
- * @property string  salt
  * @property boolean isAdmin
+ * @property string  encryptionKey
  */
 class User extends Entity
 {
@@ -30,11 +30,11 @@ class User extends Entity
     public static function fields()
     {
         return [
-            'id'          => ['type' => 'int', 'primary' => true],
-            'username'    => ['type' => 'string'],
-            'password'    => ['type' => 'text'],
-            'salt'        => ['type' => 'text'],
-            'isAdmin'     => ['type' => 'boolean'],
+            'id'            => ['type' => 'int', 'primary' => true],
+            'username'      => ['type' => 'string'],
+            'password'      => ['type' => 'string'],
+            'isAdmin'       => ['type' => 'boolean'],
+            'encryptionKey' => ['type' => 'string'],
         ];
     }
 

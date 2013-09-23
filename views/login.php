@@ -33,12 +33,12 @@
 
         <div class="col-lg-4 col-lg-offset-4">
             <form class="form-signin">
-                    {{#if loginFailed}}
-                        <div class="alert alert-danger">{{message}}</div>
-                    {{/if}}
+                {{#if loginFailed}}
+                    <div class="alert alert-danger">{{message}}</div>
+                {{/if}}
 
-                    {{input value=username type="text" classNames="form-control" placeholder="Username"}}
-                    {{input value=password type="password" classNames="form-control" placeholder="Password"}}
+                {{input value=username type="text" classNames="form-control" placeholder="Username" disabled=isSubmitted}}
+                {{input value=password type="password" classNames="form-control" placeholder="Password" disabled=isSubmitted}}
                 <button {{action 'do'}} class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
             </form>
         </div>

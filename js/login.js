@@ -11,10 +11,14 @@ App.Router.map(function () {
 App.LoginController = Ember.Controller.extend({
 
     do: function() {
+        this.set('isSubmitted', true);
+
         $.post(null, {
             username: this.get('username'),
             password: this.get('password')
         }, $.proxy(function(data) {
+            this.set('isSubmitted', false);
+
             // set response
             this.set('loginFailed', data.error);
             this.set('message', data.message);

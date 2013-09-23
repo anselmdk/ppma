@@ -3,8 +3,11 @@
 
 namespace ppma\Controller;
 
+use Keboola\Encryption\AesEncryptor;
+use PHPassLib\Hash\BCrypt;
 use ppma\Controller;
 use ppma\Entity\User;
+use Rych\Random\Random;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -53,15 +56,16 @@ class Login extends Controller
             return $this->json($response);
         }
 
-        // hash and pad password
-        $password = sha1($user->salt . str_pad($password, 32, $user->salt));
-
         // check password
-        if ($password != $user->password)
+        if (!BCrypt::verify(md5($password), $user->password))
         {
             $response['message'] = 'Your login details are invalid.';
             return $this->json($response);
         }
+
+        // create user for session
+        $user->password = md5($password);
+        \ppma\Session\User::instance($user);
 
         // all fine
         $response['error']     = false;

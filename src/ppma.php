@@ -10,11 +10,6 @@ class ppma
     protected $app;
 
     /**
-     * @var \Spot\Mapper
-     */
-    protected $db;
-
-    /**
      * @var ppma
      */
     protected static $instance;
@@ -31,12 +26,15 @@ class ppma
         // register UrlGenerator
         $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
+        // register SessionProvider
+        $app->register(new Silex\Provider\SessionServiceProvider());
+        $app['session.storage.save_path'] = realpath(__DIR__ . '/../tmp/sessions');
+
         // register Whoops
         $app->register(new Whoops\Provider\Silex\WhoopsServiceProvider());
 
         // register Spot
-        $app->register(new Psamatt\Silex\SpotServiceProvider('mysql://root:bitnami@localhost/ppma'));
-        $this->db = $app['spot'];
+        $app->register(new Psamatt\Silex\SpotServiceProvider('mysql://root:bitnami@localhost/ppmasilex'));
 
         // register routes
         $app->get('/app',            '\ppma\Controller\App::home')->bind('home');
@@ -59,6 +57,17 @@ class ppma
 
 
     /**
+     * Alias for getDatabase
+     *
+     * @return \Spot\Mapper
+     */
+    public function database()
+    {
+        return $this->getDatabase();
+    }
+
+
+    /**
      * @return \Silex\Application
      */
     public function getApp()
@@ -72,7 +81,16 @@ class ppma
      */
     public function getDatabase()
     {
-        return $this->db;
+        return $this->app['spot'];
+    }
+
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Session\Session
+     */
+    public function getSession()
+    {
+        return $this->app['session'];
     }
 
 
@@ -87,6 +105,17 @@ class ppma
         }
 
         return self::$instance;
+    }
+
+
+    /**
+     * Alias for getSession()
+     *
+     * @return \Symfony\Component\HttpFoundation\Session\Session
+     */
+    public function session()
+    {
+        return $this->getSession();
     }
 
 }
