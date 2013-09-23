@@ -38,8 +38,8 @@ class ppma
 
         // register routes
         $app->get('/app',            '\ppma\Controller\App::home')->bind('home');
-        $app->get('/app/login',      '\ppma\Controller\Login::get')->bind('login');
-        $app->post('/app/login',     '\ppma\Controller\Login::post');
+        $app->get('/login',          '\ppma\Controller\Login::get')->bind('login');
+        $app->post('/login',         '\ppma\Controller\Login::post');
         $app->get('/entries',        '\ppma\Controller\Entries::all');
         $app->get('/entries/recent', '\ppma\Controller\Entries::recent');
 
