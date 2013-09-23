@@ -28,6 +28,9 @@ class ppma
         // create application
         $app = new Silex\Application();
 
+        // register UrlGenerator
+        $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+
         // register Whoops
         $app->register(new Whoops\Provider\Silex\WhoopsServiceProvider());
 
@@ -36,8 +39,9 @@ class ppma
         $this->db = $app['spot'];
 
         // register routes
-        $app->get('/app',            '\ppma\Controller\App::home');
-        $app->get('/app/login',      '\ppma\Controller\App::login');
+        $app->get('/app',            '\ppma\Controller\App::home')->bind('home');
+        $app->get('/app/login',      '\ppma\Controller\App::login')->bind('login');
+        $app->post('/app/login',     '\ppma\Controller\App::doLogin');
         $app->get('/entries',        '\ppma\Controller\Entries::all');
         $app->get('/entries/recent', '\ppma\Controller\Entries::recent');
 

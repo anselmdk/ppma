@@ -26,16 +26,20 @@
 <script src="/ppmasilex/js/handlebars-1.0.0.js"></script>
 <script src="/ppmasilex/js/ember.js"></script>
 <script src="/ppmasilex/js/ember-data.js"></script>
-<script src="/ppmasilex/js/app.js"></script>
+<script src="/ppmasilex/js/login.js"></script>
 
 <script type="text/x-handlebars" data-template-name="login">
     <div class="container">
 
         <div class="col-lg-4 col-lg-offset-4">
             <form class="form-signin">
-                    <input type="text" class="form-control" placeholder="Username" autofocus="autofocus">
-                    <input type="password" class="form-control" placeholder="Password">
-                <button {{action 'login'}} class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    {{#if loginFailed}}
+                        <div class="alert alert-danger">{{message}}</div>
+                    {{/if}}
+
+                    {{input value=username type="text" classNames="form-control" placeholder="Username"}}
+                    {{input value=password type="password" classNames="form-control" placeholder="Password"}}
+                <button {{action 'do'}} class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
             </form>
         </div>
 
