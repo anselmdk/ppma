@@ -9,7 +9,6 @@
         "silex/silex": "1.*",
         "vlucas/spot": "dev-master",
         "psamatt/spot-service-provider": "dev-master",
-        "filp/whoops": "1.*",
-        "twig/twig": "1.*"
+        "filp/whoops": "1.*"
     }
 }

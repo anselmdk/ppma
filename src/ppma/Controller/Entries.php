@@ -34,6 +34,12 @@ class Entries
     }
 
 
+
+
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
     public function recent()
     {
         /* @var Query $query */

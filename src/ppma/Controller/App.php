@@ -3,8 +3,10 @@
 
 namespace ppma\Controller;
 
+use ppma\Controller;
 
-class App
+
+class App extends Controller
 {
 
     /**
@@ -12,13 +14,13 @@ class App
      */
     public function home()
     {
-        return \ppma::instance()->getTwig()->render('app.twig');
+        return $this->render('app');
     }
 
 
     public function login()
     {
-        return \ppma::instance()->getTwig()->render('login.twig');
+        return $this->render('login');
     }
 
 }
