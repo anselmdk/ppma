@@ -7,6 +7,7 @@ namespace ppma\Controller;
 use PHPassLib\Hash\BCrypt;
 use ppma\Application\JsonTrait;
 use ppma\Application\SilexTrait;
+use ppma\Application\UserTrait;
 use ppma\Application\ViewTrait;
 use ppma\Controller;
 use ppma\Entity\User;
@@ -14,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Login
 {
-    use JsonTrait, SilexTrait, ViewTrait;
+    use JsonTrait, UserTrait, ViewTrait;
 
     /**
      * @return string
@@ -66,7 +67,7 @@ class Login
         }
 
         // create user for session
-        \ppma::instance()->user()->setEntitiy($user, md5($password));
+        $this->user()->setEntitiy($user, md5($password));
 
         // all fine
         $response['error']     = false;
