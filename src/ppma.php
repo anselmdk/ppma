@@ -7,7 +7,8 @@ class ppma
     /**
      * @var Silex\Application
      */
-    protected $app;
+    protected $silex;
+
 
     /**
      * @var ppma
@@ -46,27 +47,7 @@ class ppma
         $app->get('/entries',        '\ppma\Controller\Entries::all');
         $app->get('/entries/recent', '\ppma\Controller\Entries::recent');
 
-        $this->app = $app;
-    }
-
-
-    /**
-     * Alias for getDatabase
-     *
-     * @return \Spot\Mapper
-     */
-    public function database()
-    {
-        return $this->getDatabase();
-    }
-
-
-    /**
-     * @return \Spot\Mapper
-     */
-    public function getDatabase()
-    {
-        return $this->app['spot'];
+        $this->silex = $app;
     }
 
 
@@ -75,7 +56,7 @@ class ppma
      */
     public function getSession()
     {
-        return $this->app['session'];
+        return $this->silex['session'];
     }
 
 
@@ -84,7 +65,7 @@ class ppma
      */
     public function getSilex()
     {
-        return $this->app;
+        return $this->silex;
     }
 
 
@@ -93,7 +74,7 @@ class ppma
      */
     public function getUser()
     {
-        return $this->app['user'];
+        return $this->silex['user'];
     }
 
 
@@ -123,11 +104,13 @@ class ppma
 
 
     /**
+     * Alias for getSilex()
+     *
      * @return \Silex\Application
      */
-    public static function silex()
+    public function silex()
     {
-        return self::instance()->getSilex();
+        return $this->getSilex();
     }
 
 

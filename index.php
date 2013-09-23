@@ -2,4 +2,4 @@
 
 require_once 'vendor/autoload.php';
 
-ppma::silex()->run();
+ppma::instance()->silex()->run();

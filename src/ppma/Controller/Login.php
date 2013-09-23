@@ -6,6 +6,7 @@ namespace ppma\Controller;
 
 use PHPassLib\Hash\BCrypt;
 use ppma\Application\JsonTrait;
+use ppma\Application\SilexTrait;
 use ppma\Application\ViewTrait;
 use ppma\Controller;
 use ppma\Entity\User;
@@ -13,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Login
 {
-    use JsonTrait, ViewTrait;
+    use JsonTrait, SilexTrait, ViewTrait;
 
     /**
      * @return string
@@ -69,7 +70,7 @@ class Login
 
         // all fine
         $response['error']     = false;
-        $response['forwardTo'] = \ppma::silex()['url_generator']->generate('home');
+        $response['forwardTo'] = $this->silex()['url_generator']->generate('home');
         return $this->json($response);
     }
 

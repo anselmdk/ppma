@@ -4,13 +4,14 @@
 namespace ppma\Controller;
 
 use ppma\Application\ApplicationTrait;
+use ppma\Application\SilexTrait;
 use ppma\Application\ViewTrait;
 use ppma\Controller;
 
 
 class App
 {
-    use ApplicationTrait, ViewTrait;
+    use ApplicationTrait, SilexTrait, ViewTrait;
 
     /**
      * @return string
@@ -19,8 +20,8 @@ class App
     {
         if (!$this->app()->user()->hasAccess())
         {
-            $url = $this->app()->silex()['url_generator']->generate('login');
-            return $this->app()->silex()->redirect($url);
+            $url = $this->silex()['url_generator']->generate('login');
+            return $this->silex()->redirect($url);
         }
 
         return $this->render('app');

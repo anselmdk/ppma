@@ -2,6 +2,7 @@
 
 namespace ppma\Entity;
 
+use ppma\Application\StaticDatabaseTrait;
 use Spot\Entity;
 
 
@@ -17,6 +18,7 @@ use Spot\Entity;
  */
 class User extends Entity
 {
+    use StaticDatabaseTrait;
 
     /**
      * @var string
@@ -45,7 +47,7 @@ class User extends Entity
      */
     public static function findByUsername($username)
     {
-        return \ppma::instance()->getDatabase()->first('ppma\Entity\User', ['username' => $username]);
+        return self::getDatabase()->first('ppma\Entity\User', ['username' => $username]);
     }
 
 }
