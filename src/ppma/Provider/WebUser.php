@@ -4,12 +4,14 @@
 namespace ppma\Provider;
 
 
+use ppma\Application\SessionTrait;
 use ppma\Session\User;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
 class WebUser implements ServiceProviderInterface
 {
+    use SessionTrait;
 
     /**
      * Registers services on the given app.
@@ -23,7 +25,7 @@ class WebUser implements ServiceProviderInterface
     {
         $app['user'] = $app->share(function() {
             // try to get user from session
-            $user = \ppma::instance()->session()->get(User::SESSION_NAME);
+            $user = $this->session()->get(User::SESSION_NAME);
 
             if ($user instanceof User)
             {

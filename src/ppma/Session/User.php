@@ -5,10 +5,12 @@ namespace ppma\Session;
 
 
 use Keboola\Encryption\AesEncryptor;
+use ppma\Application\SessionTrait;
 use Silex\Application;
 
 class User
 {
+    use SessionTrait;
 
     const SESSION_NAME = '__ppma_user';
 
@@ -118,7 +120,7 @@ class User
         $this->encrptionKey = $crypter->decrypt(base64_decode($user->encryptionKey));
 
         // set instance to session
-        \ppma::instance()->session()->set(self::SESSION_NAME, $this);
+        $this->session()->set(self::SESSION_NAME, $this);
     }
 
 }

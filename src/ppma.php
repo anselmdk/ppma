@@ -52,15 +52,6 @@ class ppma
 
 
     /**
-     * @return \Symfony\Component\HttpFoundation\Session\Session
-     */
-    public function getSession()
-    {
-        return $this->silex['session'];
-    }
-
-
-    /**
      * @return \Silex\Application
      */
     public function getSilex()
@@ -80,17 +71,6 @@ class ppma
         }
 
         return self::$instance;
-    }
-
-
-    /**
-     * Alias for getSession()
-     *
-     * @return \Symfony\Component\HttpFoundation\Session\Session
-     */
-    public function session()
-    {
-        return $this->getSession();
     }
 
 
