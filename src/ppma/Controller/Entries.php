@@ -2,11 +2,12 @@
 
 namespace ppma\Controller;
 
+use ppma\Controller;
 use Silex\Application;
 use Spot\Query;
 use Symfony\Component\HttpFoundation\Request;
 
-class Entries
+class Entries extends Controller
 {
 
     /**
