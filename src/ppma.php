@@ -32,7 +32,7 @@ class ppma
         $app['session.storage.save_path'] = realpath(__DIR__ . '/../tmp/sessions');
 
         // register WebUserProvider
-        $app->register(new \ppma\Provider\WebUser());
+        $app->register(new \ppma\Provider\User());
 
         // register Whoops
         $app->register(new Whoops\Provider\Silex\WhoopsServiceProvider());
