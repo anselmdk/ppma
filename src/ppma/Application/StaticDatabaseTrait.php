@@ -6,7 +6,6 @@ namespace ppma\Application;
 
 trait StaticDatabaseTrait
 {
-    use StaticSilexTrait;
 
     /**
      * Alias for getDatabase
@@ -23,7 +22,7 @@ trait StaticDatabaseTrait
      */
     public static function getDatabase()
     {
-        return self::silex()['spot'];
+        return \ppma::instance()->silex()['spot'];
     }
 
 }

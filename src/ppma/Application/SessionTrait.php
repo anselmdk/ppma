@@ -6,15 +6,13 @@ namespace ppma\Application;
 
 trait SessionTrait
 {
-    use SilexTrait;
-
 
     /**
      * @return \Symfony\Component\HttpFoundation\Session\Session
      */
     public function getSession()
     {
-        return $this->silex()['session'];
+        return \ppma::instance()->silex()['session'];
     }
 
 

@@ -6,14 +6,13 @@ namespace ppma\Application;
 
 trait UserTrait
 {
-    use SilexTrait;
 
     /**
      * @return \ppma\Session\User
      */
     public function getUser()
     {
-        return $this->silex()['user'];
+        return \ppma::instance()->silex()['user'];
     }
 
 

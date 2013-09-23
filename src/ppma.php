@@ -41,7 +41,7 @@ class ppma
         $app->register(new Psamatt\Silex\SpotServiceProvider('mysql://root:bitnami@localhost/ppmasilex'));
 
         // register routes
-        $app->get('/app',            '\ppma\Controller\App::home')->bind('home');
+        $app->get('/app',            '\ppma\Controller\App::home')->bind('app');
         $app->get('/login',          '\ppma\Controller\Login::get')->bind('login');
         $app->post('/login',         '\ppma\Controller\Login::post');
         $app->get('/entries',        '\ppma\Controller\Entries::all');

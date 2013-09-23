@@ -22,7 +22,7 @@ trait DatabaseTrait
      */
     public function getDatabase()
     {
-        return $this->silex['spot'];
+        return \ppma::instance()->silex()['spot'];
     }
 
 }
