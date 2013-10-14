@@ -6,19 +6,8 @@ namespace ppma\Controller;
 
 use ppma\Controller;
 use ppma\Service;
+use ppma\Serviceable;
 
-abstract class ControllerImpl implements Controller
+abstract class ControllerImpl extends Serviceable\DefaultServicableImpl implements Controller
 {
-
-    /**
-     * @param string $name
-     * @param Service $service
-     * @return void
-     */
-    public function setService($name, Service $service)
-    {
-        // TODO: validation
-        $this->$name = $service;
-    }
-
 }

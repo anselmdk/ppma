@@ -11,6 +11,7 @@
         "filp/whoops": "1.*",
         "rych/phpass": "3.0.*@beta",
         "keboola/php-encryption": "0.2.1",
-        "rych/random": "1.0.*@dev"
+        "rych/random": "1.0.*@dev",
+        "pklink/dotor": "0.2.*"
     }
 }

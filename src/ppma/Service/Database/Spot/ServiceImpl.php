@@ -5,11 +5,17 @@ namespace ppma\Service\Database\Spot;
 
 
 use ppma\Service;
+use ppma\Serviceable\DefaultServicableImpl;
 use Spot\Config;
 use Spot\Mapper;
 
-class ServiceImpl implements Service
+abstract class ServiceImpl extends DefaultServicableImpl implements Service
 {
+
+    /**
+     * @var Service\Configuration\DotorServiceImpl
+     */
+    protected $configService;
 
     /**
      * @var Mapper
@@ -24,10 +30,23 @@ class ServiceImpl implements Service
     {
         $cfg = new Config();
         $cfg->addConnection('db', sprintf('mysql://%s:%s@%s/%s',
-            $args['username'], $args['password'], $args['host'], $args['table']
+            $this->configService->get('database.username'),
+            $this->configService->get('database.password'),
+            $this->configService->get('database.host'),
+            $this->configService->get('database.database')
         ));
 
         $this->mapper = new Mapper($cfg);
+    }
+
+    public function services()
+    {
+        return [
+            [
+                'name' => 'configService',
+                'id'   => '\ppma\Service\Configuration\DotorServiceImpl'
+            ]
+        ];
     }
 
 }

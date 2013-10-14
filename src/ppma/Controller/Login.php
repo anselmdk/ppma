@@ -6,7 +6,6 @@ namespace ppma\Controller;
 
 use PHPassLib\Hash\BCrypt;
 use ppma\Application\JsonTrait;
-use ppma\Application\SilexTrait;
 use ppma\Application\UrlGeneratorTrait;
 use ppma\Application\UserTrait;
 use ppma\Application\ViewTrait;
@@ -33,12 +32,6 @@ class Login extends ControllerImpl
             [
                 'name' => 'userService',
                 'id'   => 'ppma\Service\Database\Spot\UserServiceImpl',
-                'args' => [
-                    'username' => 'root',
-                    'password' => 'bitnami',
-                    'host'     => 'localhost',
-                    'table'    => 'ppmasilex',
-                ],
             ],
         ];
     }

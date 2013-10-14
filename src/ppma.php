@@ -56,6 +56,30 @@ class ppma
         $this->registerRoutes();
     }
 
+    /**
+     * @param \ppma\Serviceable $object
+     */
+    public function attachServices(\ppma\Serviceable $object)
+    {
+        // create services
+        foreach ($object->services() as $configuration)
+        {
+            $name = $configuration['name'];
+            $id   = $configuration['id'];
+            $args = [];
+
+            if (isset($configuration['args']))
+            {
+                $args = $configuration['args'];
+            }
+
+            // create service
+            $service = $this->createService($id, $args);
+
+            // set service to object
+            $object->setService($name, $service);
+        }
+    }
 
     /**
      * @param string $id
@@ -68,20 +92,8 @@ class ppma
             /* @var \ppma\Controller $controller */
             $controller = new $id();
 
-            // create services
-            foreach ($controller->services() as $configuration)
-            {
-                $name = $configuration['name'];
-                $id   = $configuration['id'];
-                $args = [];
-
-                if (isset($configuration['args']))
-                {
-                    $args = $configuration['args'];
-                }
-
-                $controller->setService($name, $this->createService($id, $args));
-            }
+            // attach services to controller
+            $this->attachServices($controller);
 
             // save controller
             $this->controller[$id] = $controller;
@@ -101,8 +113,18 @@ class ppma
         {
             /* @var \ppma\Service $service */
             $service = new $id();
+
+            // attach services if object serviceable
+            if ($service instanceof \ppma\Serviceable)
+            {
+                /* @var \ppma\Serviceable $service */
+                $this->attachServices($service);
+            }
+
+            // init service
             $service->init($args);
 
+            // save service
             $this->services[$id] = $service;
         }
 
