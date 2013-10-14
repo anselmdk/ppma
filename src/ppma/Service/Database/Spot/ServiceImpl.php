@@ -5,11 +5,12 @@ namespace ppma\Service\Database\Spot;
 
 
 use ppma\Service;
-use ppma\Serviceable\DefaultServicableImpl;
+use ppma\Service\ConfigService;
+use ppma\Serviceable;
 use Spot\Config;
 use Spot\Mapper;
 
-abstract class ServiceImpl extends DefaultServicableImpl implements Service
+abstract class ServiceImpl implements Service, Serviceable
 {
 
     /**
@@ -39,14 +40,32 @@ abstract class ServiceImpl extends DefaultServicableImpl implements Service
         $this->mapper = new Mapper($cfg);
     }
 
+    /**
+     * @return array ['propertyName' => 'class name of service']
+     */
     public function services()
     {
-        return [
-            [
-                'name' => 'configService',
-                'id'   => '\ppma\Service\Configuration\DotorServiceImpl'
-            ]
-        ];
+        return [];
     }
+
+    /**
+     * @param ConfigService $service
+     * @return mixed
+     */
+    public function setConfigService(ConfigService $service)
+    {
+        $this->configService = $service;
+    }
+
+    /**
+     * @param string $name
+     * @param Service $service
+     * @return void
+     */
+    public function setService($name, Service $service)
+    {
+        $this->$name = $service;
+    }
+
 
 }

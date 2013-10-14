@@ -6,7 +6,7 @@ namespace ppma\Service;
 
 use ppma\Service;
 
-interface ConfigurationService extends Service
+interface ConfigService extends Service
 {
 
     /**

@@ -9,6 +9,7 @@ use ppma\Serviceable;
 
 abstract class DefaultServicableImpl implements Serviceable
 {
+
     /**
      * @param string $name
      * @param Service $service

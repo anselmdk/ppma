@@ -42,15 +42,15 @@ class Login extends ControllerImpl
         return [
             [
                 'name' => 'userEntityService',
-                'id'   => 'ppma\Service\Database\Spot\UserServiceImpl',
+                'id'   => $this->configService->get('services.database.user')
             ],
             [
-                'name' => 'userEntityService',
-                'id'   => 'ppma\Service\User\SessionServiceImpl',
+                'name' => 'userService',
+                'id'   => $this->configService->get('services.user')
             ],
             [
                 'name' => 'viewService',
-                'id'   => 'ppma\Service\View\PhpServiceImpl',
+                'id'   => $this->configService->get('services.view')
             ],
         ];
     }

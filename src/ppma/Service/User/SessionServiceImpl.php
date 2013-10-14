@@ -5,6 +5,7 @@ namespace ppma\Service\User;
 
 
 use ppma\Entity\User;
+use ppma\Service\ConfigService;
 use ppma\Service\UserService;
 use ppma\Service;
 use ppma\Serviceable;
@@ -13,9 +14,14 @@ class SessionServiceImpl implements UserService, Serviceable
 {
 
     /**
+     * @var Service\ConfigService
+     */
+    protected $configService;
+
+    /**
      * @var string
      */
-    private $_sessionName = '__user';
+    private $sessionName = '__user';
 
     /**
      * @var Service\Session\PackfireServiceImpl
@@ -37,7 +43,7 @@ class SessionServiceImpl implements UserService, Serviceable
      */
     public function login(User $user)
     {
-        $this->sessionService->set($this->_sessionName, $user);
+        $this->sessionService->set($this->sessionName, $user);
     }
 
     /**
@@ -48,9 +54,18 @@ class SessionServiceImpl implements UserService, Serviceable
         return [
             [
                 'name' => 'sessionService',
-                'id'   => '\ppma\Service\Session\PackfireServiceImpl',
+                'id'   => $this->configService->get('services.session')
             ]
         ];
+    }
+
+    /**
+     * @param ConfigService $service
+     * @return mixed
+     */
+    public function setConfigService(ConfigService $service)
+    {
+        $this->configService = $service;
     }
 
     /**

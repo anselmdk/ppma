@@ -7,10 +7,14 @@ class ppma
 {
 
     /**
+     * @var \ppma\Service\ConfigService
+     */
+    protected $configService;
+
+    /**
      * @var array ['id' => 'instance of controller']
      */
     protected $controller = [];
-
 
     /**
      * @var Silex\Application
@@ -29,14 +33,15 @@ class ppma
     protected $services = [];
 
 
-    /**
-     * @return \ppma
-     */
-    protected function __construct()
+    protected function __construct($config = [])
     {
         // create application
         $app         = new Silex\Application();
         $this->silex = $app;
+
+        // create config service
+        $serviceId           = $config['services']['config'];
+        $this->configService = $this->createService($serviceId, ['config' => $config]);
 
         // register UrlGenerator
         $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
@@ -92,6 +97,7 @@ class ppma
         {
             /* @var \ppma\Controller $controller */
             $controller = new $id();
+            $controller->setConfigService($this->configService);
 
             // attach services to controller
             $this->attachServices($controller);
@@ -119,6 +125,7 @@ class ppma
             if ($service instanceof \ppma\Serviceable)
             {
                 /* @var \ppma\Serviceable $service */
+                $service->setConfigService($this->configService);
                 $this->attachServices($service);
             }
 
@@ -143,13 +150,14 @@ class ppma
 
 
     /**
-     * @return \ppma
+     * @param array $config
+     * @return ppma
      */
-    public static function app()
+    public static function app($config = [])
     {
         if (self::$instance == null)
         {
-            self::$instance = new ppma();
+            self::$instance = new ppma($config);
         }
 
         return self::$instance;

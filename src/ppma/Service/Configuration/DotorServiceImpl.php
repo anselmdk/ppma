@@ -5,9 +5,9 @@ namespace ppma\Service\Configuration;
 
 
 use Dotor\Dotor;
-use ppma\Service\ConfigurationService;
+use ppma\Service\ConfigService;
 
-class DotorServiceImpl extends Dotor implements ConfigurationService
+class DotorServiceImpl extends Dotor implements ConfigService
 {
 
     /**
@@ -16,7 +16,7 @@ class DotorServiceImpl extends Dotor implements ConfigurationService
      */
     public function init($args = [])
     {
-        $this->params = include(__DIR__ . '/../../../../config.php');
+        $this->params = $args['config'];
     }
 
 }
