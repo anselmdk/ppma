@@ -1,8 +1,16 @@
 <?php
 
 
+use Symfony\Component\HttpFoundation\Request;
+
 class ppma
 {
+
+    /**
+     * @var array ['id' => 'instance of controller']
+     */
+    protected $controller = [];
+
 
     /**
      * @var Silex\Application
@@ -15,6 +23,11 @@ class ppma
      */
     protected static $instance;
 
+    /**
+     * @var array ['id' => 'instance of service']
+     */
+    protected $services = [];
+
 
     /**
      * @return \ppma
@@ -22,7 +35,8 @@ class ppma
     protected function __construct()
     {
         // create application
-        $app = new Silex\Application();
+        $app         = new Silex\Application();
+        $this->silex = $app;
 
         // register UrlGenerator
         $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
@@ -36,18 +50,66 @@ class ppma
 
         // register Whoops
         $app->register(new Whoops\Provider\Silex\WhoopsServiceProvider());
+        $app['whoops']->pushHandler(new \Whoops\Handler\JsonResponseHandler());
 
         // register Spot
         $app->register(new Psamatt\Silex\SpotServiceProvider('mysql://root:bitnami@localhost/ppmasilex'));
 
         // register routes
-        $app->get('/app',            '\ppma\Controller\App::home')->bind('app');
-        $app->get('/login',          '\ppma\Controller\Login::get')->bind('login');
-        $app->post('/login',         '\ppma\Controller\Login::post');
-        $app->get('/entries',        '\ppma\Controller\Entries::all');
-        $app->get('/entries/recent', '\ppma\Controller\Entries::recent');
+        $this->registerRoutes();
+    }
 
-        $this->silex = $app;
+
+    /**
+     * @param string $id
+     * @return \ppma\Controller
+     */
+    public function createController($id)
+    {
+        if (!isset($this->controller[$id]))
+        {
+            /* @var \ppma\Controller $controller */
+            $controller = new $id();
+
+            // create services
+            foreach ($controller->services() as $configuration)
+            {
+                $name = $configuration['name'];
+                $id   = $configuration['id'];
+                $args = [];
+
+                if (isset($configuration['args']))
+                {
+                    $args = $configuration['args'];
+                }
+
+                $controller->setService($name, $this->createService($id, $args));
+            }
+
+            // save controller
+            $this->controller[$id] = $controller;
+        }
+
+        return $this->controller[$id];
+    }
+
+    /**
+     * @param string $id
+     * @param array  $args
+     * @return \ppma\Service
+     */
+    public function createService($id, $args = [])
+    {
+        if (!isset($this->services[$id]))
+        {
+            /* @var \ppma\Service $service */
+            $service = new $id();
+            $service->init($args);
+
+            $this->services[$id] = $service;
+        }
+
+        return $this->services[$id];
     }
 
 
@@ -71,6 +133,41 @@ class ppma
         }
 
         return self::$instance;
+    }
+
+    /**
+     * @return void
+     */
+    protected function registerRoutes()
+    {
+        $app = $this->silex;
+
+        // register routes
+        $app->get('/app',            '\ppma\Controller\App::home')->bind('app');
+        $app->get('/entries',        '\ppma\Controller\Entries::all');
+        $app->get('/entries/recent', '\ppma\Controller\Entries::recent');
+
+        // GET: /login
+        $app->get('/login', function() {
+            return $this->createController('\ppma\Controller\Login')->get();
+        })->bind('login');
+
+        // POST: /login
+        $app->post('/login', function(Request $request) {
+            return $this->createController('\ppma\Controller\Login')->post($request);
+        });
+    }
+
+    /**
+     * @param \ppma\Controller $controller
+     * @return void
+     */
+    protected function setServices(\ppma\Controller $controller)
+    {
+        foreach ($controller->services() as $name => $id)
+        {
+            $controller->setService($name, $this->createService($id));
+        }
     }
 
 

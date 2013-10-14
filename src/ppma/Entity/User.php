@@ -1,53 +1,115 @@
 <?php
 
+
 namespace ppma\Entity;
 
-use ppma\Application\StaticDatabaseTrait;
-use Spot\Entity;
 
-
-/**
- * Class User
- * @package ppma\Entity
- *
- * @property int     id
- * @property string  username
- * @property string  password
- * @property boolean isAdmin
- * @property string  encryptionKey
- */
-class User extends Entity
+class User extends EntityImpl
 {
-    use StaticDatabaseTrait;
 
     /**
      * @var string
      */
-    protected static $_datasource = 'user';
-
+    private $encryptionKey;
 
     /**
-     * @return array
+     * @var int
      */
-    public static function fields()
+    private $id;
+
+    /**
+     * @var bool
+     */
+    private $isAdmin;
+
+    /**
+     * @var string
+     */
+    private $password;
+
+    /**
+     * @var string
+     */
+    private $username;
+
+    /**
+     * @return string
+     */
+    public function getEncryptionKey()
     {
-        return [
-            'id'            => ['type' => 'int', 'primary' => true],
-            'username'      => ['type' => 'string'],
-            'password'      => ['type' => 'string'],
-            'isAdmin'       => ['type' => 'boolean'],
-            'encryptionKey' => ['type' => 'string'],
-        ];
+        return $this->encryptionKey;
     }
 
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getIsAdmin()
+    {
+        return $this->isAdmin;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @param string $encryptionKey
+     */
+    public function setEncryptionKey($encryptionKey)
+    {
+        $this->encryptionKey = $encryptionKey;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param boolean $isAdmin
+     */
+    public function setIsAdmin($isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
 
     /**
      * @param string $username
-     * @return bool|User
      */
-    public static function findByUsername($username)
+    public function setUsername($username)
     {
-        return self::getDatabase()->first('ppma\Entity\User', ['username' => $username]);
+        $this->username = $username;
     }
 
 }

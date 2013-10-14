@@ -12,11 +12,36 @@ use ppma\Application\UserTrait;
 use ppma\Application\ViewTrait;
 use ppma\Controller;
 use ppma\Entity\User;
+use ppma\Service\Database\Spot\UserServiceImpl;
 use Symfony\Component\HttpFoundation\Request;
 
-class Login
+class Login extends ControllerImpl
 {
     use JsonTrait, UserTrait, UrlGeneratorTrait, ViewTrait;
+
+    /**
+     * @var UserServiceImpl
+     */
+    protected $userService;
+
+    /**
+     * @return array
+     */
+    public function services()
+    {
+        return [
+            [
+                'name' => 'userService',
+                'id'   => 'ppma\Service\Database\Spot\UserServiceImpl',
+                'args' => [
+                    'username' => 'root',
+                    'password' => 'bitnami',
+                    'host'     => 'localhost',
+                    'table'    => 'ppmasilex',
+                ],
+            ],
+        ];
+    }
 
     /**
      * @return string
@@ -25,7 +50,6 @@ class Login
     {
         return $this->render('login');
     }
-
 
     /**
      * @param Request $request
@@ -51,7 +75,7 @@ class Login
         }
 
         // get user
-        $user = User::findByUsername($username);
+        $user = $this->userService->getByUsername($username);
 
         // check if user exist
         if (!($user instanceof User))
@@ -61,7 +85,7 @@ class Login
         }
 
         // check password
-        if (!BCrypt::verify(md5($password), $user->password))
+        if (!BCrypt::verify(md5($password), $user->getPassword()))
         {
             $response['message'] = 'Your login details are invalid.';
             return $this->json($response);
