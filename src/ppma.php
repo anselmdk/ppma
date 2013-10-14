@@ -52,9 +52,6 @@ class ppma
         $app->register(new Whoops\Provider\Silex\WhoopsServiceProvider());
         $app['whoops']->pushHandler(new \Whoops\Handler\JsonResponseHandler());
 
-        // register Spot
-        $app->register(new Psamatt\Silex\SpotServiceProvider('mysql://root:bitnami@localhost/ppmasilex'));
-
         // register routes
         $this->registerRoutes();
     }
