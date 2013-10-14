@@ -8,20 +8,25 @@ use PHPassLib\Hash\BCrypt;
 use ppma\Application\JsonTrait;
 use ppma\Application\UrlGeneratorTrait;
 use ppma\Application\UserTrait;
-use ppma\Application\ViewTrait;
 use ppma\Controller;
 use ppma\Entity\User;
 use ppma\Service\Database\Spot\UserServiceImpl;
+use ppma\Service\View\PhpServiceImpl;
 use Symfony\Component\HttpFoundation\Request;
 
 class Login extends ControllerImpl
 {
-    use JsonTrait, UserTrait, UrlGeneratorTrait, ViewTrait;
+    use JsonTrait, UserTrait, UrlGeneratorTrait;
 
     /**
      * @var UserServiceImpl
      */
     protected $userService;
+
+    /**
+     * @var PhpServiceImpl
+     */
+    protected $viewService;
 
     /**
      * @return array
@@ -33,6 +38,10 @@ class Login extends ControllerImpl
                 'name' => 'userService',
                 'id'   => 'ppma\Service\Database\Spot\UserServiceImpl',
             ],
+            [
+                'name' => 'viewService',
+                'id'   => 'ppma\Service\View\PhpServiceImpl',
+            ],
         ];
     }
 
@@ -41,7 +50,7 @@ class Login extends ControllerImpl
      */
     public function get()
     {
-        return $this->render('login');
+        return $this->viewService->render('login');
     }
 
     /**
