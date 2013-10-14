@@ -11,6 +11,7 @@ use ppma\Application\UserTrait;
 use ppma\Controller;
 use ppma\Entity\User;
 use ppma\Service\Database\Spot\UserServiceImpl;
+use ppma\Service\User\SessionServiceImpl;
 use ppma\Service\View\PhpServiceImpl;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -20,6 +21,11 @@ class Login extends ControllerImpl
 
     /**
      * @var UserServiceImpl
+     */
+    protected $userEntityService;
+
+    /**
+     * @var SessionServiceImpl
      */
     protected $userService;
 
@@ -35,8 +41,12 @@ class Login extends ControllerImpl
     {
         return [
             [
-                'name' => 'userService',
+                'name' => 'userEntityService',
                 'id'   => 'ppma\Service\Database\Spot\UserServiceImpl',
+            ],
+            [
+                'name' => 'userEntityService',
+                'id'   => 'ppma\Service\User\SessionServiceImpl',
             ],
             [
                 'name' => 'viewService',
@@ -77,7 +87,7 @@ class Login extends ControllerImpl
         }
 
         // get user
-        $user = $this->userService->getByUsername($username);
+        $user = $this->userEntityService->getByUsername($username);
 
         // check if user exist
         if (!($user instanceof User))

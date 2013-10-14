@@ -51,6 +51,7 @@ class ppma
         // register Whoops
         $app->register(new Whoops\Provider\Silex\WhoopsServiceProvider());
         $app['whoops']->pushHandler(new \Whoops\Handler\JsonResponseHandler());
+        $app['whoops']->pushHandler(new \Whoops\Handler\PrettyPageHandler());
 
         // register routes
         $this->registerRoutes();
