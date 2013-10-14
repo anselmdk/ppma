@@ -1,7 +1,6 @@
 <?php
 
 namespace ppma\Service\Database\Spot\Entity;
-
 use Spot\Entity;
 
 

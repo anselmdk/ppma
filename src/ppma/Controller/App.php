@@ -3,13 +3,13 @@
 
 namespace ppma\Controller;
 
+
 use ppma\Application\ApplicationTrait;
 use ppma\Application\SilexTrait;
 use ppma\Application\UrlGeneratorTrait;
 use ppma\Application\UserTrait;
 use ppma\Application\ViewTrait;
 use ppma\Controller;
-
 
 class App
 {

@@ -5,9 +5,9 @@ namespace ppma\Service\Database\Spot;
 
 
 use ppma\Entity\User;
-use ppma\Service\Database\UserService;
-use ppma\Service\Database\Spot\ServiceImpl;
 use ppma\Service\Database\Spot\Entity\User as SpotUser;
+use ppma\Service\Database\Spot\ServiceImpl;
+use ppma\Service\Database\UserService;
 
 class UserServiceImpl extends ServiceImpl implements UserService
 {
