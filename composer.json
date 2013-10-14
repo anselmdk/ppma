@@ -7,7 +7,7 @@
 
     "require": {
         "silex/silex": "1.*",
-        "vlucas/spot": "dev-master",
+        "vlucas/spot": "0.9.*",
         "filp/whoops": "1.*",
         "rych/phpass": "3.0.*@beta",
         "keboola/php-encryption": "0.2.1",
