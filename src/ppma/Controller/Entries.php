@@ -2,22 +2,24 @@
 
 namespace ppma\Controller;
 
+use ppma\Application\JsonTrait;
 use ppma\Controller;
+use ppma\Entity\Entry;
 use Silex\Application;
 use Spot\Query;
 use Symfony\Component\HttpFoundation\Request;
 
 class Entries
 {
+    use JsonTrait;
+
 
     /**
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function all()
     {
-        /* @var Query $query */
-        $query  = \ppma::app()->getDatabase()->all('\ppma\Entity\Entry');
-        $models = $query->order(['id' => 'desc']);
+        $models = Entry::findAll()->order(['id' => 'desc']);
         $data   = [];
 
         // prepare response
@@ -31,7 +33,7 @@ class Entries
             ];
         }
 
-        return \ppma::silex()->json($data);
+        return $this->json($data);
     }
 
 
@@ -40,9 +42,7 @@ class Entries
      */
     public function recent()
     {
-        /* @var Query $query */
-        $query = \ppma::app()->getDatabase()->all('\ppma\Entity\Entry');
-        $models = $query->order(['id' => 'desc'])->limit(1);
+        $models = Entry::findAll()->order(['id' => 'desc'])->limit(1);
         $data   = [];
 
         // prepare response
@@ -56,7 +56,7 @@ class Entries
             ];
         }
 
-        return \ppma::silex()->json($data);
+        return $this->json($data);
     }
 
 }

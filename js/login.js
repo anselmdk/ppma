@@ -17,15 +17,14 @@ App.LoginController = Ember.Controller.extend({
             username: this.get('username'),
             password: this.get('password')
         }, $.proxy(function(data) {
-            this.set('isSubmitted', false);
-
-            // set response
-            this.set('loginFailed', data.error);
-            this.set('message', data.message);
-
             // redirect user is login successfully
             if (!data.error) {
                 window.location.href = data.forwardTo;
+            }
+            else {
+                this.set('isSubmitted', false);
+                this.set('loginFailed', true);
+                this.set('message', data.message);
             }
         }, this));
     }

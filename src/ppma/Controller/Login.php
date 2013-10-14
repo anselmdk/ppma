@@ -73,6 +73,7 @@ class Login
         // all fine
         $response['error']     = false;
         $response['forwardTo'] = $this->path('app');
+        $response['baseUrl']   = $request->getBaseUrl();
         return $this->json($response);
     }
 

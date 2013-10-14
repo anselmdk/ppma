@@ -24,7 +24,7 @@
 <script src="/ppmasilex/js/ember-data.js"></script>
 <script src="/ppmasilex/js/app.js"></script>
 
-<!-- Fixed navbar -->
+
 <script type="text/x-handlebars">
 
     <div class="navbar navbar-default navbar-fixed-top">
@@ -48,7 +48,7 @@
                         </ul>
                     </li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
                 </ul>
                 <form class="navbar-form navbar-right">
                     <div class="form-group">
@@ -71,19 +71,18 @@
 
         </div>
 
-    </div> <!-- /container -->
-
-</script>
-
-<script type="text/x-handlerbars" data-template-name="entries">
-    entries
+    </div>
 </script>
 
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="/ppmasilex/js/jquery.js"></script>
+<script type="text/x-handlebars" data-template-name="entries">
+    <p>entries</p>
+    <p>entries</p>
+    <p>entries</p>
+    <p>entries</p>
+</script>
+
+
 <script src="/ppmasilex/js/bootstrap.min.js"></script>
 </body>
 </html>

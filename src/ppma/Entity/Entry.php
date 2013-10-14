@@ -2,10 +2,15 @@
 
 namespace ppma\Entity;
 
+use ppma\Application\DatabaseTrait;
+use ppma\Application\StaticDatabaseTrait;
 use Spot\Entity;
+use Spot\Query;
 
 class Entry extends Entity
 {
+    use StaticDatabaseTrait;
+
 
     /**
      * @var string
@@ -27,6 +32,15 @@ class Entry extends Entity
             'userId'      => ['type' => 'int'],
             'categoryId'  => ['type' => 'int'],
         ];
+    }
+
+
+    /**
+     * @return Query
+     */
+    public static function findAll()
+    {
+        return self::database()->all('\ppma\Entity\Entry');
     }
 
 }
