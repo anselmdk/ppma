@@ -18,10 +18,10 @@ class JsonServiceImpl implements ResponseService
     }
 
     /**
-     * @param array $data
+     * @param mixed $data
      * @return string
      */
-    public function send(array $data)
+    public function send($data)
     {
         header('Content-type: application/json');
         return json_encode($data);

@@ -19,7 +19,7 @@ return [
             //'html' => '\ppma\Service\Response\JsonServiceImpl',
             'json' => '\ppma\Service\Response\JsonServiceImpl',
         ],
-        'session' => '\ppma\Service\Session\PackfireServiceImpl',
+        'session' => '\ppma\Service\Session\DispatchServiceImpl',
         'user'    => '\ppma\Service\User\SessionServiceImpl',
         'view'    => '\ppma\Service\View\PhpServiceImpl',
     ]

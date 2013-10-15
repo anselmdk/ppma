@@ -14,14 +14,9 @@ class SessionServiceImpl implements UserService, Serviceable
 {
 
     /**
-     * @var string
+     * @var Service\SessionService
      */
-    private $sessionName = '__user';
-
-    /**
-     * @var Service\Session\PackfireServiceImpl
-     */
-    protected $sessionService;
+    protected $session;
 
     /**
      * @param array $args
@@ -29,7 +24,6 @@ class SessionServiceImpl implements UserService, Serviceable
      */
     public function init($args = [])
     {
-        // TODO: Implement init() method.
     }
 
     /**
@@ -38,7 +32,7 @@ class SessionServiceImpl implements UserService, Serviceable
      */
     public function login(User $user)
     {
-        $this->sessionService->set($this->sessionName, $user);
+        $this->session->set('user', $user);
     }
 
     /**
@@ -48,8 +42,8 @@ class SessionServiceImpl implements UserService, Serviceable
     {
         return [
             [
-                'name' => 'sessionService',
-                'id'   => Config::get('services.session')
+                'name' => 'session',
+                'id'   => Config::get('services.session'),
             ]
         ];
     }

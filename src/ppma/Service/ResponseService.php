@@ -10,9 +10,9 @@ interface ResponseService extends Service
 {
 
     /**
-     * @param array $data
+     * @param mixed $data
      * @return string
      */
-    public function send(array $data);
+    public function send($data);
 
 }

@@ -19,7 +19,7 @@ class LoginController extends ControllerImpl
     /**
      * @var JsonServiceImpl
      */
-    protected $jsonService;
+    protected $json;
 
     /**
      * @var UserServiceImpl
@@ -43,7 +43,7 @@ class LoginController extends ControllerImpl
     {
         return [
             [
-                'name' => 'jsonService',
+                'name' => 'json',
                 'id'   => Config::get('services.response.json')
             ],
             [
@@ -88,34 +88,35 @@ class LoginController extends ControllerImpl
         if (is_null($username) || is_null($password))
         {
             $response['message'] = 'Username and password cannot be blank.';
-            return $this->jsonService->send($response);
+            return $this->json->send($response);
         }
 
-        // get user
+        // retrieve user
         $user = $this->userEntityService->getByUsername($username);
 
         // check if user exist
         if (!($user instanceof User))
         {
             $response['message'] = 'Your login details are invalid.';
-            return $this->jsonService->send($response);
+            return $this->json->send($response);
         }
 
         // check password
         if (!BCrypt::verify(md5($password), $user->getPassword()))
         {
             $response['message'] = 'Your login details are invalid.';
-            return $this->jsonService->send($response);
+            return $this->json->send($response);
         }
 
         // create user for session
-        $this->user()->setEntitiy($user, md5($password));
+        $this->userService->login($user);
+        //$this->user()->setEntitiy($user, md5($password));
 
         // all fine
         $response['error']     = false;
         //$response['forwardTo'] = $this->path('app');
-        $response['baseUrl']   = $request->getBaseUrl();
-        return $this->jsonService->send($response);
+        //$response['baseUrl']   = $request->getBaseUrl();
+        return $this->json->send($response);
     }
 
 }

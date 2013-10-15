@@ -8,6 +8,7 @@ use ppma\Entity\User;
 use ppma\Service\Database\Spot\Entity\User as SpotUser;
 use ppma\Service\Database\Spot\ServiceImpl;
 use ppma\Service\Database\UserService;
+use Spot\Exception;
 
 class UserServiceImpl extends ServiceImpl implements UserService
 {
@@ -63,16 +64,17 @@ class UserServiceImpl extends ServiceImpl implements UserService
         );
     }
 
-    /**
-     * @param string $username
-     * @return User
-     */
     public function getByUsername($username)
     {
-        return $this->assignModelToEntity(
-            $this->mapper->get($this->_entityClass, ['username' => $username]),
-            new User()
-        );
+        /* @var \ppma\Service\Database\Spot\Entity\User $model */
+        $model = $this->mapper->first($this->_entityClass, ['username' => $username]);
+
+        if ($model === false)
+        {
+            throw new Exception();
+        }
+
+        return $this->assignModelToEntity($model, new User());
     }
 
 }

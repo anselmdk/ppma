@@ -11,7 +11,6 @@
         "rych/phpass": "3.0.*@beta",
         "keboola/php-encryption": "0.2.1",
         "rych/random": "1.0.*@dev",
-        "pklink/dotor": "0.2.*",
-        "packfire/session": "1.0.*"
+        "pklink/dotor": "0.2.*"
     }
 }
