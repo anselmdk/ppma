@@ -2,8 +2,6 @@
 
 namespace ppma\Service\Database\Spot\Entity;
 
-use ppma\Application\DatabaseTrait;
-use ppma\Application\StaticDatabaseTrait;
 use Spot\Entity;
 use Spot\Query;
 
