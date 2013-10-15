@@ -19,11 +19,41 @@ class SessionServiceImpl implements UserService, Serviceable
     protected $session;
 
     /**
+     * @return User
+     */
+    public function getEntity()
+    {
+        $this->session->get('user');
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        $this->getEntity()->getId();
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        $this->getEntity()->getUsername();
+    }
+
+    /**
      * @param array $args
      * @return mixed
      */
-    public function init($args = [])
+    public function init($args = []) { }
+
+    /**
+     * @return boolean
+     */
+    public function isLoggedIn()
     {
+        return $this->getEntity() instanceof User;
     }
 
     /**
@@ -33,6 +63,14 @@ class SessionServiceImpl implements UserService, Serviceable
     public function login(User $user)
     {
         $this->session->set('user', $user);
+    }
+
+    /**
+     * @return void
+     */
+    public function logout()
+    {
+        $this->session->set('user', null);
     }
 
     /**
