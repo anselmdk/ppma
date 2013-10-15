@@ -108,14 +108,12 @@ class LoginController extends ControllerImpl
             return $this->json->send($response);
         }
 
-        // create user for session
+        // sign user in
         $this->userService->login($user);
-        //$this->user()->setEntitiy($user, md5($password));
 
         // all fine
         $response['error']     = false;
-        //$response['forwardTo'] = $this->path('app');
-        //$response['baseUrl']   = $request->getBaseUrl();
+        $response['forwardTo'] = site() . config('dispatch.router') . '/app';
         return $this->json->send($response);
     }
 

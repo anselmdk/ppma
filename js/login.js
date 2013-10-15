@@ -19,7 +19,7 @@ App.LoginController = Ember.Controller.extend({
         }, $.proxy(function(data) {
             // redirect user is login successfully
             if (!data.error) {
-                //window.location.href = data.forwardTo;
+                window.location.href = data.forwardTo;
             }
             else {
                 this.set('isSubmitted', false);

@@ -64,6 +64,10 @@ class ppma
         on('POST', '/login', function() {
             echo ControllerFactory::get('\ppma\Controller\LoginController')->post();
         });
+
+        on('GET', '/app', function() {
+            echo ControllerFactory::get('\ppma\Controller\AppController')->home();
+        });
     }
 
     /**
