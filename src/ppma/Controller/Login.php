@@ -5,19 +5,24 @@ namespace ppma\Controller;
 
 
 use PHPassLib\Hash\BCrypt;
-use ppma\Application\JsonTrait;
 use ppma\Application\UrlGeneratorTrait;
 use ppma\Application\UserTrait;
 use ppma\Controller;
 use ppma\Entity\User;
 use ppma\Service\Database\Spot\UserServiceImpl;
+use ppma\Service\Response\JsonServiceImpl;
 use ppma\Service\User\SessionServiceImpl;
 use ppma\Service\View\PhpServiceImpl;
 use Symfony\Component\HttpFoundation\Request;
 
 class Login extends ControllerImpl
 {
-    use JsonTrait, UserTrait, UrlGeneratorTrait;
+    use UserTrait, UrlGeneratorTrait;
+
+    /**
+     * @var JsonServiceImpl
+     */
+    protected $jsonService;
 
     /**
      * @var UserServiceImpl
@@ -40,6 +45,10 @@ class Login extends ControllerImpl
     public function services()
     {
         return [
+            [
+                'name' => 'jsonService',
+                'id'   => $this->configService->get('services.response.json')
+            ],
             [
                 'name' => 'userEntityService',
                 'id'   => $this->configService->get('services.database.user')
@@ -83,7 +92,7 @@ class Login extends ControllerImpl
         if (is_null($username) || is_null($password))
         {
             $response['message'] = 'Username and password cannot be blank.';
-            return $this->json($response);
+            return $this->jsonService->send($response);
         }
 
         // get user
@@ -93,14 +102,14 @@ class Login extends ControllerImpl
         if (!($user instanceof User))
         {
             $response['message'] = 'Your login details are invalid.';
-            return $this->json($response);
+            return $this->jsonService->send($response);
         }
 
         // check password
         if (!BCrypt::verify(md5($password), $user->getPassword()))
         {
             $response['message'] = 'Your login details are invalid.';
-            return $this->json($response);
+            return $this->jsonService->send($response);
         }
 
         // create user for session
@@ -108,9 +117,9 @@ class Login extends ControllerImpl
 
         // all fine
         $response['error']     = false;
-        $response['forwardTo'] = $this->path('app');
+        //$response['forwardTo'] = $this->path('app');
         $response['baseUrl']   = $request->getBaseUrl();
-        return $this->json($response);
+        return $this->jsonService->send($response);
     }
 
 }

@@ -3,7 +3,7 @@
 require_once 'vendor/autoload.php';
 
 // load config
-$config = include('./config.php');
+$config = require(__DIR__ . '/config.php');
 
 // create and run app
 (new ppma($config))->run();

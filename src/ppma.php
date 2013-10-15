@@ -31,6 +31,10 @@ class ppma
      */
     protected $silex;
 
+    /**
+     * @param array $config
+     * @throws \InvalidArgumentException
+     */
     public function __construct($config = [])
     {
         // create application
@@ -38,6 +42,12 @@ class ppma
         $this->silex = $app;
 
         // create config service
+        if (!isset($config['services']['config']))
+        {
+            debug_print_backtrace();die();
+            throw new InvalidArgumentException('configuration needs services.config');
+        }
+
         $serviceId           = $config['services']['config'];
         $this->configService = $this->createService($serviceId, ['config' => $config]);
 
@@ -53,8 +63,8 @@ class ppma
 
         // register Whoops
         $app->register(new Whoops\Provider\Silex\WhoopsServiceProvider());
-        $app['whoops']->pushHandler(new \Whoops\Handler\JsonResponseHandler());
         $app['whoops']->pushHandler(new \Whoops\Handler\PrettyPageHandler());
+        $app['whoops']->pushHandler(new \Whoops\Handler\JsonResponseHandler());
 
         // register routes
         $this->registerRoutes();
@@ -109,15 +119,29 @@ class ppma
 
     /**
      * @param string $id
-     * @param array  $args
+     * @param array $args
      * @return \ppma\Service
+     * @throws ppma\Exception\ServiceDoesNotExist
+     * @throws ppma\Exception\InstanceIsNotAService
      */
     public function createService($id, $args = [])
     {
         if (!isset($this->services[$id]))
         {
+            // check if class $id exist
+            if (!class_exists($id))
+            {
+                throw new \ppma\Exception\ServiceDoesNotExist($id);
+            }
+
             /* @var \ppma\Service $service */
             $service = new $id();
+
+            // check if $service really a service
+            if (!($service instanceof \ppma\Service))
+            {
+                throw new \ppma\Exception\InstanceIsNotAService($id);
+            }
 
             // attach services if object serviceable
             if ($service instanceof \ppma\Serviceable)

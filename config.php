@@ -15,6 +15,10 @@ return [
             'user'  => '\ppma\Service\Database\Spot\UserServiceImpl',
             'entry' => '\ppma\Service\Database\Spot\EntryServiceImpl'
         ],
+        'response' => [
+            //'html' => '\ppma\Service\Response\JsonServiceImpl',
+            'json' => '\ppma\Service\Response\JsonServiceImpl',
+        ],
         'session' => '\ppma\Service\Session\PackfireServiceImpl',
         'user'    => '\ppma\Service\User\SessionServiceImpl',
         'view'    => '\ppma\Service\View\PhpServiceImpl',
