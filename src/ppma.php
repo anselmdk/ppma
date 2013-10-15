@@ -17,12 +17,6 @@ class ppma
     protected $controller = [];
 
     /**
-     * @var Silex\Application
-     */
-    protected $silex;
-
-
-    /**
      * @var ppma
      */
     protected static $instance;
@@ -32,8 +26,12 @@ class ppma
      */
     protected $services = [];
 
+    /**
+     * @var Silex\Application
+     */
+    protected $silex;
 
-    protected function __construct($config = [])
+    public function __construct($config = [])
     {
         // create application
         $app         = new Silex\Application();
@@ -184,6 +182,14 @@ class ppma
         $app->post('/login', function(Request $request) {
             return $this->createController('\ppma\Controller\Login')->post($request);
         });
+    }
+
+    /**
+     * @return void
+     */
+    public function run()
+    {
+        $this->silex->run();
     }
 
     /**

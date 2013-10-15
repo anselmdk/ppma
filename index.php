@@ -5,5 +5,5 @@ require_once 'vendor/autoload.php';
 // load config
 $config = include('./config.php');
 
-// run app
-ppma::app($config)->silex()->run();
+// create and run app
+(new ppma($config))->run();
