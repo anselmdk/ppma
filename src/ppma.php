@@ -139,11 +139,11 @@ class ppma
     protected function registerRoutes()
     {
         on('GET', '/login', function() {
-            echo $this->createController('\ppma\Controller\Login')->get();
+            echo $this->createController('\ppma\Controller\LoginController')->get();
         });
 
         on('POST', '/login', function() {
-            echo $this->createController('\ppma\Controller\Login')->post();
+            echo $this->createController('\ppma\Controller\LoginController')->post();
         });
     }
 

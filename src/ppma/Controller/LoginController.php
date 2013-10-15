@@ -12,7 +12,7 @@ use ppma\Service\Response\JsonServiceImpl;
 use ppma\Service\User\SessionServiceImpl;
 use ppma\Service\View\PhpServiceImpl;
 
-class Login extends ControllerImpl
+class LoginController extends ControllerImpl
 {
 
     /**

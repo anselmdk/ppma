@@ -7,7 +7,7 @@ namespace ppma\Controller;
 use ppma\Controller;
 use ppma\Service\ViewService;
 
-class App extends ControllerImpl
+class AppController extends ControllerImpl
 {
 
     /**
