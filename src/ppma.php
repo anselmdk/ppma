@@ -169,9 +169,13 @@ class ppma
         $app = $this->silex;
 
         // register routes
-        $app->get('/app',            '\ppma\Controller\App::home')->bind('app');
         $app->get('/entries',        '\ppma\Controller\Entries::all');
         $app->get('/entries/recent', '\ppma\Controller\Entries::recent');
+
+        // GET: /app
+        $app->get('/app', function() {
+            return $this->createController('\ppma\Controller\App')->home();
+        })->bind('app');
 
         // GET: /login
         $app->get('/login', function() {

@@ -4,27 +4,36 @@
 namespace ppma\Controller;
 
 
-use ppma\Application\ApplicationTrait;
-use ppma\Application\SilexTrait;
-use ppma\Application\UrlGeneratorTrait;
-use ppma\Application\UserTrait;
 use ppma\Controller;
+use ppma\Service\ViewService;
 
-class App
+class App extends ControllerImpl
 {
-    use ApplicationTrait, UserTrait, UrlGeneratorTrait;
+
+    /**
+     * @var ViewService
+     */
+    protected $viewService;
 
     /**
      * @return string
      */
     public function home()
     {
-        if (!$this->user()->hasAccess())
-        {
-            return $this->app()->silex()->redirect( $this->path('login') );
-        }
+        return $this->viewService->render('app');
+    }
 
-        return $this->render('app');
+    /**
+     * @return array ['propertyName' => 'class name of service']
+     */
+    public function services()
+    {
+        return [
+            [
+                'name' => 'viewService',
+                'id'   => $this->configService->get('services.view')
+            ]
+        ];
     }
 
 }
