@@ -5,6 +5,7 @@ namespace ppma\Controller;
 
 
 use PHPassLib\Hash\BCrypt;
+use ppma\Config;
 use ppma\Controller;
 use ppma\Entity\User;
 use ppma\Service\Database\Spot\UserServiceImpl;
@@ -43,19 +44,19 @@ class LoginController extends ControllerImpl
         return [
             [
                 'name' => 'jsonService',
-                'id'   => $this->configService->get('services.response.json')
+                'id'   => Config::get('services.response.json')
             ],
             [
                 'name' => 'userEntityService',
-                'id'   => $this->configService->get('services.database.user')
+                'id'   => Config::get('services.database.user')
             ],
             [
                 'name' => 'userService',
-                'id'   => $this->configService->get('services.user')
+                'id'   => Config::get('services.user')
             ],
             [
                 'name' => 'viewService',
-                'id'   => $this->configService->get('services.view')
+                'id'   => Config::get('services.view')
             ],
         ];
     }
@@ -69,7 +70,7 @@ class LoginController extends ControllerImpl
     }
 
     /**
-     * @param Request $request
+     * @return string
      */
     public function post()
     {

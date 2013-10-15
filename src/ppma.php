@@ -1,5 +1,6 @@
 <?php
 
+use ppma\Config;
 use ppma\Factory\ServiceFactory;
 
 class ppma
@@ -16,20 +17,13 @@ class ppma
      */
     public function __construct($config = [])
     {
-        // create config service
-        if (!isset($config['services']['config']))
-        {
-            throw new InvalidArgumentException('configuration needs services.config');
-        }
-
-        /* @var \ppma\Service\ConfigService $configService */
-        $configService = ServiceFactory::get($config['services']['config'], ['config' => $config]);
-        ServiceFactory::init($configService);
+        // initialize ppma\Config
+        Config::init($config);
 
         // config dispatch
         config('dispatch.views', '../views');
-        config('dispatch.router', pathinfo($configService->get('url'), PATHINFO_BASENAME));
-        config('dispatch.url',    pathinfo($configService->get('url'), PATHINFO_DIRNAME));
+        config('dispatch.router', pathinfo(Config::get('url'), PATHINFO_BASENAME));
+        config('dispatch.url',    pathinfo(Config::get('url'), PATHINFO_DIRNAME));
 
         // register routes
         $this->registerRoutes();

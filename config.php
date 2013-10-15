@@ -11,7 +11,6 @@ return [
     ],
 
     'services' => [
-        'config'   => '\ppma\Service\Configuration\DotorServiceImpl',
         'database' => [
             'user'  => '\ppma\Service\Database\Spot\UserServiceImpl',
             'entry' => '\ppma\Service\Database\Spot\EntryServiceImpl'

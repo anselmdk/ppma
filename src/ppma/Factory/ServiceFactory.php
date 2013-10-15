@@ -13,11 +13,6 @@ class ServiceFactory
 {
 
     /**
-     * @var Service\ConfigService
-     */
-    protected static $configService;
-
-    /**
      * @var Service[]
      */
     protected static $services = [];
@@ -28,8 +23,6 @@ class ServiceFactory
      */
     public static function adorn(Serviceable $object)
     {
-        $object->setConfigService(self::$configService);
-
         foreach ($object->services() as $configuration)
         {
             $name = $configuration['name'];
@@ -108,15 +101,6 @@ class ServiceFactory
         }
 
         return self::$services[$id][$argId];
-    }
-
-    /**
-     * @param Service\ConfigService $config
-     * @return void
-     */
-    public static function init(Service\ConfigService $config)
-    {
-        self::$configService = $config;
     }
 
 }

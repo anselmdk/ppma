@@ -5,12 +5,9 @@ namespace ppma\Session;
 
 
 use Keboola\Encryption\AesEncryptor;
-use ppma\Application\SessionTrait;
-use Silex\Application;
 
 class User
 {
-    use SessionTrait;
 
     const SESSION_NAME = '__ppma_user';
 

@@ -4,6 +4,7 @@
 namespace ppma\Controller;
 
 
+use ppma\Config;
 use ppma\Controller;
 use ppma\Service\ViewService;
 
@@ -31,7 +32,7 @@ class AppController extends ControllerImpl
         return [
             [
                 'name' => 'viewService',
-                'id'   => $this->configService->get('services.view')
+                'id'   => Config::get('services.view')
             ]
         ];
     }

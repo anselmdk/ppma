@@ -4,11 +4,19 @@
 namespace ppma\Service\View;
 
 
-use ppma\Service\EmptyServiceImpl;
 use ppma\Service\ViewService;
 
-class PhpServiceImpl extends EmptyServiceImpl implements ViewService
+class PhpServiceImpl implements ViewService
 {
+
+    /**
+     * @param array $args
+     * @return mixed
+     */
+    public function init($args = [])
+    {
+    }
+
     /**
      * @param string $template
      * @return mixed

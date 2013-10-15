@@ -4,19 +4,14 @@
 namespace ppma\Service\Database\Spot;
 
 
+use ppma\Config;
 use ppma\Service;
-use ppma\Service\ConfigService;
 use ppma\Serviceable;
-use Spot\Config;
+use Spot\Config as SpotConfig;
 use Spot\Mapper;
 
 abstract class ServiceImpl implements Service, Serviceable
 {
-
-    /**
-     * @var Service\Configuration\DotorServiceImpl
-     */
-    protected $configService;
 
     /**
      * @var Mapper
@@ -29,12 +24,12 @@ abstract class ServiceImpl implements Service, Serviceable
      */
     public function init($args = [])
     {
-        $cfg = new Config();
+        $cfg = new SpotConfig();
         $cfg->addConnection('db', sprintf('mysql://%s:%s@%s/%s',
-            $this->configService->get('database.username'),
-            $this->configService->get('database.password'),
-            $this->configService->get('database.host'),
-            $this->configService->get('database.database')
+            Config::get('database.username'),
+            Config::get('database.password'),
+            Config::get('database.host'),
+            Config::get('database.database')
         ));
 
         $this->mapper = new Mapper($cfg);
@@ -46,15 +41,6 @@ abstract class ServiceImpl implements Service, Serviceable
     public function services()
     {
         return [];
-    }
-
-    /**
-     * @param ConfigService $service
-     * @return mixed
-     */
-    public function setConfigService(ConfigService $service)
-    {
-        $this->configService = $service;
     }
 
     /**

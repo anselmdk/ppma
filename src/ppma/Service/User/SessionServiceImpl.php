@@ -4,19 +4,14 @@
 namespace ppma\Service\User;
 
 
+use ppma\Config;
 use ppma\Entity\User;
-use ppma\Service\ConfigService;
 use ppma\Service\UserService;
 use ppma\Service;
 use ppma\Serviceable;
 
 class SessionServiceImpl implements UserService, Serviceable
 {
-
-    /**
-     * @var Service\ConfigService
-     */
-    protected $configService;
 
     /**
      * @var string
@@ -54,18 +49,9 @@ class SessionServiceImpl implements UserService, Serviceable
         return [
             [
                 'name' => 'sessionService',
-                'id'   => $this->configService->get('services.session')
+                'id'   => Config::get('services.session')
             ]
         ];
-    }
-
-    /**
-     * @param ConfigService $service
-     * @return mixed
-     */
-    public function setConfigService(ConfigService $service)
-    {
-        $this->configService = $service;
     }
 
     /**
