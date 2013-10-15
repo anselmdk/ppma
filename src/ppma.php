@@ -1,6 +1,7 @@
 <?php
 
 use ppma\Config;
+use ppma\Factory\ControllerFactory;
 use ppma\Factory\ServiceFactory;
 
 class ppma
@@ -57,11 +58,11 @@ class ppma
     protected function registerRoutes()
     {
         on('GET', '/login', function() {
-            echo $this->createController('\ppma\Controller\LoginController')->get();
+            echo ControllerFactory::get('\ppma\Controller\LoginController')->get();
         });
 
         on('POST', '/login', function() {
-            echo $this->createController('\ppma\Controller\LoginController')->post();
+            echo ControllerFactory::get('\ppma\Controller\LoginController')->post();
         });
     }
 
