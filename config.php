@@ -2,6 +2,7 @@
 
 return [
 
+    'url'      => 'http://localhost:8080/ppmasilex/index.php',
     'database' => [
         'username' => 'root',
         'password' => 'bitnami',

@@ -25,18 +25,20 @@ class ppma
      */
     public function __construct($config = [])
     {
-        config('dispatch.views', '../views');
-        config('dispatch.router', 'index.php');
-        config('dispatch.url', 'http://localhost:8080/ppmasilex');
-
         // create config service
         if (!isset($config['services']['config']))
         {
             throw new InvalidArgumentException('configuration needs services.config');
         }
 
-        $serviceId           = $config['services']['config'];
-        $this->configService = $this->createService($serviceId, ['config' => $config]);
+        $configService       = $this->createService($config['services']['config'], ['config' => $config]);
+        $this->configService = $configService;
+        /* @var \ppma\Service\ConfigService $configService */
+
+        // config dispatch
+        config('dispatch.views', '../views');
+        config('dispatch.router', pathinfo($configService->get('url'), PATHINFO_BASENAME));
+        config('dispatch.url',    pathinfo($configService->get('url'), PATHINFO_DIRNAME));
 
         // register routes
         $this->registerRoutes();
