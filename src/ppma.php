@@ -1,8 +1,6 @@
 <?php
 
 
-use Symfony\Component\HttpFoundation\Request;
-
 class ppma
 {
 
@@ -17,19 +15,9 @@ class ppma
     protected $controller = [];
 
     /**
-     * @var ppma
-     */
-    protected static $instance;
-
-    /**
      * @var array ['id' => 'instance of service']
      */
     protected $services = [];
-
-    /**
-     * @var Silex\Application
-     */
-    protected $silex;
 
     /**
      * @param array $config
@@ -37,34 +25,18 @@ class ppma
      */
     public function __construct($config = [])
     {
-        // create application
-        $app         = new Silex\Application();
-        $this->silex = $app;
+        config('dispatch.views', '../views');
+        config('dispatch.router', 'index.php');
+        config('dispatch.url', 'http://localhost:8080/ppmasilex');
 
         // create config service
         if (!isset($config['services']['config']))
         {
-            debug_print_backtrace();die();
             throw new InvalidArgumentException('configuration needs services.config');
         }
 
         $serviceId           = $config['services']['config'];
         $this->configService = $this->createService($serviceId, ['config' => $config]);
-
-        // register UrlGenerator
-        $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
-
-        // register SessionProvider
-        $app->register(new Silex\Provider\SessionServiceProvider());
-        $app['session.storage.save_path'] = realpath(__DIR__ . '/../tmp/sessions');
-
-        // register WebUserProvider
-        $app->register(new \ppma\Provider\User());
-
-        // register Whoops
-        $app->register(new Whoops\Provider\Silex\WhoopsServiceProvider());
-        $app['whoops']->pushHandler(new \Whoops\Handler\PrettyPageHandler());
-        $app['whoops']->pushHandler(new \Whoops\Handler\JsonResponseHandler());
 
         // register routes
         $this->registerRoutes();
@@ -161,54 +133,17 @@ class ppma
         return $this->services[$id];
     }
 
-
-    /**
-     * @return \Silex\Application
-     */
-    public function getSilex()
-    {
-        return $this->silex;
-    }
-
-
-    /**
-     * @param array $config
-     * @return ppma
-     */
-    public static function app($config = [])
-    {
-        if (self::$instance == null)
-        {
-            self::$instance = new ppma($config);
-        }
-
-        return self::$instance;
-    }
-
     /**
      * @return void
      */
     protected function registerRoutes()
     {
-        $app = $this->silex;
+        on('GET', '/login', function() {
+            echo $this->createController('\ppma\Controller\Login')->get();
+        });
 
-        // register routes
-        $app->get('/entries',        '\ppma\Controller\Entries::all');
-        $app->get('/entries/recent', '\ppma\Controller\Entries::recent');
-
-        // GET: /app
-        $app->get('/app', function() {
-            return $this->createController('\ppma\Controller\App')->home();
-        })->bind('app');
-
-        // GET: /login
-        $app->get('/login', function() {
-            return $this->createController('\ppma\Controller\Login')->get();
-        })->bind('login');
-
-        // POST: /login
-        $app->post('/login', function(Request $request) {
-            return $this->createController('\ppma\Controller\Login')->post($request);
+        on('POST', '/login', function() {
+            echo $this->createController('\ppma\Controller\Login')->post();
         });
     }
 
@@ -217,7 +152,7 @@ class ppma
      */
     public function run()
     {
-        $this->silex->run();
+        dispatch();
     }
 
     /**
@@ -230,17 +165,6 @@ class ppma
         {
             $controller->setService($name, $this->createService($id));
         }
-    }
-
-
-    /**
-     * Alias for getSilex()
-     *
-     * @return \Silex\Application
-     */
-    public function silex()
-    {
-        return $this->getSilex();
     }
 
 }

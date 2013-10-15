@@ -5,19 +5,15 @@ namespace ppma\Controller;
 
 
 use PHPassLib\Hash\BCrypt;
-use ppma\Application\UrlGeneratorTrait;
-use ppma\Application\UserTrait;
 use ppma\Controller;
 use ppma\Entity\User;
 use ppma\Service\Database\Spot\UserServiceImpl;
 use ppma\Service\Response\JsonServiceImpl;
 use ppma\Service\User\SessionServiceImpl;
 use ppma\Service\View\PhpServiceImpl;
-use Symfony\Component\HttpFoundation\Request;
 
 class Login extends ControllerImpl
 {
-    use UserTrait, UrlGeneratorTrait;
 
     /**
      * @var JsonServiceImpl
@@ -74,9 +70,8 @@ class Login extends ControllerImpl
 
     /**
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function post(Request $request)
+    public function post()
     {
         // prepare response
         $response = [
@@ -85,8 +80,8 @@ class Login extends ControllerImpl
         ];
 
         // get username and password
-        $username = $request->get('username');
-        $password = $request->get('password');
+        $username = params('username');
+        $password = params('password');
 
         // check if username and password set
         if (is_null($username) || is_null($password))
