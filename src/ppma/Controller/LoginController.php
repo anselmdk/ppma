@@ -8,8 +8,10 @@ use PHPassLib\Hash\BCrypt;
 use ppma\Config;
 use ppma\Controller;
 use ppma\Entity\User;
+use ppma\Service\Database\Exception\RecordNotFoundException;
 use ppma\Service\Database\Spot\UserServiceImpl;
 use ppma\Service\Response\JsonServiceImpl;
+use ppma\Service\ResponseService;
 use ppma\Service\User\SessionServiceImpl;
 use ppma\Service\View\PhpServiceImpl;
 
@@ -17,7 +19,7 @@ class LoginController extends ControllerImpl
 {
 
     /**
-     * @var JsonServiceImpl
+     * @var ResponseService
      */
     protected $json;
 
@@ -92,11 +94,9 @@ class LoginController extends ControllerImpl
         }
 
         // retrieve user
-        $user = $this->userEntityService->getByUsername($username);
-
-        // check if user exist
-        if (!($user instanceof User))
-        {
+        try {
+            $user = $this->userEntityService->getByUsername($username);
+        } catch (RecordNotFoundException $e) {
             $response['message'] = 'Your login details are invalid.';
             return $this->json->send($response);
         }

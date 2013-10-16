@@ -5,6 +5,7 @@ namespace ppma\Service\Database\Spot;
 
 
 use ppma\Entity\User;
+use ppma\Service\Database\Exception\RecordNotFoundException;
 use ppma\Service\Database\Spot\Entity\User as SpotUser;
 use ppma\Service\Database\Spot\ServiceImpl;
 use ppma\Service\Database\UserService;
@@ -55,15 +56,25 @@ class UserServiceImpl extends ServiceImpl implements UserService
     /**
      * @param int $id
      * @return User
+     * @throws \ppma\Service\Database\Exception\RecordNotFoundException
      */
     public function getById($id)
     {
-        return $this->assignModelToEntity(
-            $this->mapper->get($this->_entityClass, $id),
-            new User()
-        );
+        $model = $this->mapper->get($this->_entityClass, $id);
+
+        if ($model === false)
+        {
+            throw new RecordNotFoundException();
+        }
+
+        return $this->assignModelToEntity($model, new User());
     }
 
+    /**
+     * @param string $username
+     * @return User
+     * @throws \ppma\Service\Database\Exception\RecordNotFoundException
+     */
     public function getByUsername($username)
     {
         /* @var \ppma\Service\Database\Spot\Entity\User $model */
@@ -71,7 +82,7 @@ class UserServiceImpl extends ServiceImpl implements UserService
 
         if ($model === false)
         {
-            throw new Exception();
+            throw new RecordNotFoundException();
         }
 
         return $this->assignModelToEntity($model, new User());
