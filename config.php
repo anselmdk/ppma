@@ -17,7 +17,7 @@ return [
         ],
         'response' => [
             //'html' => '\ppma\Service\Response\JsonServiceImpl',
-            'json' => '\ppma\Service\Response\JsonServiceImpl',
+            'json' => '\ppma\Service\Response\Json\DispatchServiceImpl',
         ],
         'session' => '\ppma\Service\Session\DispatchServiceImpl',
         'user'    => '\ppma\Service\User\SessionServiceImpl',
