@@ -65,15 +65,15 @@ class LoginController extends ControllerImpl
     }
 
     /**
-     * @return string
+     * @return void
      */
     public function get()
     {
-        return $this->html->render('login');
+        $this->html->render('login');
     }
 
     /**
-     * @return string
+     * @return void
      */
     public function post()
     {
@@ -91,22 +91,23 @@ class LoginController extends ControllerImpl
         if (is_null($username) || is_null($password))
         {
             $response['message'] = 'Username and password cannot be blank.';
-            return $this->json->send($response);
+            $this->json->send($response);
         }
 
         // retrieve user
+        $user = null;
         try {
             $user = $this->userEntityService->getByUsername($username);
         } catch (RecordNotFoundException $e) {
             $response['message'] = 'Your login details are invalid.';
-            return $this->json->send($response);
+            $this->json->send($response);
         }
 
         // check password
         if (!BCrypt::verify(md5($password), $user->getPassword()))
         {
             $response['message'] = 'Your login details are invalid.';
-            return $this->json->send($response);
+            $this->json->send($response);
         }
 
         // sign user in
@@ -115,7 +116,7 @@ class LoginController extends ControllerImpl
         // all fine
         $response['error']     = false;
         $response['forwardTo'] = site() . config('dispatch.router') . '/app';
-        return $this->json->send($response);
+        $this->json->send($response);
     }
 
 }

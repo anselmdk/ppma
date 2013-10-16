@@ -19,12 +19,12 @@ class PhpServiceImpl implements ResponseService
 
     /**
      * @param mixed $data
-     * @return string
+     * @return void
      */
     public function send($data)
     {
         header('Content-type: application/json');
-        return json_encode($data);
+        echo json_encode($data);
     }
 
 }

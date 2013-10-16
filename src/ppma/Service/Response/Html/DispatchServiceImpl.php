@@ -22,13 +22,13 @@ class DispatchServiceImpl extends HtmlServiceImpl
     /**
      * @param string $template
      * @param array $data
-     * @return string
+     * @return void
      */
     public function render($template, $data = [])
     {
         ob_start();
         render($template, $data, false);
-        return $this->send(ob_get_clean());
+        $this->send(ob_get_clean());
     }
 
 }

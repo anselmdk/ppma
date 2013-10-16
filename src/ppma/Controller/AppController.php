@@ -6,22 +6,23 @@ namespace ppma\Controller;
 
 use ppma\Config;
 use ppma\Controller;
+use ppma\Service\Response\HtmlService;
 use ppma\Service\ViewService;
 
 class AppController extends ControllerImpl
 {
 
     /**
-     * @var ViewService
+     * @var HtmlService
      */
-    protected $viewService;
+    protected $html;
 
     /**
-     * @return string
+     * @return void
      */
     public function home()
     {
-        return $this->viewService->render('app');
+        $this->html->render('app');
     }
 
     /**
@@ -32,7 +33,7 @@ class AppController extends ControllerImpl
         return [
             [
                 'name' => 'html',
-                'id'   => Config::get('services.view')
+                'id'   => Config::get('services.response.html')
             ]
         ];
     }

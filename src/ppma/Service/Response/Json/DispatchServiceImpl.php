@@ -17,13 +17,11 @@ class DispatchServiceImpl implements ResponseService
 
     /**
      * @param mixed $data
-     * @return string
+     * @return void
      */
     public function send($data)
     {
-        ob_start();
         json_out($data);
-        return ob_get_clean();
     }
 
 }

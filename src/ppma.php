@@ -58,15 +58,15 @@ class ppma
     protected function registerRoutes()
     {
         on('GET', '/login', function() {
-            echo ControllerFactory::get('\ppma\Controller\LoginController')->get();
+            ControllerFactory::get('\ppma\Controller\LoginController')->get();
         });
 
         on('POST', '/login', function() {
-            echo ControllerFactory::get('\ppma\Controller\LoginController')->post();
+            ControllerFactory::get('\ppma\Controller\LoginController')->post();
         });
 
         on('GET', '/app', function() {
-            echo ControllerFactory::get('\ppma\Controller\AppController')->home();
+            ControllerFactory::get('\ppma\Controller\AppController')->home();
         });
     }
 

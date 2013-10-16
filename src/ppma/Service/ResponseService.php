@@ -11,7 +11,7 @@ interface ResponseService extends Service
 
     /**
      * @param mixed $data
-     * @return string
+     * @return void
      */
     public function send($data);
 

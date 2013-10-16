@@ -21,7 +21,6 @@ return [
         ],
         'session' => '\ppma\Service\Session\DispatchServiceImpl',
         'user'    => '\ppma\Service\User\SessionServiceImpl',
-        'view'    => '\ppma\Service\Response\Html\DispatchServiceImpl',
     ],
     'views' => __DIR__ . '/views',
 ];

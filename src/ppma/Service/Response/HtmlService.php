@@ -12,7 +12,7 @@ interface HtmlService extends ResponseService
     /**
      * @param string $template
      * @param array $data
-     * @return string
+     * @return void
      */
     public function render($template, $data = []);
 

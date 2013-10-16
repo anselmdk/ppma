@@ -21,7 +21,7 @@ abstract class HtmlServiceImpl implements HtmlService
      */
     public function send($data)
     {
-        return $data;
+        echo $data;
     }
 
 }
