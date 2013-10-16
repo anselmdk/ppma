@@ -31,7 +31,7 @@ class AppController extends ControllerImpl
     {
         return [
             [
-                'name' => 'viewService',
+                'name' => 'html',
                 'id'   => Config::get('services.view')
             ]
         ];

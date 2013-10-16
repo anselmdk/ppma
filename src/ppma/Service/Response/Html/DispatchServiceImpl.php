@@ -1,13 +1,12 @@
 <?php
 
 
-namespace ppma\Service\View;
+namespace ppma\Service\Response\Html;
 
 
 use ppma\Config;
-use ppma\Service\ViewService;
 
-class DispatchServiceImpl implements ViewService
+class DispatchServiceImpl extends HtmlServiceImpl
 {
 
     /**
@@ -16,6 +15,7 @@ class DispatchServiceImpl implements ViewService
      */
     public function init($args = [])
     {
+        parent::init();
         config('dispatch.views', Config::get('views'));
     }
 
@@ -26,7 +26,9 @@ class DispatchServiceImpl implements ViewService
      */
     public function render($template, $data = [])
     {
+        ob_start();
         render($template, $data, false);
+        return $this->send(ob_get_clean());
     }
 
 }

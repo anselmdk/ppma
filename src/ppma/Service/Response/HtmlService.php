@@ -1,12 +1,12 @@
 <?php
 
 
-namespace ppma\Service;
+namespace ppma\Service\Response;
 
 
-use ppma\Service;
+use ppma\Service\ResponseService;
 
-interface ViewService extends Service
+interface HtmlService extends ResponseService
 {
 
     /**

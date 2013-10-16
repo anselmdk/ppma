@@ -16,13 +16,12 @@ return [
             'entry' => '\ppma\Service\Database\Spot\EntryServiceImpl'
         ],
         'response' => [
-            //'html' => '\ppma\Service\Response\JsonServiceImpl',
+            'html' => '\ppma\Service\Response\Html\DispatchServiceImpl',
             'json' => '\ppma\Service\Response\Json\DispatchServiceImpl',
         ],
         'session' => '\ppma\Service\Session\DispatchServiceImpl',
         'user'    => '\ppma\Service\User\SessionServiceImpl',
-        'view'    => '\ppma\Service\View\DispatchServiceImpl',
+        'view'    => '\ppma\Service\Response\Html\DispatchServiceImpl',
     ],
     'views' => __DIR__ . '/views',
-
 ];

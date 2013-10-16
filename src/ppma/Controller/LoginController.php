@@ -10,6 +10,7 @@ use ppma\Controller;
 use ppma\Entity\User;
 use ppma\Service\Database\Exception\RecordNotFoundException;
 use ppma\Service\Database\Spot\UserServiceImpl;
+use ppma\Service\Response\HtmlService;
 use ppma\Service\Response\JsonServiceImpl;
 use ppma\Service\ResponseService;
 use ppma\Service\User\SessionServiceImpl;
@@ -17,6 +18,11 @@ use ppma\Service\View\PhpServiceImpl;
 
 class LoginController extends ControllerImpl
 {
+
+    /**
+     * @var HtmlService
+     */
+    protected $html;
 
     /**
      * @var ResponseService
@@ -34,16 +40,15 @@ class LoginController extends ControllerImpl
     protected $userService;
 
     /**
-     * @var PhpServiceImpl
-     */
-    protected $viewService;
-
-    /**
      * @return array
      */
     public function services()
     {
         return [
+            [
+                'name' => 'html',
+                'id'   => Config::get('services.response.html')
+            ],
             [
                 'name' => 'json',
                 'id'   => Config::get('services.response.json')
@@ -56,10 +61,6 @@ class LoginController extends ControllerImpl
                 'name' => 'userService',
                 'id'   => Config::get('services.user')
             ],
-            [
-                'name' => 'viewService',
-                'id'   => Config::get('services.view')
-            ],
         ];
     }
 
@@ -68,7 +69,7 @@ class LoginController extends ControllerImpl
      */
     public function get()
     {
-        return $this->viewService->render('login');
+        return $this->html->render('login');
     }
 
     /**
