@@ -11,8 +11,9 @@ interface ViewService extends Service
 
     /**
      * @param string $template
-     * @return mixed
+     * @param array $data
+     * @return string
      */
-    public function render($template);
+    public function render($template, $data = []);
 
 }

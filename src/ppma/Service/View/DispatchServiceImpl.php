@@ -4,9 +4,10 @@
 namespace ppma\Service\View;
 
 
+use ppma\Config;
 use ppma\Service\ViewService;
 
-class PhpServiceImpl implements ViewService
+class DispatchServiceImpl implements ViewService
 {
 
     /**
@@ -15,6 +16,7 @@ class PhpServiceImpl implements ViewService
      */
     public function init($args = [])
     {
+        config('dispatch.views', Config::get('views'));
     }
 
     /**
@@ -24,9 +26,7 @@ class PhpServiceImpl implements ViewService
      */
     public function render($template, $data = [])
     {
-        ob_start();
-        include sprintf('%s/%s.php', realpath(__DIR__ . '/../../../../views'), $template);
-        return ob_get_clean();
+        render($template, $data, false);
     }
 
 }

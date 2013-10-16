@@ -22,7 +22,7 @@ class ppma
         Config::init($config);
 
         // config dispatch
-        config('dispatch.views', '../views');
+
         config('dispatch.router', pathinfo(Config::get('url'), PATHINFO_BASENAME));
         config('dispatch.url',    pathinfo(Config::get('url'), PATHINFO_DIRNAME));
 
