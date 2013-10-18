@@ -31,10 +31,7 @@ class AppController extends ControllerImpl
     public function services()
     {
         return [
-            [
-                'name' => 'html',
-                'id'   => Config::get('services.response.html')
-            ]
+            Config::get('services.response.html'),
         ];
     }
 

@@ -23,34 +23,20 @@ class ServiceFactory
      */
     public static function adorn(Serviceable $object)
     {
-        foreach ($object->services() as $configuration)
+        foreach ($object->services() as $config)
         {
-            $name = $configuration['name'];
-            $id   = $configuration['id'];
-            $args = [];
-
-            if (isset($configuration['args']))
-            {
-                $args = $configuration['args'];
-            }
-
             // create service
-            $service = self::get($id, $args);
+            $service = self::get($config);
 
             // set service to object
-            $object->setService($name, $service);
+            $object->setService($config['name'], $service);
         }
     }
 
-    /**
-     * @param $id
-     * @param array $args
-     * @return Service|Serviceable
-     * @throws \ppma\Exception\ServiceDoesNotExist
-     * @throws \ppma\Exception\InstanceIsNotAService
-     */
-    protected static function create($id, $args = [])
+    protected static function create($config)
     {
+        $id = $config['id'];
+
         // check if class $id exist
         if (!class_exists($id))
         {
@@ -75,32 +61,22 @@ class ServiceFactory
         }
 
         // init service
-        $service->init($args);
+        $service->init($config);
 
         return $service;
     }
 
-    /**
-     * @param string $id
-     * @param array $args
-     * @return Service
-     */
-    public static function get($id, $args = [])
+    public static function get($config)
     {
-        $argId = md5(serialize($args));
+        $key = md5(serialize($config));
 
-        if (!isset(self::$services[$id]))
+        if (!isset(self::$services[$key]))
         {
-            self::$services[$id] = [];
+            self::$services[$key] = self::create($config);
 
         }
 
-        if (!isset(self::$services[$id][$argId]))
-        {
-            self::$services[$id][$argId] = self::create($id, $args);
-        }
-
-        return self::$services[$id][$argId];
+        return self::$services[$key];
     }
 
 }

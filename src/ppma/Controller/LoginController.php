@@ -51,26 +51,11 @@ class LoginController extends ControllerImpl
     public function services()
     {
         return [
-            [
-                'name' => 'html',
-                'id'   => Config::get('services.response.html')
-            ],
-            [
-                'name' => 'json',
-                'id'   => Config::get('services.response.json')
-            ],
-            [
-                'name' => 'log',
-                'id'   => Config::get('services.log')
-            ],
-            [
-                'name' => 'userEntityService',
-                'id'   => Config::get('services.database.user')
-            ],
-            [
-                'name' => 'userService',
-                'id'   => Config::get('services.user')
-            ],
+            Config::get('services.response.html'),
+            Config::get('services.response.json'),
+            Config::get('services.log'),
+            Config::get('services.database.user'),
+            Config::get('services.user'),
         ];
     }
 

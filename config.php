@@ -3,6 +3,7 @@
 return [
 
     'url'      => 'http://localhost:8080/ppmasilex/index.php',
+
     'database' => [
         'username' => 'root',
         'password' => 'bitnami',
@@ -10,18 +11,53 @@ return [
         'database' => 'ppmasilex',
     ],
 
+    // services
     'services' => [
+        // orm/database services
         'database' => [
-            'user'  => '\ppma\Service\Database\Spot\UserServiceImpl',
-            'entry' => '\ppma\Service\Database\Spot\EntryServiceImpl'
+            'user'  => [
+                'id'   => '\ppma\Service\Database\Spot\UserServiceImpl',
+                'name' => 'userEntity',
+            ],
+            'entry' => [
+                'id'   => '\ppma\Service\Database\Spot\EntryServiceImpl',
+                'name' => 'entryEntity',
+            ],
         ],
-        'log' => '\ppma\Service\Log\ChromeServiceImpl',
+
+        // logging
+        'log' => [
+            'id'   => '\ppma\Service\Log\ChromeServiceImpl',
+            'name' => 'log',
+        ],
+
+        // response/rendering
         'response' => [
-            'html' => '\ppma\Service\Response\Html\DispatchServiceImpl',
-            'json' => '\ppma\Service\Response\Json\DispatchServiceImpl',
+            'html' => [
+                'id'   => '\ppma\Service\Response\Html\DispatchServiceImpl',
+                'name' => 'html',
+            ],
+
+            'json' => [
+                'id'   => '\ppma\Service\Response\Json\DispatchServiceImpl',
+                'name' => 'json',
+            ],
         ],
-        'session' => '\ppma\Service\Session\DispatchServiceImpl',
-        'user'    => '\ppma\Service\User\SessionServiceImpl',
+
+        // session handling
+        'session' => [
+            'id'   => '\ppma\Service\Session\DispatchServiceImpl',
+            'name' => 'session',
+        ],
+
+        // (web)user
+        'user'    => [
+            'id'   => '\ppma\Service\User\SessionServiceImpl',
+            'name' => 'user',
+        ]
     ],
+
+    // path to views
     'views' => __DIR__ . '/views',
+
 ];
