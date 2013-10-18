@@ -15,6 +15,7 @@ return [
             'user'  => '\ppma\Service\Database\Spot\UserServiceImpl',
             'entry' => '\ppma\Service\Database\Spot\EntryServiceImpl'
         ],
+        'log' => '\ppma\Service\Log\ChromeServiceImpl',
         'response' => [
             'html' => '\ppma\Service\Response\Html\DispatchServiceImpl',
             'json' => '\ppma\Service\Response\Json\DispatchServiceImpl',

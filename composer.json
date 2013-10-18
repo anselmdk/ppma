@@ -11,6 +11,9 @@
         "rych/phpass": "3.0.*@beta",
         "keboola/php-encryption": "0.2.1",
         "rych/random": "1.0.*@dev",
-        "pklink/dotor": "0.2.*"
+        "pklink/dotor": "0.2.*",
+        "pallo/lib-log": "dev-master",
+        "pallo/lib-common": "dev-master",
+        "ccampbell/chromephp": "4.1.0"
     }
 }

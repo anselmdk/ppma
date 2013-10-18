@@ -10,6 +10,7 @@ use ppma\Controller;
 use ppma\Entity\User;
 use ppma\Service\Database\Exception\RecordNotFoundException;
 use ppma\Service\Database\Spot\UserServiceImpl;
+use ppma\Service\LogService;
 use ppma\Service\Response\HtmlService;
 use ppma\Service\Response\JsonServiceImpl;
 use ppma\Service\ResponseService;
@@ -28,6 +29,11 @@ class LoginController extends ControllerImpl
      * @var ResponseService
      */
     protected $json;
+
+    /**
+     * @var LogService
+     */
+    protected $log;
 
     /**
      * @var UserServiceImpl
@@ -52,6 +58,10 @@ class LoginController extends ControllerImpl
             [
                 'name' => 'json',
                 'id'   => Config::get('services.response.json')
+            ],
+            [
+                'name' => 'log',
+                'id'   => Config::get('services.log')
             ],
             [
                 'name' => 'userEntityService',
