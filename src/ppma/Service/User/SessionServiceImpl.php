@@ -84,13 +84,13 @@ class SessionServiceImpl implements UserService, Serviceable
     }
 
     /**
-     * @param string $name
+     * @param string $target
      * @param Service $service
      * @return void
      */
-    public function setService($name, Service $service)
+    public function setService($target, Service $service)
     {
-        $this->$name = $service;
+        $this->$target = $service;
     }
 
 }

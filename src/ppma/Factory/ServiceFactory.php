@@ -29,7 +29,7 @@ class ServiceFactory
             $service = self::get($config);
 
             // set service to object
-            $object->setService($config['name'], $service);
+            $object->setService($config['target'], $service);
         }
     }
 

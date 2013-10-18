@@ -16,44 +16,44 @@ return [
         // orm/database services
         'database' => [
             'user'  => [
-                'id'   => '\ppma\Service\Database\Spot\UserServiceImpl',
-                'name' => 'userEntity',
+                'id'     => '\ppma\Service\Database\Spot\UserServiceImpl',
+                'target' => 'userEntity',
             ],
             'entry' => [
-                'id'   => '\ppma\Service\Database\Spot\EntryServiceImpl',
-                'name' => 'entryEntity',
+                'id'     => '\ppma\Service\Database\Spot\EntryServiceImpl',
+                'target' => 'entryEntity',
             ],
         ],
 
         // logging
         'log' => [
-            'id'   => '\ppma\Service\Log\ChromeServiceImpl',
-            'name' => 'log',
+            'id'     => '\ppma\Service\Log\ChromeServiceImpl',
+            'target' => 'log',
         ],
 
         // response/rendering
         'response' => [
             'html' => [
-                'id'   => '\ppma\Service\Response\Html\DispatchServiceImpl',
-                'name' => 'html',
+                'id'     => '\ppma\Service\Response\Html\DispatchServiceImpl',
+                'target' => 'html',
             ],
 
             'json' => [
-                'id'   => '\ppma\Service\Response\Json\DispatchServiceImpl',
-                'name' => 'json',
+                'id'     => '\ppma\Service\Response\Json\DispatchServiceImpl',
+                'target' => 'json',
             ],
         ],
 
         // session handling
         'session' => [
-            'id'   => '\ppma\Service\Session\DispatchServiceImpl',
-            'name' => 'session',
+            'id'     => '\ppma\Service\Session\DispatchServiceImpl',
+            'target' => 'session',
         ],
 
         // (web)user
         'user'    => [
-            'id'   => '\ppma\Service\User\SessionServiceImpl',
-            'name' => 'user',
+            'id'     => '\ppma\Service\User\SessionServiceImpl',
+            'target' => 'user',
         ]
     ],
 
