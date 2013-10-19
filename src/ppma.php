@@ -18,6 +18,23 @@ class ppma
      */
     public function __construct($config = [])
     {
+        // set error handler in DEV_MODE
+        if (DEV_MODE)
+        {
+            $catcher = new UniversalErrorCatcher_Catcher();
+            $catcher->registerCallback(function(\Exception $e) {
+                echo '<pre>';
+                printf("Type:    %s\n",   get_class($e));
+                printf("Message: %s\n",   $e->getMessage());
+                printf("File:    %s\n",   $e->getFile());
+                printf("Line:    %s\n\n", $e->getLine());
+                printf("Message: \n%s",   $e->getTraceAsString());
+                echo '</pre>';
+                die();
+            });
+            $catcher->start();
+        }
+
         // initialize ppma\Config
         Config::init($config);
 
