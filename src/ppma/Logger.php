@@ -4,6 +4,7 @@
 namespace ppma;
 
 
+use ppma\Logger\Exception\InvalidLevelException;
 use ppma\Logger\Writer;
 
 class Logger
@@ -82,12 +83,30 @@ class Logger
     /**
      * @param string $level
      * @param string $message
+     * @throws Logger\Exception\InvalidLevelException
+     * @return void
      */
     public static function log($level, $message)
     {
         foreach (self::$writer as $writer)
         {
-            $writer->write(sprintf('%s: %s', $level, $message));
+            switch($level)
+            {
+                case Logger::DEBUG:
+                    $writer->debug($message);
+                    break;
+                case Logger::ERROR:
+                    $writer->error($message);
+                    break;
+                case Logger::INFO:
+                    $writer->info($message);
+                    break;
+                case Logger::WARN:
+                    $writer->warn($message);
+                    break;
+                default:
+                    throw new InvalidLevelException();
+            }
         }
     }
 

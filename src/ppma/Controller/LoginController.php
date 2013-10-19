@@ -57,6 +57,7 @@ class LoginController extends ControllerImpl
      */
     public function get()
     {
+        Logger::debug('blbl');
         $this->html->render('login');
     }
 
