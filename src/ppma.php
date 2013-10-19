@@ -22,9 +22,11 @@ class ppma
         Config::init($config);
 
         // config dispatch
-
         config('dispatch.router', pathinfo(Config::get('url'), PATHINFO_BASENAME));
         config('dispatch.url',    pathinfo(Config::get('url'), PATHINFO_DIRNAME));
+
+        // create and init logger
+        \ppma\Logger::init(Config::get('log'));
 
         // register routes
         $this->registerRoutes();

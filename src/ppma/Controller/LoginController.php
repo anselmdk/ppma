@@ -7,15 +7,14 @@ namespace ppma\Controller;
 use PHPassLib\Hash\BCrypt;
 use ppma\Config;
 use ppma\Controller;
-use ppma\Entity\User;
+use ppma\Logger\LoggerImpl;
+use ppma\Logger;
 use ppma\Service\Database\Exception\RecordNotFoundException;
 use ppma\Service\Database\Spot\UserServiceImpl;
-use ppma\Service\LogService;
 use ppma\Service\Response\HtmlService;
 use ppma\Service\Response\JsonServiceImpl;
 use ppma\Service\ResponseService;
 use ppma\Service\User\SessionServiceImpl;
-use ppma\Service\View\PhpServiceImpl;
 
 class LoginController extends ControllerImpl
 {
@@ -29,11 +28,6 @@ class LoginController extends ControllerImpl
      * @var ResponseService
      */
     protected $json;
-
-    /**
-     * @var LogService
-     */
-    protected $log;
 
     /**
      * @var UserServiceImpl
@@ -53,7 +47,6 @@ class LoginController extends ControllerImpl
         return [
             Config::get('services.response.html'),
             Config::get('services.response.json'),
-            Config::get('services.log'),
             Config::get('services.database.user'),
             Config::get('services.user'),
         ];

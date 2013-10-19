@@ -11,6 +11,15 @@ return [
         'database' => 'ppmasilex',
     ],
 
+    'log' => [
+        'writer'  => [
+            [
+                'id'      => '\ppma\Logger\Writer\EchoWriterImpl',
+                'enabled' => true,
+            ],
+        ],
+    ],
+
     // services
     'services' => [
         // orm/database services
@@ -23,12 +32,6 @@ return [
                 'id'     => '\ppma\Service\Database\Spot\EntryServiceImpl',
                 'target' => 'entryEntity',
             ],
-        ],
-
-        // logging
-        'log' => [
-            'id'     => '\ppma\Service\Log\ChromeServiceImpl',
-            'target' => 'log',
         ],
 
         // response/rendering
