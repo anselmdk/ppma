@@ -6,23 +6,27 @@ namespace ppma\Logger\Writer;
 
 class ChromeWriterImpl extends AbstractWriterImpl
 {
+
     /**
      * @param string $msg
+     * @param string $context
      * @return void
      */
-    public function debug($msg)
+    public function debug($msg, $context = null)
     {
-        $this->info('DEBUG: method ChromePhp::info() does not exist, i will use info() instead of this');
-        $this->info('DEBUG: ' . $msg);
+        $infoMessage = 'method ChromePhp::info() does not exist, i will use info() instead of this';
+        \ChromePhp::info(sprintf('%-8s %-40s %s', 'DEBUG:', $context, $infoMessage));
+        \ChromePhp::info(sprintf('%-8s %-40s %s', 'DEBUG:', $context, $msg));
     }
 
     /**
      * @param string $msg
+     * @param string $context
      * @return void
      */
-    public function error($msg)
+    public function error($msg, $context = null)
     {
-        \ChromePhp::info('ERROR: ' . $msg);
+        \ChromePhp::error(sprintf('%-8s %-40s %s', 'ERROR:', $context, $msg));
     }
 
     /**
@@ -33,20 +37,22 @@ class ChromeWriterImpl extends AbstractWriterImpl
 
     /**
      * @param string $msg
-     * @return mixed
+     * @param string $context
+     * @return void
      */
-    public function info($msg)
+    public function info($msg, $context = null)
     {
-        \ChromePhp::info('INFO: ' . $msg);
+        \ChromePhp::info(sprintf('%-8s %-40s %s', 'INFO:', $context, $msg));
     }
 
     /**
-     * @param $msg
+     * @param string $msg
+     * @param string $context
      * @return void
      */
-    public function warn($msg)
+    public function warn($msg, $context = null)
     {
-        \ChromePhp::info('WARN: ' . $msg);
+        \ChromePhp::warn(sprintf('%-8s %-40s %s', 'WARN:', $context, $msg));
     }
 
 

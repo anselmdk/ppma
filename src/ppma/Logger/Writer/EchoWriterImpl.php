@@ -12,29 +12,32 @@ class EchoWriterImpl extends AbstractWriterImpl
 
     /**
      * @param string $msg
+     * @param string $context
      * @return void
      */
-    public function debug($msg)
+    public function debug($msg, $context = null)
     {
-        echo 'DEBUG: ' . $msg;
+        printf("%-8s %-40s %s\n", 'DEBUG:', $context, $msg);
     }
 
     /**
      * @param string $msg
+     * @param string $context
      * @return void
      */
-    public function error($msg)
+    public function error($msg, $context = null)
     {
-        echo 'ERROR: ' . $msg;
+        printf("%-8s %-40s %s\n", 'ERROR:', $context, $msg);
     }
 
     /**
      * @param string $msg
-     * @return mixed
+     * @param string $context
+     * @return void
      */
-    public function info($msg)
+    public function info($msg, $context = null)
     {
-        echo 'INFO: ' . $msg;
+        printf("%-8s %-40s %s\n", 'INFO:', $context, $msg);
     }
 
     /**
@@ -44,12 +47,13 @@ class EchoWriterImpl extends AbstractWriterImpl
     public function init($config = []) { }
 
     /**
-     * @param $msg
+     * @param string $msg
+     * @param string $context
      * @return void
      */
-    public function warn($msg)
+    public function warn($msg, $context = null)
     {
-        echo 'WARN: ' . $msg;
+        printf("%-8s %-40s %s\n", 'WARN:', $context, $msg);
     }
 
 }

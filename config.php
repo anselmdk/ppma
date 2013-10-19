@@ -15,7 +15,7 @@ return [
         'writer'  => [
             [
                 'id'      => '\ppma\Logger\Writer\EchoWriterImpl',
-                'enabled' => false,
+                'enabled' => true,
             ],
             [
                 'id'      => '\ppma\Logger\Writer\ChromeWriterImpl',

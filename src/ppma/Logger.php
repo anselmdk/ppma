@@ -34,29 +34,32 @@ class Logger
 
     /**
      * @param string $message
+     * @param string $context
      * @return void
      */
-    public static function debug($message)
+    public static function debug($message, $context = null)
     {
-        self::log(Logger::DEBUG, $message);
+        self::log(Logger::DEBUG, $message, $context);
     }
 
     /**
      * @param string $message
+     * @param string $context
      * @return void
      */
-    public static function error($message)
+    public static function error($message, $context = null)
     {
-        self::log(Logger::ERROR, $message);
+        self::log(Logger::ERROR, $message, $context);
     }
 
     /**
      * @param string $message
+     * @param string $context
      * @return void
      */
-    public static function info($message)
+    public static function info($message, $context = null)
     {
-        self::log(Logger::INFO, $message);
+        self::log(Logger::INFO, $message, $context);
     }
 
     /**
@@ -83,26 +86,26 @@ class Logger
     /**
      * @param string $level
      * @param string $message
+     * @param string $context
      * @throws Logger\Exception\InvalidLevelException
-     * @return void
      */
-    public static function log($level, $message)
+    public static function log($level, $message, $context = null)
     {
         foreach (self::$writer as $writer)
         {
             switch($level)
             {
                 case Logger::DEBUG:
-                    $writer->debug($message);
+                    $writer->debug($message, $context);
                     break;
                 case Logger::ERROR:
-                    $writer->error($message);
+                    $writer->error($message, $context);
                     break;
                 case Logger::INFO:
-                    $writer->info($message);
+                    $writer->info($message, $context);
                     break;
                 case Logger::WARN:
-                    $writer->warn($message);
+                    $writer->warn($message, $context);
                     break;
                 default:
                     throw new InvalidLevelException();
@@ -112,11 +115,12 @@ class Logger
 
     /**
      * @param string $message
+     * @param string $context
      * @return void
      */
-    public static function warn($message)
+    public static function warn($message, $context = null)
     {
-        self::log(Logger::WARN, $message);
+        self::log(Logger::WARN, $message, $context);
     }
 
 }
