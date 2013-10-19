@@ -17,6 +17,10 @@ return [
                 'id'      => '\ppma\Logger\Writer\EchoWriterImpl',
                 'enabled' => true,
             ],
+            [
+                'id'      => '\ppma\Logger\Writer\ChromeWriterImpl',
+                'enabled' => true,
+            ],
         ],
     ],
 
