@@ -32,12 +32,12 @@ class LoginController extends ControllerImpl
     /**
      * @var UserServiceImpl
      */
-    protected $userEntityService;
+    protected $userEntity;
 
     /**
      * @var SessionServiceImpl
      */
-    protected $userService;
+    protected $user;
 
     /**
      * @return array
@@ -80,15 +80,17 @@ class LoginController extends ControllerImpl
         {
             $response['message'] = 'Username and password cannot be blank.';
             $this->json->send($response);
+            return;
         }
 
         // retrieve user
         $user = null;
         try {
-            $user = $this->userEntityService->getByUsername($username);
+            $user = $this->userEntity->getByUsername($username);
         } catch (RecordNotFoundException $e) {
             $response['message'] = 'Your login details are invalid.';
             $this->json->send($response);
+            return;
         }
 
         // check password
@@ -96,10 +98,11 @@ class LoginController extends ControllerImpl
         {
             $response['message'] = 'Your login details are invalid.';
             $this->json->send($response);
+            return;
         }
 
         // sign user in
-        $this->userService->login($user);
+        $this->user->login($user);
 
         // all fine
         $response['error']     = false;
