@@ -2,7 +2,7 @@
 
 return [
 
-    'url'      => 'http://localhost:8080/ppmasilex/index.php',
+    'url'      => 'http://localhost:8080/ppmasilex/public/index.php',
 
     'database' => [
         'username' => 'root',

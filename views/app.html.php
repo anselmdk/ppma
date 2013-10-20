@@ -8,21 +8,21 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
     <title>ppma // any title</title>
-    <link href="/ppmasilex/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/ppmasilex/css/app.css" rel="stylesheet">
+    <link href="<?php echo site() ?>css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo site() ?>css/app.css" rel="stylesheet">
     <!--[if lt IE 9]>
-    <script src="/ppmasilex/js/html5shiv.js"></script>
-    <script src="/ppmasilex/js/respond.min.js"></script>
+    <script src="<?php echo site() ?>js/html5shiv.js"></script>
+    <script src="<?php echo site() ?>js/respond.min.js"></script>
     <![endif]-->
 </head>
 
 <body>
 
-<script src="/ppmasilex/js/jquery-1.10.2.min.js"></script>
-<script src="/ppmasilex/js/handlebars-1.0.0.js"></script>
-<script src="/ppmasilex/js/ember.js"></script>
-<script src="/ppmasilex/js/ember-data.js"></script>
-<script src="/ppmasilex/js/app.js"></script>
+<script src="<?php echo site() ?>js/jquery-1.10.2.min.js"></script>
+<script src="<?php echo site() ?>js/handlebars-1.0.0.js"></script>
+<script src="<?php echo site() ?>js/ember.js"></script>
+<script src="<?php echo site() ?>js/ember-data.js"></script>
+<script src="<?php echo site() ?>js/app.js"></script>
 
 
 <script type="text/x-handlebars">
@@ -83,6 +83,6 @@
 </script>
 
 
-<script src="/ppmasilex/js/bootstrap.min.js"></script>
+<script src="<?php echo site() ?>js/bootstrap.min.js"></script>
 </body>
 </html>
