@@ -17,26 +17,17 @@ class Config
     /**
      * @param string $key
      * @param mixed $default
-     * @param bool $forceOverwriting
      * @return mixed
      * @throws \InvalidArgumentException
      */
-    public static function get($key, $default = null, $forceOverwriting = false)
+    public static function get($key, $default = null)
     {
         if (!(self::$dotor instanceof Dotor))
         {
             throw new \InvalidArgumentException(sprintf('%s is not initialized', __CLASS__));
         }
 
-        // get value
-        $value = self::$dotor->get($key, $default);
-
-        if ($forceOverwriting && is_array($value) && is_array($default))
-        {
-            $value = array_merge($value, $default);
-        }
-
-        return $value;
+        return self::$dotor->get($key, $default);
     }
 
     /**
