@@ -9,6 +9,21 @@ use ppma\Service;
 
 abstract class ControllerImpl implements Controller
 {
+    /**
+     * @return void
+     */
+    public function after()
+    {
+        // noop
+    }
+
+    /**
+     * @return void
+     */
+    public function before()
+    {
+        // noop
+    }
 
     /**
      * @param string $target

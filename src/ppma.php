@@ -76,17 +76,17 @@ class ppma
      */
     protected function registerRoutes()
     {
-        on('GET', '/login', function() {
-            ControllerFactory::get('\ppma\Controller\LoginController')->get();
-        });
+        $caller = function($id, $method) {
+            /* @var \ppma\Controller $controller */
+            $controller = ControllerFactory::get($id);
+            $controller->before();
+            $controller->$method();
+            $controller->after();
+        };
 
-        on('POST', '/login', function() {
-            ControllerFactory::get('\ppma\Controller\LoginController')->post();
-        });
-
-        on('GET', '/app', function() {
-            ControllerFactory::get('\ppma\Controller\AppController')->home();
-        });
+        on('GET',  '/login', function() use ($caller) { $caller('\ppma\Controller\LoginController', 'get'); });
+        on('POST', '/login', function() use ($caller) { $caller('\ppma\Controller\LoginController', 'post'); });
+        on('GET',  '/app',   function() use ($caller) { $caller('\ppma\Controller\AppController',   'home'); });
     }
 
     /**

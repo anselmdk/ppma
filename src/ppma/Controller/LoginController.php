@@ -40,19 +40,6 @@ class LoginController extends ControllerImpl
     protected $user;
 
     /**
-     * @return array
-     */
-    public function services()
-    {
-        return [
-            array_merge(Config::get('services.response.html'), ['target' => 'html']),
-            array_merge(Config::get('services.response.json'), ['target' => 'json']),
-            array_merge(Config::get('services.database.user'), ['target' => 'userEntity']),
-            array_merge(Config::get('services.user'), ['target' => 'user']),
-        ];
-    }
-
-    /**
      * @return void
      */
     public function get()
@@ -108,6 +95,19 @@ class LoginController extends ControllerImpl
         $response['error']     = false;
         $response['forwardTo'] = site() . config('dispatch.router') . '/app';
         $this->json->send($response);
+    }
+
+    /**
+     * @return array
+     */
+    public function services()
+    {
+        return [
+            array_merge(Config::get('services.response.html'), ['target' => 'html']),
+            array_merge(Config::get('services.response.json'), ['target' => 'json']),
+            array_merge(Config::get('services.database.user'), ['target' => 'userEntity']),
+            array_merge(Config::get('services.user'), ['target' => 'user']),
+        ];
     }
 
 }
