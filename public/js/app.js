@@ -14,11 +14,10 @@ App.ApplicationRoute = Ember.Route.extend({
 
     actions: {
         logout: function() {
-            $.get(
-                $('#urls .logout').val(),
-                {},
-                function() { location.reload(); }
-            );
+            $.get($('#urls .logout').val())
+                .then(function() {
+                    location.reload();
+                });
         }
     }
 
