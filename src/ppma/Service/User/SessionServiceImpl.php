@@ -60,7 +60,7 @@ class SessionServiceImpl implements UserService, Serviceable
     /**
      * @return boolean
      */
-    public function isLoggedIn()
+    public function isAuthenticated()
     {
         return $this->getEntity() instanceof User;
     }

@@ -28,7 +28,7 @@ interface UserService extends Service
     /**
      * @return boolean
      */
-    public function isLoggedIn();
+    public function isAuthenticated();
 
     /**
      * @param User $user
