@@ -12,7 +12,13 @@ class DispatchServiceImpl implements SessionService
      * @param array $args
      * @return mixed
      */
-    public function init($args = []) { }
+    public function init($args = [])
+    {
+        if (isset($args['path']))
+        {
+            session_save_path($args['path']);
+        }
+    }
 
     /**
      * @param string $name
@@ -20,7 +26,7 @@ class DispatchServiceImpl implements SessionService
      */
     public function get($name)
     {
-        session($name);
+        return session($name);
     }
 
     /**

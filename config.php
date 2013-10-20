@@ -49,11 +49,12 @@ return [
 
         // session handling
         'session' => [
-            'id'     => '\ppma\Service\Session\DispatchServiceImpl',
+            'id'   => '\ppma\Service\Session\DispatchServiceImpl',
+            'path' => __DIR__ . '/tmp/sessions',
         ],
 
         // (web)user
-        'user'    => [
+        'user' => [
             'id' => '\ppma\Service\User\SessionServiceImpl',
         ]
     ],

@@ -23,7 +23,16 @@ class SessionServiceImpl implements UserService, Serviceable
      */
     public function getEntity()
     {
-        $this->session->get('user');
+        $entity = $this->session->get('user');
+
+        if ($entity instanceof User)
+        {
+            return $entity;
+        }
+        else
+        {
+            return new User();
+        }
     }
 
     /**
@@ -31,7 +40,7 @@ class SessionServiceImpl implements UserService, Serviceable
      */
     public function getId()
     {
-        $this->getEntity()->getId();
+        return $this->getEntity()->getId();
     }
 
     /**
@@ -39,7 +48,7 @@ class SessionServiceImpl implements UserService, Serviceable
      */
     public function getUsername()
     {
-        $this->getEntity()->getUsername();
+        return $this->getEntity()->getUsername();
     }
 
     /**
