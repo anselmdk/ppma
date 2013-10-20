@@ -38,4 +38,13 @@ class Config
         self::$dotor = new Dotor($config);
     }
 
+    /**
+     * @param string $name
+     * @return string
+     */
+    public static function url($name)
+    {
+        return self::get('url.base') . self::get('url.' . $name);
+    }
+
 }

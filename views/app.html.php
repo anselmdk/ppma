@@ -25,7 +25,7 @@
 <script src="<?php echo site() ?>js/app.js"></script>
 
 <datalist id="urls">
-    <option class="logout" value="<?php echo \ppma\Config::get('url.base') . \ppma\Config::get('url.logout') ?>" />
+    <option class="logout" value="<?php echo \ppma\Config::url('logout') ?>" />
 </datalist>
 
 <script type="text/x-handlebars">

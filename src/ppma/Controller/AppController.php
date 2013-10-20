@@ -28,7 +28,7 @@ class AppController extends ControllerImpl
     public function before()
     {
         parent::before();
-        redirect(Config::get('url.base') . Config::get('url.login'), 302, !$this->user->isAuthenticated());
+        redirect(Config::url('login'), 302, !$this->user->isAuthenticated());
     }
 
     /**
