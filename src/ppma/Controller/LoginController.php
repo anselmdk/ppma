@@ -99,8 +99,7 @@ class LoginController extends ControllerImpl
         $this->user->login($user);
 
         // all fine
-        $response['error']     = false;
-        $response['forwardTo'] = site() . config('dispatch.router') . '/app';
+        $response['error'] = false;
         $this->json->send($response);
     }
 
