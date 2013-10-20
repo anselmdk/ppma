@@ -5,7 +5,7 @@ namespace ppma\Service\User;
 
 
 use ppma\Config;
-use ppma\Entity\User;
+use ppma\Entity\UserEntity;
 use ppma\Service\UserService;
 use ppma\Service;
 use ppma\Serviceable;
@@ -19,19 +19,19 @@ class SessionServiceImpl implements UserService, Serviceable
     protected $session;
 
     /**
-     * @return User
+     * @return UserEntity
      */
     public function getEntity()
     {
         $entity = $this->session->get('user');
 
-        if ($entity instanceof User)
+        if ($entity instanceof UserEntity)
         {
             return $entity;
         }
         else
         {
-            return new User();
+            return new UserEntity();
         }
     }
 
@@ -62,14 +62,14 @@ class SessionServiceImpl implements UserService, Serviceable
      */
     public function isAuthenticated()
     {
-        return $this->getEntity() instanceof User;
+        return $this->getEntity() instanceof UserEntity;
     }
 
     /**
-     * @param User $user
+     * @param UserEntity $user
      * @return void
      */
-    public function login(User $user)
+    public function login(UserEntity $user)
     {
         $this->session->set('user', $user);
     }

@@ -4,7 +4,7 @@
 namespace ppma\Entity;
 
 
-class User extends EntityImpl
+class UserEntity extends EntityImpl
 {
 
     /**

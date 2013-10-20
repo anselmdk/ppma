@@ -4,20 +4,20 @@
 namespace ppma\Service\Database;
 
 
-use ppma\Entity\Entry;
+use ppma\Entity\EntryEntity;
 use ppma\Service;
 
 interface EntryService extends Service
 {
 
     /**
-     * @return Entry[]
+     * @return EntryEntity[]
      */
     public function getAll();
 
     /**
      * @param int $id
-     * @return Entry
+     * @return EntryEntity
      */
     public function getById($id);
 

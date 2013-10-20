@@ -4,7 +4,7 @@
 namespace ppma\Service\Database\Spot;
 
 
-use ppma\Entity\User;
+use ppma\Entity\UserEntity;
 use ppma\Service\Database\Exception\RecordNotFoundException;
 use ppma\Service\Database\Spot\Entity\User as SpotUser;
 use ppma\Service\Database\Spot\ServiceImpl;
@@ -21,10 +21,10 @@ class UserServiceImpl extends ServiceImpl implements UserService
 
     /**
      * @param SpotUser $model
-     * @param User     $entity
-     * @return User
+     * @param UserEntity     $entity
+     * @return UserEntity
      */
-    protected function assignModelToEntity(SpotUser $model, User $entity)
+    protected function assignModelToEntity(SpotUser $model, UserEntity $entity)
     {
         $entity->assignToProperties([
             'id'            => $model->id,
@@ -38,7 +38,7 @@ class UserServiceImpl extends ServiceImpl implements UserService
     }
 
     /**
-     * @return User[]
+     * @return UserEntity[]
      */
     public function getAll()
     {
@@ -47,7 +47,7 @@ class UserServiceImpl extends ServiceImpl implements UserService
 
         foreach ($models as $model)
         {
-            $entities[] = $this->assignModelToEntity($model, new User());
+            $entities[] = $this->assignModelToEntity($model, new UserEntity());
         }
 
         return $entities;
@@ -55,7 +55,7 @@ class UserServiceImpl extends ServiceImpl implements UserService
 
     /**
      * @param int $id
-     * @return User
+     * @return UserEntity
      * @throws \ppma\Service\Database\Exception\RecordNotFoundException
      */
     public function getById($id)
@@ -67,12 +67,12 @@ class UserServiceImpl extends ServiceImpl implements UserService
             throw new RecordNotFoundException();
         }
 
-        return $this->assignModelToEntity($model, new User());
+        return $this->assignModelToEntity($model, new UserEntity());
     }
 
     /**
      * @param string $username
-     * @return User
+     * @return UserEntity
      * @throws \ppma\Service\Database\Exception\RecordNotFoundException
      */
     public function getByUsername($username)
@@ -85,7 +85,7 @@ class UserServiceImpl extends ServiceImpl implements UserService
             throw new RecordNotFoundException();
         }
 
-        return $this->assignModelToEntity($model, new User());
+        return $this->assignModelToEntity($model, new UserEntity());
     }
 
 }

@@ -4,14 +4,14 @@
 namespace ppma\Service;
 
 
-use ppma\Entity\User;
+use ppma\Entity\UserEntity;
 use ppma\Service;
 
 interface UserService extends Service
 {
 
     /**
-     * @return User
+     * @return UserEntity
      */
     public function getEntity();
 
@@ -31,10 +31,10 @@ interface UserService extends Service
     public function isAuthenticated();
 
     /**
-     * @param User $user
+     * @param UserEntity $user
      * @return void
      */
-    public function login(User $user);
+    public function login(UserEntity $user);
 
     /**
      * @return void

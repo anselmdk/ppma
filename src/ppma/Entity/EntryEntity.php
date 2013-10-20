@@ -5,7 +5,7 @@ namespace ppma\Entity;
 
 use ppma\Entity;
 
-class Entry extends EntityImpl
+class EntryEntity extends EntityImpl
 {
 
     /**

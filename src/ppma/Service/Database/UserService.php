@@ -4,25 +4,25 @@
 namespace ppma\Service\Database;
 
 
-use ppma\Entity\User;
+use ppma\Entity\UserEntity;
 
 interface UserService
 {
 
     /**
-     * @return User[]
+     * @return UserEntity[]
      */
     public function getAll();
 
     /**
      * @param int $id
-     * @return User
+     * @return UserEntity
      */
     public function getById($id);
 
     /**
      * @param string $username
-     * @return User
+     * @return UserEntity
      */
     public function getByUsername($username);
 
