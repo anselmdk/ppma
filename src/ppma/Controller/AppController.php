@@ -31,7 +31,7 @@ class AppController extends ControllerImpl
     public function services()
     {
         return [
-            Config::get('services.response.html'),
+            array_merge(Config::get('services.response.html'), ['target' => 'html']),
         ];
     }
 

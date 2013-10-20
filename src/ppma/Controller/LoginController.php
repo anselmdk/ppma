@@ -45,10 +45,10 @@ class LoginController extends ControllerImpl
     public function services()
     {
         return [
-            Config::get('services.response.html'),
-            Config::get('services.response.json'),
-            Config::get('services.database.user'),
-            Config::get('services.user'),
+            array_merge(Config::get('services.response.html'), ['target' => 'html']),
+            array_merge(Config::get('services.response.json'), ['target' => 'json']),
+            array_merge(Config::get('services.database.user'), ['target' => 'userEntry']),
+            array_merge(Config::get('services.user'), ['target' => 'user']),
         ];
     }
 

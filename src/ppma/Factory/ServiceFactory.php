@@ -19,12 +19,19 @@ class ServiceFactory
 
     /**
      * @param Serviceable $object
+     * @throws \InvalidArgumentException
      * @return void
      */
     public static function adorn(Serviceable $object)
     {
         foreach ($object->services() as $config)
         {
+            // check if index 'target' exist
+            if (!isset($config['target']))
+            {
+                throw new \InvalidArgumentException('"target" is not set');
+            }
+
             // create service
             $service = self::get($config);
 
@@ -33,8 +40,22 @@ class ServiceFactory
         }
     }
 
+    /**
+     * @param array $config
+     * @return Service|Serviceable
+     * @throws \ppma\Exception\ServiceDoesNotExist
+     * @throws \InvalidArgumentException
+     * @throws \ppma\Exception\InstanceIsNotAService
+     * @return void
+     */
     protected static function create($config)
     {
+        // check if index 'id' exist
+        if (!isset($config['id']))
+        {
+            throw new \InvalidArgumentException('"id" is not set');
+        }
+
         $id = $config['id'];
 
         // check if class $id exist
@@ -66,6 +87,10 @@ class ServiceFactory
         return $service;
     }
 
+    /**
+     * @param array $config
+     * @return Service
+     */
     public static function get($config)
     {
         $key = md5(serialize($config));

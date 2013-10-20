@@ -29,38 +29,32 @@ return [
         // orm/database services
         'database' => [
             'user'  => [
-                'id'     => '\ppma\Service\Database\Spot\UserServiceImpl',
-                'target' => 'userEntity',
+                'id' => '\ppma\Service\Database\Spot\UserServiceImpl',
             ],
             'entry' => [
-                'id'     => '\ppma\Service\Database\Spot\EntryServiceImpl',
-                'target' => 'entryEntity',
+                'id' => '\ppma\Service\Database\Spot\EntryServiceImpl',
             ],
         ],
 
         // response/rendering
         'response' => [
             'html' => [
-                'id'     => '\ppma\Service\Response\Html\DispatchServiceImpl',
-                'target' => 'html',
+                'id' => '\ppma\Service\Response\Html\DispatchServiceImpl',
             ],
 
             'json' => [
-                'id'     => '\ppma\Service\Response\Json\DispatchServiceImpl',
-                'target' => 'json',
+                'id' => '\ppma\Service\Response\Json\DispatchServiceImpl',
             ],
         ],
 
         // session handling
         'session' => [
             'id'     => '\ppma\Service\Session\DispatchServiceImpl',
-            'target' => 'session',
         ],
 
         // (web)user
         'user'    => [
-            'id'     => '\ppma\Service\User\SessionServiceImpl',
-            'target' => 'user',
+            'id' => '\ppma\Service\User\SessionServiceImpl',
         ]
     ],
 

@@ -79,7 +79,7 @@ class SessionServiceImpl implements UserService, Serviceable
     public function services()
     {
         return [
-            Config::get('services.session'),
+            array_merge(Config::get('services.session'), ['target' => 'session']),
         ];
     }
 
