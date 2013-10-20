@@ -24,6 +24,9 @@
 <script src="<?php echo site() ?>js/ember-data.js"></script>
 <script src="<?php echo site() ?>js/app.js"></script>
 
+<datalist id="urls">
+    <option class="logout" value="<?php echo \ppma\Config::get('url.base') . \ppma\Config::get('url.logout') ?>" />
+</datalist>
 
 <script type="text/x-handlebars">
 
@@ -48,7 +51,7 @@
                         </ul>
                     </li>
                     <li><a href="#about">About</a></li>
-                    <li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
+                    <li><a href="#/logout" {{action 'logout'}}>Logout</a></li>
                 </ul>
                 <form class="navbar-form navbar-right">
                     <div class="form-group">

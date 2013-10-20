@@ -3,9 +3,10 @@
 return [
 
     'url' => [
-        'base'  => 'http://localhost:8080/ppmasilex/public/index.php',
-        'login' => '/login',
-        'app'   => '/app',
+        'base'   => 'http://localhost:8080/ppmasilex/public/index.php',
+        'login'  => '/login',
+        'app'    => '/app',
+        'logout' => '/logout',
     ],
 
     'database' => [

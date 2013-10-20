@@ -40,6 +40,15 @@ class AppController extends ControllerImpl
     }
 
     /**
+     * @return void
+     */
+    public function logout()
+    {
+        $this->user->logout();
+        redirect(Config::get('url.base') . Config::get('url.login'));
+    }
+
+    /**
      * @return array ['propertyName' => 'class name of service']
      */
     public function services()
