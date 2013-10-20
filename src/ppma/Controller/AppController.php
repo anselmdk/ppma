@@ -7,7 +7,7 @@ namespace ppma\Controller;
 use ppma\Config;
 use ppma\Controller;
 use ppma\Service\Response\HtmlService;
-use ppma\Service\ViewService;
+use ppma\Service\UserService;
 
 class AppController extends ControllerImpl
 {
@@ -18,10 +18,16 @@ class AppController extends ControllerImpl
     protected $html;
 
     /**
+     * @var UserService
+     */
+    protected $user;
+
+    /**
      * @return void
      */
     public function home()
     {
+        redirect(Config::get('url.base') . Config::get('url.login'), 302, !$this->user->isAuthenticated());
         $this->html->render('app');
     }
 
@@ -32,6 +38,7 @@ class AppController extends ControllerImpl
     {
         return [
             array_merge(Config::get('services.response.html'), ['target' => 'html']),
+            array_merge(Config::get('services.user'), ['target' => 'user']),
         ];
     }
 
