@@ -39,6 +39,13 @@ class LoginController extends ControllerImpl
      */
     protected $user;
 
+    public function before()
+    {
+        parent::before();
+        redirect(Config::get('url.base') . Config::get('url.app'), 302, $this->user->isAuthenticated());
+    }
+
+
     /**
      * @return void
      */

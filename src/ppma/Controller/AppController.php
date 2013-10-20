@@ -25,9 +25,17 @@ class AppController extends ControllerImpl
     /**
      * @return void
      */
+    public function before()
+    {
+        parent::before();
+        redirect(Config::get('url.base') . Config::get('url.login'), 302, !$this->user->isAuthenticated());
+    }
+
+    /**
+     * @return void
+     */
     public function home()
     {
-        redirect(Config::get('url.base') . Config::get('url.login'), 302, !$this->user->isAuthenticated());
         $this->html->render('app');
     }
 
