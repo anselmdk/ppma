@@ -11,26 +11,58 @@ class UserEntity extends EntityImpl
      * @var string
      */
     private $encryptionKey;
-
     /**
      * @var int
      */
     private $id;
-
-    /**
-     * @var bool
-     */
-    private $isAdmin;
-
     /**
      * @var string
      */
     private $password;
-
     /**
      * @var string
      */
     private $username;
+    /**
+     * @var string
+     */
+    private $email;
+    /**
+     * @var string
+     */
+    private $apikey;
+
+    /**
+     * @return string
+     */
+    public function getApikey()
+    {
+        return $this->apikey;
+    }
+
+    /**
+     * @param string $apikey
+     */
+    public function setApikey($apikey)
+    {
+        $this->apikey = $apikey;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
 
     /**
      * @return string
@@ -41,11 +73,27 @@ class UserEntity extends EntityImpl
     }
 
     /**
+     * @param string $encryptionKey
+     */
+    public function setEncryptionKey($encryptionKey)
+    {
+        $this->encryptionKey = $encryptionKey;
+    }
+
+    /**
      * @return int
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -65,38 +113,6 @@ class UserEntity extends EntityImpl
     }
 
     /**
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
-    /**
-     * @param string $encryptionKey
-     */
-    public function setEncryptionKey($encryptionKey)
-    {
-        $this->encryptionKey = $encryptionKey;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
-     * @param boolean $isAdmin
-     */
-    public function setIsAdmin($isAdmin)
-    {
-        $this->isAdmin = $isAdmin;
-    }
-
-    /**
      * @param string $password
      */
     public function setPassword($password)
@@ -105,11 +121,27 @@ class UserEntity extends EntityImpl
     }
 
     /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
      * @param string $username
      */
     public function setUsername($username)
     {
         $this->username = $username;
+    }
+
+    /**
+     * @param boolean $isAdmin
+     */
+    public function setIsAdmin($isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
     }
 
 }

@@ -64,6 +64,8 @@ return [
         ]
     ],
 
+    'version' => '1.0.0-alpha',
+
     // path to views
     'views' => __DIR__ . '/views',
 

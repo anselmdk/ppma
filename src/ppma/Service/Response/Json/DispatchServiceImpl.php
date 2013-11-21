@@ -4,9 +4,9 @@
 namespace ppma\Service\Response\Json;
 
 
-use ppma\Service\ResponseService;
+use ppma\Service\Response\JsonService;
 
-class DispatchServiceImpl implements ResponseService
+class DispatchServiceImpl implements JsonService
 {
 
     /**
@@ -15,12 +15,11 @@ class DispatchServiceImpl implements ResponseService
      */
     public function init($args = []) { }
 
-    /**
-     * @param mixed $data
-     * @return void
-     */
-    public function send($data)
+    public function send($data = [], $status = 200, $header =[])
     {
+        // add name of status code
+        header(sprintf('HTTP/1.1 %d', $status));
+
         json_out($data);
     }
 
