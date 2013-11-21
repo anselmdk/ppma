@@ -1,13 +1,13 @@
 <?php
 
 
-namespace ppma\Service\Request\HttpFoundation;
+namespace ppma\Service\Request;
 
 
 use ppma\Service;
 use Symfony\Component\HttpFoundation\Request;
 
-class RequestServiceImpl implements Service\Request\RequestService
+class HttpFoundationServiceImpl implements Service\RequestService
 {
 
     /**

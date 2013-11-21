@@ -36,7 +36,7 @@ return [
 
         // request
         'request' => [
-            'id' => '\ppma\Service\Request\HttpFoundation\RequestServiceImpl'
+            'id' => '\ppma\Service\Request\HttpFoundationServiceImpl'
         ],
 
         // response

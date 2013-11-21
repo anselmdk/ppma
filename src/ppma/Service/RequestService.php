@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ppma\Service\Request;
+namespace ppma\Service;
 
 
 use ppma\Service;

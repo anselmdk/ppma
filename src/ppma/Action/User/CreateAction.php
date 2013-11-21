@@ -7,14 +7,14 @@ namespace ppma\Action\User;
 use ppma\Action\ActionImpl;
 use ppma\Config;
 use ppma\Service\Database\UserService;
-use ppma\Service\Request\HttpFoundation\RequestServiceImpl;
+use ppma\Service\Request\HttpFoundation\HttpFoundationServiceImpl;
 use ppma\Service\Response\JsonService;
 
 class CreateAction extends ActionImpl
 {
 
     /**
-     * @var RequestServiceImpl
+     * @var HttpFoundationServiceImpl
      */
     protected $request;
 
