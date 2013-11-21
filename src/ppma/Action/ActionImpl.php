@@ -44,7 +44,7 @@ abstract class ActionImpl implements Action
     public function services()
     {
         return [
-            array_merge(Config::get('services.response.json'), ['target' => 'response']),
+            array_merge(Config::get('services.response'), ['target' => 'response']),
         ];
     }
 

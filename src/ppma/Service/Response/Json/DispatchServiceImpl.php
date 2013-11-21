@@ -4,9 +4,9 @@
 namespace ppma\Service\Response\Json;
 
 
-use ppma\Service\Response\JsonService;
+use ppma\Service\ResponseService;
 
-class DispatchServiceImpl implements JsonService
+class DispatchServiceImpl implements ResponseService
 {
 
     /**

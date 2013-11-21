@@ -41,9 +41,7 @@ return [
 
         // response
         'response' => [
-            'json' => [
-                'id' => '\ppma\Service\Response\Json\DispatchServiceImpl',
-            ],
+            'id' => '\ppma\Service\Response\Json\DispatchServiceImpl',
         ],
 
     ],
