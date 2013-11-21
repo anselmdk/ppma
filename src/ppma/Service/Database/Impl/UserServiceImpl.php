@@ -9,6 +9,7 @@ use ppma\Model\UserModel;
 use ppma\Service\Database\Exception\EmailIsRequiredException;
 use ppma\Service\Database\Exception\PasswordIsRequiredException;
 use ppma\Service\Database\Exception\PasswordNeedsToBeALengthOf64Exception;
+use ppma\Service\Database\Exception\UsernameAlreadyExistsException;
 use ppma\Service\Database\Exception\UsernameIsRequiredException;
 use ppma\Service\Database\UserEntity;
 use ppma\Service\Database\UserService;
@@ -58,6 +59,12 @@ class UserServiceImpl implements UserService
         if (strlen($username) == 0)
         {
             throw new UsernameIsRequiredException();
+        }
+
+        // check if is username already taken
+        if (UserModel::objects()->filter('username', '=', $username)->exists())
+        {
+            throw new UsernameAlreadyExistsException();
         }
 
         // check if email is empty
