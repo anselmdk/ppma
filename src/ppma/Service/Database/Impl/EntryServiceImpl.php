@@ -4,7 +4,7 @@
 namespace ppma\Service\Database\Spot;
 
 
-use ppma\Entity\EntryEntity;
+use ppma\Entity\EntryModel;
 use ppma\Service\Database\EntryService;
 use ppma\Service\Database\Spot\Entity\Entry as SpotEntry;
 
@@ -18,10 +18,10 @@ class EntryServiceImpl extends ServiceImpl implements EntryService
 
     /**
      * @param SpotEntry $model
-     * @param EntryEntity $entity
-     * @return EntryEntity
+     * @param EntryModel $entity
+     * @return EntryModel
      */
-    protected function assignModelToEntity(SpotEntry $model, EntryEntity $entity)
+    protected function assignModelToEntity(SpotEntry $model, EntryModel $entity)
     {
         $entity->assignToProperties([
             'id'        => $model->id,
@@ -38,7 +38,7 @@ class EntryServiceImpl extends ServiceImpl implements EntryService
     }
 
     /**
-     * @return EntryEntity[]
+     * @return EntryModel[]
      */
     public function getAll()
     {
@@ -47,7 +47,7 @@ class EntryServiceImpl extends ServiceImpl implements EntryService
 
         foreach ($models as $model)
         {
-            $entities[] = $this->assignModelToEntity($model, new EntryEntity());
+            $entities[] = $this->assignModelToEntity($model, new EntryModel());
         }
 
         return $entities;
@@ -55,13 +55,13 @@ class EntryServiceImpl extends ServiceImpl implements EntryService
 
     /**
      * @param int $id
-     * @return EntryEntity
+     * @return EntryModel
      */
     public function getById($id)
     {
         return $this->assignModelToEntity(
             $this->mapper->get($this->_enitityClass, $id),
-            new EntryEntity()
+            new EntryModel()
         );
     }
 

@@ -6,12 +6,16 @@
     },
 
     "require": {
+        "cocur/slugify": "v0.2.3",
         "dispatch/dispatch": "2.6.*",
-        "vlucas/spot": "0.9.*",
+        "phormium/phormium": "0.4",
         "rych/phpass": "3.0.*@beta",
         "keboola/php-encryption": "0.2.1",
         "rych/random": "1.0.*@dev",
         "pklink/dotor": "0.2.*",
         "fp/universal-error-catcher": "1.0.*"
+    },
+    "require-dev": {
+        "codeception/codeception": "1.8.0.1"
     }
 }

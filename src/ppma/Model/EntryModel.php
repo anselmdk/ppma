@@ -3,9 +3,7 @@
 namespace ppma\Entity;
 
 
-use ppma\Entity;
-
-class EntryEntity extends EntityImpl
+class EntryModel extends \Phormium\Model
 {
 
     /**

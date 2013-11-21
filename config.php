@@ -3,10 +3,10 @@
 return [
 
     'database' => [
+        'host'     => '127.0.0.1',
+        'name'     => 'ppma',
         'username' => 'root',
-        'password' => 'bitnami',
-        'host'     => 'localhost',
-        'database' => 'ppmasilex',
+        'password' => 'bitnami'
     ],
 
     'log' => [
@@ -27,10 +27,10 @@ return [
         // orm/database services
         'database' => [
             'user'  => [
-                'id' => '\ppma\Service\Database\Spot\UserServiceImpl',
+                'id' => '\ppma\Service\Database\Impl\UserServiceImpl',
             ],
             'entry' => [
-                'id' => '\ppma\Service\Database\Spot\EntryServiceImpl',
+                'id' => '\ppma\Service\Database\Impl\EntryServiceImpl',
             ],
         ],
 

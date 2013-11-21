@@ -20,6 +20,11 @@ class DispatchServiceImpl implements JsonService
         // add name of status code
         header(sprintf('HTTP/1.1 %d', $status));
 
+        foreach ($header as $name => $value)
+        {
+            header(sprintf('%s: %s', $name, $value));
+        }
+
         json_out($data);
     }
 

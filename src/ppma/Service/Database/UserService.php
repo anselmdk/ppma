@@ -4,9 +4,10 @@
 namespace ppma\Service\Database;
 
 
-use ppma\Entity\UserEntity;
+use ppma\Model\UserModel;
+use ppma\Service;
 
-interface UserService
+interface UserService extends Service
 {
 
     /**
@@ -25,5 +26,13 @@ interface UserService
      * @return UserEntity
      */
     public function getByUsername($username);
+
+    /**
+     * @param string $username
+     * @param string $email
+     * @param string $password
+     * @return UserModel
+     */
+    public function create($username, $email, $password);
 
 }

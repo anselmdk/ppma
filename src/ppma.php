@@ -38,9 +38,23 @@ class ppma
         // initialize ppma\Config
         Config::init($config);
 
+        // config phormium
+        Phormium\DB::configure([
+            'databases' => [
+                'ppma' => [
+                    'dsn' => sprintf('mysql:host=%s;dbname=%s',
+                        Config::get('database.host', 'localhost'),
+                        Config::get('database.name', 'ppma')
+                    ),
+                    'username' => Config::get('database.username', 'root'),
+                    'password' => Config::get('database.password', '')
+                ],
+            ],
+            'logging' => false
+        ]);
+
         // config dispatch
-        config('dispatch.router', pathinfo(Config::get('url.base'), PATHINFO_BASENAME));
-        config('dispatch.url',    pathinfo(Config::get('url.base'), PATHINFO_DIRNAME));
+        config('dispatch.router', 'index.php');
 
         // create and init logger
         \ppma\Logger::init(Config::get('log'));
@@ -76,13 +90,28 @@ class ppma
      */
     protected function registerRoutes()
     {
-        $caller = function($id, $method) {
+        $caller = function($id, $method, $args = []) {
             /* @var \ppma\Controller $controller */
             $controller = ControllerFactory::get($id);
             $controller->before();
-            $controller->$method();
+
+            if (isset($args[0]))
+            {
+                $controller->$method($args[0]);
+            }
+            else
+            {
+                $controller->$method();
+            }
+
+
             $controller->after();
         };
+
+        // user
+        on('POST', '/users', function() use ($caller) {
+            $caller('\ppma\Controller\UserController', 'create');
+        });
 
         on('GET',  '/',       function() use ($caller) { $caller('\ppma\Controller\ServerController', 'getVersion'); });
         on('GET',  '/login',  function() use ($caller) { $caller('\ppma\Controller\LoginController',  'get'); });
