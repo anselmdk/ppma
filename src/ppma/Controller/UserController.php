@@ -9,11 +9,17 @@ use ppma\Config;
 use ppma\Controller;
 use ppma\Logger;
 use ppma\Model\UserModel;
+use ppma\Request\HttpFoundation\RequestServiceImpl;
 use ppma\Service\Database\UserService;
 use ppma\Service\Response\JsonService;
 
 class UserController extends ControllerImpl
 {
+
+    /**
+     * @var RequestServiceImpl
+     */
+    protected $request;
 
     /**
      * @var JsonService
@@ -33,7 +39,8 @@ class UserController extends ControllerImpl
     {
         return [
             array_merge(Config::get('services.response.json'), ['target' => 'response']),
-            array_merge(Config::get('services.database.user'), ['target' => 'userService'])
+            array_merge(Config::get('services.database.user'), ['target' => 'userService']),
+            array_merge(Config::get('services.request'),       ['target' => 'request'])
         ];
     }
 
@@ -42,9 +49,9 @@ class UserController extends ControllerImpl
         try
         {
             // get attributes
-            $username = $_POST['username'];
-            $email    = $_POST['email'];
-            $password = $_POST['password'];
+            $username = $this->request->post('username');
+            $email    = $this->request->post('email');
+            $password = $this->request->post('password');
 
             // create user
             $model = $this->userService->create($username, $email, $password);

@@ -34,7 +34,12 @@ return [
             ],
         ],
 
-        // response/rendering
+        // request
+        'request' => [
+            'id' => '\ppma\Service\Request\HttpFoundation\RequestServiceImpl'
+        ],
+
+        // response
         'response' => [
             'json' => [
                 'id' => '\ppma\Service\Response\Json\DispatchServiceImpl',
