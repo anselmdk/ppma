@@ -18,25 +18,28 @@ class ppma
      */
     public function __construct($config = [])
     {
+        // initialize ppma\Config
+        Config::init($config);
+
         // set error handler in DEV_MODE
         if (DEV_MODE)
         {
             $catcher = new UniversalErrorCatcher_Catcher();
             $catcher->registerCallback(function(\Exception $e) {
-                echo '<pre>';
-                printf("Type:    %s\n",   get_class($e));
-                printf("Message: %s\n",   $e->getMessage());
-                printf("File:    %s\n",   $e->getFile());
-                printf("Line:    %s\n\n", $e->getLine());
-                printf("Message: \n%s",   $e->getTraceAsString());
-                echo '</pre>';
+                /* @var \ppma\Service\Response\Json\DispatchServiceImpl $response */
+                $response = ServiceFactory::get(Config::get('services.response'));
+
+                $response->send([
+                    'type'    => get_class($e),
+                    'message' => $e->getMessage(),
+                    'file'    => $e->getFile(),
+                    'line'    => $e->getLine(),
+                    'trace'   => $e->getTrace()
+                ], 500);
                 die();
             });
             $catcher->start();
         }
-
-        // initialize ppma\Config
-        Config::init($config);
 
         // config phormium
         Phormium\DB::configure([

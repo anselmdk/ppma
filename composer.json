@@ -13,10 +13,10 @@
         "rych/phpass": "3.0.*@beta",
         "keboola/php-encryption": "0.2.1",
         "rych/random": "1.0.*@dev",
-        "pklink/dotor": "0.2.*",
-        "fp/universal-error-catcher": "1.0.*"
+        "pklink/dotor": "0.2.*"
     },
     "require-dev": {
-        "codeception/codeception": "1.8.0.1"
+        "codeception/codeception": "1.8.0.1",
+        "fp/universal-error-catcher": "1.0.*"
     }
 }
