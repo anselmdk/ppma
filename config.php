@@ -2,13 +2,6 @@
 
 return [
 
-    'url' => [
-        'base'   => 'http://localhost:8000/index.php',
-        'login'  => '/login',
-        'app'    => '/app',
-        'logout' => '/logout',
-    ],
-
     'database' => [
         'username' => 'root',
         'password' => 'bitnami',
@@ -48,10 +41,6 @@ return [
             ],
         ],
 
-        // (web)user
-        'user' => [
-            'id' => '\ppma\Service\User\SessionServiceImpl',
-        ]
     ],
 
     'version' => '1.0.0-alpha',
