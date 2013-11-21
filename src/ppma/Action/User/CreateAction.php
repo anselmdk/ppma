@@ -19,11 +19,6 @@ class CreateAction extends ActionImpl
     protected $request;
 
     /**
-     * @var JsonService
-     */
-    protected $response;
-
-    /**
      * @var UserService
      */
     protected $userService;
@@ -33,11 +28,10 @@ class CreateAction extends ActionImpl
      */
     public function services()
     {
-        return [
-            array_merge(Config::get('services.response.json'), ['target' => 'response']),
+        return array_merge(parent::services(), [
             array_merge(Config::get('services.database.user'), ['target' => 'userService']),
             array_merge(Config::get('services.request'),       ['target' => 'request'])
-        ];
+        ]);
     }
 
     /**
