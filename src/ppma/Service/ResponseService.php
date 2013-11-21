@@ -11,8 +11,10 @@ interface ResponseService extends Service
 
     /**
      * @param mixed $data
+     * @param int $status
+     * @param array $header
      * @return void
      */
-    public function send($data);
+    public function send($data, $status = 200, $header =[]);
 
 }

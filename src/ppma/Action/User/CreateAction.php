@@ -4,6 +4,7 @@
 namespace ppma\Action\User;
 
 
+use Nocarrier\Hal;
 use ppma\Action\ActionImpl;
 use ppma\Config;
 use ppma\Service\Database\Exception\EmailIsRequiredException;
@@ -58,9 +59,20 @@ class CreateAction extends ActionImpl
             // create user
             $model = $this->userService->create($username, $email, $password);
 
+            // create hal
+            $hal = new Hal('/users', [
+                'apikey' => $model->apikey
+            ]);
+
+            // get uri of user
+            $uri = sprintf('/users/%s', $model->slug);
+
+            // add link to user profile
+            $hal->addLink('user', $uri);
+
             // send response
-            $header = ['Location' => sprintf('/users/%s', $model->slug)];
-            $this->response->send([], 201, $header);
+            $header = ['Location' => $uri];
+            $this->response->send($hal->asJson(), 201, $header);
 
         // no username
         } catch (UsernameIsRequiredException $e) {

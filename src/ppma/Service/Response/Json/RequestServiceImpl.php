@@ -17,7 +17,7 @@ class RequestServiceImpl implements ResponseService
     {
     }
 
-    public function send($data = [], $status = 200, $header =[])
+    public function send($data, $status = 200, $header =[])
     {
         // TODO: add name of status code
         header(sprintf('HTTP/1.1 %d', $status));
@@ -28,7 +28,15 @@ class RequestServiceImpl implements ResponseService
             header(sprintf('%s: %s', $name, $value));
         }
 
-        echo json_encode($data);
+        if (is_array($data))
+        {
+            echo json_encode($data);
+        }
+        else
+        {
+            echo $data;
+        }
+
     }
 
 }

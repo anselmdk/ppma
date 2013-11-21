@@ -4,6 +4,7 @@
 namespace ppma\Action\Server;
 
 
+use Nocarrier\Hal;
 use ppma\Action\ActionImpl;
 
 class PingAction extends ActionImpl
@@ -14,7 +15,11 @@ class PingAction extends ActionImpl
      */
     public function run()
     {
-        $this->response->send(['message' => 'ping']);
+        $hal = new Hal('/', [
+            'message' => 'ping'
+        ]);
+
+        $this->response->send($hal->asJson());
     }
 
 } 
