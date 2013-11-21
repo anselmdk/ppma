@@ -1,19 +1,16 @@
 <?php
 
 
-namespace ppma\Controller;
+namespace ppma\Action\User;
 
 
-use PHPassLib\Hash\BCrypt;
+use ppma\Action\ActionImpl;
 use ppma\Config;
-use ppma\Controller;
-use ppma\Logger;
-use ppma\Model\UserModel;
-use ppma\Request\HttpFoundation\RequestServiceImpl;
 use ppma\Service\Database\UserService;
+use ppma\Service\Request\HttpFoundation\RequestServiceImpl;
 use ppma\Service\Response\JsonService;
 
-class UserController extends ControllerImpl
+class CreateAction extends ActionImpl
 {
 
     /**
@@ -31,7 +28,6 @@ class UserController extends ControllerImpl
      */
     protected $userService;
 
-
     /**
      * @return array
      */
@@ -44,7 +40,10 @@ class UserController extends ControllerImpl
         ];
     }
 
-    public function create()
+    /**
+     * @return void
+     */
+    public function run()
     {
         try
         {
@@ -60,14 +59,13 @@ class UserController extends ControllerImpl
             $header = ['Location' => sprintf('/users/%s', $model->slug)];
             $this->response->send([], 201, $header);
 
-        // unknown error
+            // unknown error
         } catch (\Exception $e) {
             $this->response->send([
                 'code'    => 999,
                 'message' => $e->getMessage()
             ], 500);
         }
-
     }
 
-}
+} 

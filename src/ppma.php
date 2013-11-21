@@ -1,7 +1,7 @@
 <?php
 
 use ppma\Config;
-use ppma\Factory\ControllerFactory;
+use ppma\Factory\ActionFactory;
 use ppma\Factory\ServiceFactory;
 
 class ppma
@@ -64,58 +64,24 @@ class ppma
     }
 
     /**
-     * @param string $id
-     * @return \ppma\Controller
-     */
-    public function createController($id)
-    {
-        if (!isset($this->controller[$id]))
-        {
-            /* @var \ppma\Controller $controller */
-            $controller = new $id();
-            ServiceFactory::adorn($controller);
-
-            // attach services to controller
-            ServiceFactory::adorn($controller);
-
-            // save controller
-            $this->controller[$id] = $controller;
-        }
-
-        return $this->controller[$id];
-    }
-
-    /**
      * @return void
      */
     protected function registerRoutes()
     {
-        $caller = function($id, $method, $args = []) {
-            /* @var \ppma\Controller $controller */
-            $controller = ControllerFactory::get($id);
-            $controller->before();
-
-            if (isset($args[0]))
-            {
-                $controller->$method($args[0]);
-            }
-            else
-            {
-                $controller->$method();
-            }
-
-
-            $controller->after();
+        $caller = function($id, $args = []) {
+            /* @var \ppma\Action $action */
+            $action = ActionFactory::get($id);
+            $action->before();
+            $action->init($args);
+            $action->run();
+            $action->after();
         };
 
-        // user
-        on('POST', '/users', function() use ($caller) {
-            $caller('\ppma\Controller\UserController', 'create');
-        });
+        // server
+        on('GET', '/', function() use ($caller) { $caller('\ppma\Action\Server\PingAction'); });
 
-        on('GET',  '/',       function() use ($caller) { $caller('\ppma\Controller\ServerController', 'getVersion'); });
-        on('GET',  '/login',  function() use ($caller) { $caller('\ppma\Controller\LoginController',  'get'); });
-        on('POST', '/login',  function() use ($caller) { $caller('\ppma\Controller\LoginController',  'post'); });
+        // user
+        on('POST', '/users', function() use ($caller) { $caller('\ppma\Action\User\CreateAction'); });
     }
 
     /**
