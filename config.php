@@ -14,11 +14,7 @@ return [
             [
                 'id'      => '\ppma\Logger\Writer\EchoWriterImpl',
                 'enabled' => true,
-            ],
-            [
-                'id'      => '\ppma\Logger\Writer\ChromeWriterImpl',
-                'enabled' => DEV_MODE,
-            ],
+            ]
         ],
     ],
 
@@ -41,7 +37,7 @@ return [
 
         // response
         'response' => [
-            'id' => '\ppma\Service\Response\Json\DispatchServiceImpl',
+            'id' => '\ppma\Service\Response\Json\RequestServiceImpl',
         ],
 
     ],
