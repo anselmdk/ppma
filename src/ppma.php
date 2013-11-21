@@ -87,8 +87,6 @@ class ppma
         on('GET',  '/',       function() use ($caller) { $caller('\ppma\Controller\ServerController', 'getVersion'); });
         on('GET',  '/login',  function() use ($caller) { $caller('\ppma\Controller\LoginController',  'get'); });
         on('POST', '/login',  function() use ($caller) { $caller('\ppma\Controller\LoginController',  'post'); });
-        on('GET',  '/app',    function() use ($caller) { $caller('\ppma\Controller\AppController',    'home'); });
-        on('GET',  '/logout', function() use ($caller) { $caller('\ppma\Controller\AppController',    'logout'); });
     }
 
     /**

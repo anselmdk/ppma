@@ -43,19 +43,9 @@ return [
 
         // response/rendering
         'response' => [
-            'html' => [
-                'id' => '\ppma\Service\Response\Html\DispatchServiceImpl',
-            ],
-
             'json' => [
                 'id' => '\ppma\Service\Response\Json\DispatchServiceImpl',
             ],
-        ],
-
-        // session handling
-        'session' => [
-            'id'   => '\ppma\Service\Session\DispatchServiceImpl',
-            'path' => __DIR__ . '/tmp/sessions',
         ],
 
         // (web)user
@@ -65,8 +55,5 @@ return [
     ],
 
     'version' => '1.0.0-alpha',
-
-    // path to views
-    'views' => __DIR__ . '/views',
 
 ];
