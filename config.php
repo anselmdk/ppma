@@ -3,7 +3,7 @@
 return [
 
     'url' => [
-        'base'   => 'http://localhost:8080/ppmasilex/public/index.php',
+        'base'   => 'http://localhost:8000/index.php',
         'login'  => '/login',
         'app'    => '/app',
         'logout' => '/logout',
