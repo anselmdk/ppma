@@ -11,7 +11,13 @@ App.Router.map(function () {
 App.LoginController = Ember.Controller.extend({
 
     do: function() {
-        this.set('isSubmitted', true);
+        var view = Ember.View.create({
+            templateName: 'login'
+        });
+
+        $(view.element).find('.form').addClass('loading');
+
+        //$('#login').find('.form').addClass('loading');
 
         $.post(null, {
             username: this.get('username'),
@@ -22,7 +28,7 @@ App.LoginController = Ember.Controller.extend({
                 location.reload();
             }
             else {
-                this.set('isSubmitted', false);
+                $('#login .form').removeClass('loading');
                 this.set('loginFailed', true);
                 this.set('message', data.message);
             }

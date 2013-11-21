@@ -59,6 +59,7 @@ class LoginController extends ControllerImpl
      */
     public function post()
     {
+        sleep(2);
         // prepare response
         $response = [
             'error'   => true,

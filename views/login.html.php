@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Login</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="<?php echo site() ?>css/bootstrap.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
+    <link href="<?php echo site() ?>css/semantic.min.css" rel="stylesheet">
     <link href="<?php echo site() ?>css/login.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -22,26 +21,40 @@
 
 
 <script src="<?php echo site() ?>js/jquery-1.10.2.min.js"></script>
+<script src="<?php echo site() ?>js/semantic.min.js"></script>
 <script src="<?php echo site() ?>js/handlebars-1.0.0.js"></script>
 <script src="<?php echo site() ?>js/ember.js"></script>
 <script src="<?php echo site() ?>js/ember-data.js"></script>
 <script src="<?php echo site() ?>js/login.js"></script>
 
-<script type="text/x-handlebars" data-template-name="login">
-    <div class="container">
 
-        <div class="col-lg-4 col-lg-offset-4">
-            <form class="form-signin">
-                {{#if loginFailed}}
-                    <div class="alert alert-danger">{{message}}</div>
-                {{/if}}
+<script type="text/x-handlebars" id="login">
+    <div class="ui page">
+        <div class="ui three column grid">
+            <div class="column"></div>
+            <div class="column">
+                <div class="ui error form segment">
+                    {{#if loginFailed}}
+                        <div class="ui error message">
+                            <div class="header">Error</div>
+                            <p>{{message}}</p>
+                        </div>
+                    {{/if}}
 
-                {{input value=username type="text" classNames="form-control" placeholder="Username" disabled=isSubmitted}}
-                {{input value=password type="password" classNames="form-control" placeholder="Password" disabled=isSubmitted}}
-                <button {{action 'do'}} class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            </form>
+                    <div class="field">
+                        {{input value=username type="text" placeholder="Username"}}
+                    </div>
+                    <div class="field">
+                        {{input value=password type="password" placeholder="Password"}}
+                    </div>
+                    <div class="fluid ui right labeled  submit icon button" {{action 'do'}}>
+                        <i class="sign in icon"></i>
+                        Login
+                    </div>
+                </div>
+
+            </div>
         </div>
-
     </div>
 </script>
 

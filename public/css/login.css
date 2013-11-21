@@ -1,7 +1,14 @@
 body {
+    font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    text-rendering: optimizeLegibility;
+    color: #555555;
     padding-top: 40px;
     padding-bottom: 40px;
     background-color: #eee;
+}
+
+.ui.header {
+    font-family: 'Source Sans Pro', "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
 .form-signin {
