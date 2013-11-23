@@ -24,6 +24,7 @@ class CreateAction extends ActionImpl
     const EMAIL_IS_REQUIRED       = 3;
     const PASSWORD_IS_REQUIRED    = 4;
     const PASSWORD_IS_INVALID     = 5;
+    const UNKNOWN_ERROR           = 999;
 
     /**
      * @var HttpFoundationServiceImpl
@@ -57,8 +58,11 @@ class CreateAction extends ActionImpl
      */
     public function run()
     {
-        // add content-type to response header
-        $this->response->addHeader('Content-Type', 'application/hal+json');
+        // prepare response
+        $this->response
+            ->addHeader('Content-Type', 'application/hal+json')
+            ->setStatus(400)
+        ;
 
         // create hal object
         $hal    = new Hal('/users');
@@ -107,10 +111,7 @@ class CreateAction extends ActionImpl
                 'message' => '`username` is required'
             ]);
 
-            return $this->response
-                ->setData(json_decode($hal->asJson()))
-                ->setStatus(400)
-            ;
+            return $this->response->setData(json_decode($hal->asJson()));
 
         } catch (UsernameAlreadyExistsException $e) {
             $hal->setData([
@@ -118,10 +119,7 @@ class CreateAction extends ActionImpl
                 'message' => '`username` already exists in database'
             ]);
 
-            return $this->response
-                ->setData(json_decode($hal->asJson()))
-                ->setStatus(400)
-            ;
+            return $this->response->setData(json_decode($hal->asJson()));
 
         // no email
         } catch (EmailIsRequiredException $e) {
@@ -130,10 +128,7 @@ class CreateAction extends ActionImpl
                 'message' => '`email` is required'
             ]);
 
-            return $this->response
-                ->setData(json_decode($hal->asJson()))
-                ->setStatus(400)
-            ;
+            return $this->response->setData(json_decode($hal->asJson()));
 
         // no password
         } catch (PasswordIsRequiredException $e) {
@@ -142,10 +137,7 @@ class CreateAction extends ActionImpl
                 'message' => '`password` is required'
             ]);
 
-            return $this->response
-                ->setData(json_decode($hal->asJson()))
-                ->setStatus(400)
-            ;
+            return $this->response->setData(json_decode($hal->asJson()));
 
         // no password
         } catch (PasswordNeedsToBeALengthOf64Exception $e) {
@@ -154,22 +146,16 @@ class CreateAction extends ActionImpl
                 'message' => '`password` is not a sha256 hash'
             ]);
 
-            return $this->response
-                ->setData(json_decode($hal->asJson()))
-                ->setStatus(400)
-            ;
+            return $this->response->setData(json_decode($hal->asJson()));
 
         // unknown error
         } catch (\Exception $e) {
             $hal->setData([
-                'code'    => 999,
+                'code'    => self::UNKNOWN_ERROR,
                 'message' => $e->getMessage()
             ]);
 
-            return $this->response
-                ->setData(json_decode($hal->asJson()))
-                ->setStatus(400)
-            ;
+            return $this->response->setData(json_decode($hal->asJson()));
         }
     }
 
