@@ -34,7 +34,7 @@ return [
 
         // response
         'response' => [
-            'id' => '\ppma\Service\Response\Json\RequestServiceImpl',
+            'id' => '\ppma\Service\Response\Json\ResponseServiceImpl',
         ],
 
         'orm' => [
