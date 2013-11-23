@@ -58,14 +58,14 @@ class GetKeyAction extends ActionImpl
             return $this->response
                 ->addData('code', self::UNKNOW_ERROR)
                 ->addData('message', $e->getMessage())
-                ->setStatus(500)
+                ->setStatusCode(500)
             ;
         }
 
         return $this->response
             ->addData('code', self::AUTHENTICATION_FAILED)
             ->addData('message', 'authentication failed')
-            ->setStatus(400);
+            ->setStatusCode(400);
     }
 
     /**

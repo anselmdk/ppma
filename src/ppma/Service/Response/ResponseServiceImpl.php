@@ -62,7 +62,7 @@ class ResponseServiceImpl implements ResponseService
     /**
      * @return int
      */
-    public function getStatus()
+    public function getStatusCode()
     {
         return $this->status;
     }
@@ -91,7 +91,7 @@ class ResponseServiceImpl implements ResponseService
      * @param int $status
      * @return ResponseService
      */
-    public function setStatus($status)
+    public function setStatusCode($status)
     {
         $this->status = $status;
         return $this;

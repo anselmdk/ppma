@@ -29,7 +29,7 @@ interface ResponseService extends Service
     /**
      * @return int
      */
-    public function getStatus();
+    public function getStatusCode();
 
     /**
      * @param mixed $body
@@ -47,6 +47,6 @@ interface ResponseService extends Service
      * @param int $status
      * @return ResponseService
      */
-    public function setStatus($status);
+    public function setStatusCode($status);
 
 }

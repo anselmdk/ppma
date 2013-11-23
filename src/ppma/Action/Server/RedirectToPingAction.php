@@ -15,7 +15,7 @@ class RedirectToPingAction extends ActionImpl
     public function run()
     {
         return $this->response
-            ->setStatus(300)
+            ->setStatusCode(300)
             ->addHeader('Location', '/ping')
         ;
     }

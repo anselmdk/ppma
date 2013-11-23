@@ -3,6 +3,7 @@
 use ppma\Config;
 use ppma\Factory\ActionFactory;
 use ppma\Factory\ServiceFactory;
+use ppma\Service\ResponseService;
 
 class ppma
 {
@@ -26,17 +27,20 @@ class ppma
         {
             $catcher = new UniversalErrorCatcher_Catcher();
             $catcher->registerCallback(function(\Exception $e) {
-                /* @var \ppma\Service\Response\Json\ResponseServiceImpl $response */
+                /* @var \ppma\Service\Response\Impl\JsonServiceImpl $response */
                 $response = ServiceFactory::get(Config::get('services.response'));
 
-                $response->send([
-                    'type'    => get_class($e),
-                    'message' => $e->getMessage(),
-                    'file'    => $e->getFile(),
-                    'line'    => $e->getLine(),
-                    'trace'   => $e->getTrace()
-                ], 500);
-                die();
+                $response
+                    ->addData('type', get_class($e))
+                    ->addData('message', $e->getMessage())
+                    ->addData('file', $e->getFile())
+                    ->addData('line', $e->getLine())
+                    ->addData('trace', $e->getTrace())
+                    ->setStatusCode(500)
+                ;
+
+                $this->sendResponse($response);
+                exit;
             });
             $catcher->start();
         }
@@ -70,14 +74,7 @@ class ppma
             $response = $action->run();
 
             // output action
-            header(sprintf('HTTP/1.1 %d', $response->getStatus()));
-
-            foreach ($response->getHeader() as $name => $value)
-            {
-                header(sprintf('%s: %s', $name, $value));
-            }
-
-            echo $response->getBody();
+            $this->sendResponse($response);
 
             // triger `after`-event
             $action->after();
@@ -102,6 +99,18 @@ class ppma
     public function run()
     {
         dispatch();
+    }
+
+    protected function sendResponse(ResponseService $response)
+    {
+        header(sprintf('HTTP/1.1 %d', $response->getStatusCode()));
+
+        foreach ($response->getHeader() as $name => $value)
+        {
+            header(sprintf('%s: %s', $name, $value));
+        }
+
+        echo $response->getBody();
     }
 
 }

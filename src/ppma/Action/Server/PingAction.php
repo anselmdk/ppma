@@ -21,7 +21,7 @@ class PingAction extends ActionImpl
 
         return $this->response
             ->setData(json_decode($hal->asJson()))
-            ->setStatus(200)
+            ->setStatusCode(200)
             ->addHeader('Content-Type', 'application/hal+json')
         ;
         //$this->response->send($hal->asJson(), 200, ['Content-Type' => 'application/hal+json']);

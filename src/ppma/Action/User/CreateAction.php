@@ -61,7 +61,7 @@ class CreateAction extends ActionImpl
         // prepare response
         $this->response
             ->addHeader('Content-Type', 'application/hal+json')
-            ->setStatus(400)
+            ->setStatusCode(400)
         ;
 
         // create hal object
@@ -100,7 +100,7 @@ class CreateAction extends ActionImpl
             // send response
             return $this->response
                 ->setData(json_decode($hal->asJson()))
-                ->setStatus(201)
+                ->setStatusCode(201)
                 ->addHeader('Location', $uri)
             ;
 
