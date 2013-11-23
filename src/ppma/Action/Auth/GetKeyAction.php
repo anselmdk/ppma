@@ -12,6 +12,10 @@ use ppma\Service\Model\Phormium\UserServiceImpl;
 class GetKeyAction extends ActionImpl
 {
 
+    const AUTHENTICATION_FAILED = 1;
+    const UNKNOW_ERROR          = 999;
+
+
     /**
      * @var string
      */
@@ -52,13 +56,16 @@ class GetKeyAction extends ActionImpl
         } catch (UserNotFoundException $e) {
         } catch (\Exception $e) {
             return $this->response
-                ->addData('code', 999)
+                ->addData('code', self::UNKNOW_ERROR)
                 ->addData('message', $e->getMessage())
                 ->setStatus(500)
             ;
         }
 
-        return $this->response->setStatus(400);
+        return $this->response
+            ->addData('code', self::AUTHENTICATION_FAILED)
+            ->addData('message', 'authentication failed')
+            ->setStatus(400);
     }
 
     /**
