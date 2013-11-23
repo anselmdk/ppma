@@ -14,6 +14,7 @@ use ppma\Service\Model\Exception\UsernameIsRequiredException;
 use ppma\Service\Model\Exception\UserNotFoundException;
 use ppma\Service\Model\UserService;
 use ppma\Service\Model\PhormiumServiceImpl;
+use Rych\Random\Random;
 
 
 class UserServiceImpl extends PhormiumServiceImpl implements UserService
@@ -108,7 +109,7 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
         $model->slug     = $this->slugUsername($model->username);
         $model->email    = $email;
         $model->password = password_hash($password, PASSWORD_BCRYPT, ['costs' => 31]);
-        $model->authkey  = sha1(rand() . password_hash(rand(), PASSWORD_BCRYPT, ['costs' => 31]));
+        $model->authkey  = sha1((new Random())->getRandomBytes(42));
         $model->save();
 
         return $model;
