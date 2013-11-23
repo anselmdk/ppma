@@ -3,7 +3,6 @@
 
 namespace ppma\Model;
 
-use ppma\Config;
 use Phormium\Model;
 
 class UserModel extends Model
