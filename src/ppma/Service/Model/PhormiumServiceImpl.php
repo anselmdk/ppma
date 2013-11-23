@@ -1,42 +1,30 @@
 <?php
 
 
-namespace ppma\Action;
+namespace ppma\Service\Model;
 
 
-use ppma\Action;
+use ppma\Service\ModelService;
 use ppma\Config;
+use ppma\Service\Orm\PhormiumService;
 use ppma\Service;
 
-abstract class ActionImpl implements Action
+abstract class PhormiumServiceImpl implements ModelService
 {
 
     /**
-     * @var Service\Response\Json\RequestServiceImpl
+     * @var PhormiumService
      */
-    protected $response;
-
-    /**
-     * @return void
-     */
-    public function after()
-    {
-    }
-
-    /**
-     * @return void
-     */
-    public function before()
-    {
-    }
+    protected $phormium;
 
     /**
      * @param array $args
-     * @return void
+     * @return mixed
      */
     public function init($args = [])
     {
     }
+
 
     /**
      * @return array ['propertyName' => 'class name of service']
@@ -44,7 +32,7 @@ abstract class ActionImpl implements Action
     public function services()
     {
         return [
-            array_merge(Config::get('services.response'), ['target' => 'response']),
+            array_merge(Config::get('services.orm'), ['target' => 'phormium'])
         ];
     }
 
@@ -59,4 +47,4 @@ abstract class ActionImpl implements Action
         $this->$target = $service;
     }
 
-} 
+}

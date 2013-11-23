@@ -1,23 +1,24 @@
 <?php
 
 
-namespace ppma\Service\Database\Impl;
+namespace ppma\Service\Model\Phormium;
 
 
 use Cocur\Slugify\Slugify;
 use ppma\Model\UserModel;
-use ppma\Service\Database\Exception\EmailIsRequiredException;
-use ppma\Service\Database\Exception\PasswordIsRequiredException;
-use ppma\Service\Database\Exception\PasswordNeedsToBeALengthOf64Exception;
-use ppma\Service\Database\Exception\UsernameAlreadyExistsException;
-use ppma\Service\Database\Exception\UsernameIsRequiredException;
-use ppma\Service\Database\UserEntity;
-use ppma\Service\Database\UserService;
+use ppma\Service\Model\Exception\EmailIsRequiredException;
+use ppma\Service\Model\Exception\PasswordIsRequiredException;
+use ppma\Service\Model\Exception\PasswordNeedsToBeALengthOf64Exception;
+use ppma\Service\Model\Exception\UsernameAlreadyExistsException;
+use ppma\Service\Model\Exception\UsernameIsRequiredException;
+use ppma\Service\Model\UserService;
+use ppma\Service\Model\PhormiumServiceImpl;
 
-class UserServiceImpl implements UserService
+
+class UserServiceImpl extends PhormiumServiceImpl implements UserService
 {
     /**
-     * @return UserEntity[]
+     * @return UserModel[]
      */
     public function getAll()
     {
@@ -26,7 +27,7 @@ class UserServiceImpl implements UserService
 
     /**
      * @param int $id
-     * @return UserEntity
+     * @return UserModel
      */
     public function getById($id)
     {
@@ -35,7 +36,7 @@ class UserServiceImpl implements UserService
 
     /**
      * @param string $username
-     * @return UserEntity
+     * @return UserModel
      */
     public function getByUsername($username)
     {
@@ -51,6 +52,17 @@ class UserServiceImpl implements UserService
         // TODO: Implement init() method.
     }
 
+    /**
+     * @param string $username
+     * @param string $email
+     * @param string $password
+     * @return UserModel
+     * @throws \ppma\Service\Model\Exception\UsernameIsRequiredException
+     * @throws \ppma\Service\Model\Exception\EmailIsRequiredException
+     * @throws \ppma\Service\Model\Exception\PasswordNeedsToBeALengthOf64Exception
+     * @throws \ppma\Service\Model\Exception\UsernameAlreadyExistsException
+     * @throws \ppma\Service\Model\Exception\PasswordIsRequiredException
+     */
     public function create($username, $email, $password)
     {
         $model = new UserModel();

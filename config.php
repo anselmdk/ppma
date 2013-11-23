@@ -21,12 +21,9 @@ return [
     // services
     'services' => [
         // orm/database services
-        'database' => [
+        'model' => [
             'user'  => [
-                'id' => '\ppma\Service\Database\Impl\UserServiceImpl',
-            ],
-            'entry' => [
-                'id' => '\ppma\Service\Database\Impl\EntryServiceImpl',
+                'id' => '\ppma\Service\Model\Phormium\UserServiceImpl',
             ],
         ],
 
@@ -39,6 +36,10 @@ return [
         'response' => [
             'id' => '\ppma\Service\Response\Json\RequestServiceImpl',
         ],
+
+        'orm' => [
+            'id' => '\ppma\Service\Orm\Impl\PhormiumServiceImpl',
+        ]
 
     ],
 

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ppma\Service\Database;
+namespace ppma\Service\Model;
 
 
 use ppma\Model\UserModel;
@@ -11,19 +11,19 @@ interface UserService extends Service
 {
 
     /**
-     * @return UserEntity[]
+     * @return UserModel[]
      */
     public function getAll();
 
     /**
      * @param int $id
-     * @return UserEntity
+     * @return UserModel
      */
     public function getById($id);
 
     /**
      * @param string $username
-     * @return UserEntity
+     * @return UserModel
      */
     public function getByUsername($username);
 

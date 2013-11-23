@@ -41,21 +41,6 @@ class ppma
             $catcher->start();
         }
 
-        // config phormium
-        Phormium\DB::configure([
-            'databases' => [
-                'ppma' => [
-                    'dsn' => sprintf('mysql:host=%s;dbname=%s',
-                        Config::get('database.host', 'localhost'),
-                        Config::get('database.name', 'ppma')
-                    ),
-                    'username' => Config::get('database.username', 'root'),
-                    'password' => Config::get('database.password', '')
-                ],
-            ],
-            'logging' => false
-        ]);
-
         // config dispatch
         config('dispatch.router', 'index.php');
 

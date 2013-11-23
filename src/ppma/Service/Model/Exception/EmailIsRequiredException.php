@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ppma\Service\Database\Exception;
+namespace ppma\Service\Model\Exception;
 
 
 class EmailIsRequiredException extends \Exception {

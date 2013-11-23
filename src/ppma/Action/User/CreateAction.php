@@ -7,12 +7,13 @@ namespace ppma\Action\User;
 use Nocarrier\Hal;
 use ppma\Action\ActionImpl;
 use ppma\Config;
-use ppma\Service\Database\Exception\EmailIsRequiredException;
-use ppma\Service\Database\Exception\PasswordIsRequiredException;
-use ppma\Service\Database\Exception\PasswordNeedsToBeALengthOf64Exception;
-use ppma\Service\Database\Exception\UsernameAlreadyExistsException;
-use ppma\Service\Database\Exception\UsernameIsRequiredException;
-use ppma\Service\Database\UserService;
+use ppma\Service\Model\Exception\EmailIsRequiredException;
+use ppma\Service\Model\Exception\PasswordIsRequiredException;
+use ppma\Service\Model\Exception\PasswordNeedsToBeALengthOf64Exception;
+use ppma\Service\Model\Exception\UsernameAlreadyExistsException;
+use ppma\Service\Model\Exception\UsernameIsRequiredException;
+use ppma\Service\Model\UserService;
+use ppma\Service\Request\HttpFoundationServiceImpl;
 
 class CreateAction extends ActionImpl
 {
@@ -39,7 +40,7 @@ class CreateAction extends ActionImpl
     public function services()
     {
         return array_merge(parent::services(), [
-            array_merge(Config::get('services.database.user'), ['target' => 'userService']),
+            array_merge(Config::get('services.model.user'), ['target' => 'userService']),
             array_merge(Config::get('services.request'),       ['target' => 'request'])
         ]);
     }
