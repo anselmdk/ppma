@@ -19,7 +19,7 @@ class PingAction extends ActionImpl
             'message' => 'pong'
         ]);
 
-        $this->response->send($hal->asJson());
+        $this->response->send($hal->asJson(), 200, ['Content-Type' => 'application/hal+json']);
     }
 
 } 
