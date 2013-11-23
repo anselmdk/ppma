@@ -66,7 +66,8 @@ class ppma
         };
 
         // server
-        on('GET', '/', function() use ($caller) { $caller('\ppma\Action\Server\PingAction'); });
+        on('GET', '/', function() use ($caller) { $caller('\ppma\Action\Server\RedirectToPingAction'); });
+        on('GET', '/ping', function() use ($caller) { $caller('\ppma\Action\Server\PingAction'); });
 
         // user
         on('POST', '/users', function() use ($caller) { $caller('\ppma\Action\User\CreateAction'); });

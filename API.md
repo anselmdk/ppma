@@ -2,7 +2,7 @@
 
 ## Server
 
-### Ping
+### Default (redirect to ping)
 
 Erfordert keine besonderen Rechte
 
@@ -10,6 +10,26 @@ Erfordert keine besonderen Rechte
 
 ```
 GET /
+```
+	
+##### Response
+
+```
+303 See Other
+Content-Type: application/json
+Location: /ping
+```
+
+
+
+### Ping
+
+Erfordert keine besonderen Rechte
+
+##### Request
+
+```
+GET /ping
 ```
 	
 ##### Response
