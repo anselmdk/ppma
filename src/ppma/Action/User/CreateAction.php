@@ -49,6 +49,11 @@ class CreateAction extends ActionImpl
      */
     public function run()
     {
+        // create hal object
+        $hal    = new Hal('/users');
+        $header = ['Content-Type' => 'application/hal+json'];
+        $status = 201;
+
         try
         {
             // get attributes
@@ -59,8 +64,8 @@ class CreateAction extends ActionImpl
             // create user
             $model = $this->userService->create($username, $email, $password);
 
-            // create hal
-            $hal = new Hal('/users', [
+            // add apikey to hal
+            $hal->setData([
                 'apikey' => $model->apikey
             ]);
 
@@ -70,51 +75,58 @@ class CreateAction extends ActionImpl
             // add link to user profile
             $hal->addLink('user', $uri);
 
-            // send response
-            $header = ['Location' => $uri];
-            $this->response->send($hal->asJson(), 201, $header);
+            // add created resource to header
+            $header['Location'] = $uri;
 
         // no username
         } catch (UsernameIsRequiredException $e) {
-            $this->response->send([
+            $status = 400;
+            $hal->setData([
                 'code'    => self::USERNAME_IS_REQUIRED,
                 'message' => '`username` is required'
-            ], 400);
+            ]);
 
         } catch (UsernameAlreadyExistsException $e) {
-            $this->response->send([
+            $status = 400;
+            $hal->setData([
                 'code'    => self::USERNAME_ALREADY_EXISTS,
                 'message' => '`username` already exists in database'
-            ], 400);
+            ]);
 
         // no email
         } catch (EmailIsRequiredException $e) {
-            $this->response->send([
+            $status = 400;
+            $hal->setData([
                 'code'    => self::EMAIL_IS_REQUIRED,
                 'message' => '`email` is required'
-            ], 400);
+            ]);
 
         // no password
         } catch (PasswordIsRequiredException $e) {
-            $this->response->send([
+            $status = 400;
+            $hal->setData([
                 'code'    => self::PASSWORD_IS_REQUIRED,
                 'message' => '`password` is required'
-            ], 400);
+            ]);
 
         // no password
         } catch (PasswordNeedsToBeALengthOf64Exception $e) {
-            $this->response->send([
+            $status = 400;
+            $hal->setData([
                 'code'    => self::PASSWORD_IS_INVALID,
                 'message' => '`password` is not a sha256 hash'
-            ], 400);
+            ]);
 
         // unknown error
         } catch (\Exception $e) {
-            $this->response->send([
+            $status = 400;
+            $hal->setData([
                 'code'    => 999,
                 'message' => $e->getMessage()
-            ], 500);
+            ]);
         }
+
+        $this->response->send($hal->asJson(), $status, $header);
     }
 
 } 
