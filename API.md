@@ -143,4 +143,14 @@ Content-Type: application/json
 ```
 400 Bad Request
 ```
+```
+{
+	"code":    <code>,
+	"message": <message>
+}
+```
+
+* `code`: error code
+	* 1: authentication failed
+* `message`: description of `code`
 
