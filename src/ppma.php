@@ -69,6 +69,11 @@ class ppma
         on('GET', '/', function() use ($caller) { $caller('\ppma\Action\Server\RedirectToPingAction'); });
         on('GET', '/ping', function() use ($caller) { $caller('\ppma\Action\Server\PingAction'); });
 
+        // auth
+        on('GET', '/users/:username/auth/:password', function($username, $password) use ($caller) {
+            $caller('\ppma\Action\Auth\GetKeyAction', ['username' => $username, 'password' => $password]); }
+        );
+
         // user
         on('POST', '/users', function() use ($caller) { $caller('\ppma\Action\User\CreateAction'); });
     }

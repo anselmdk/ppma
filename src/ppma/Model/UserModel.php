@@ -40,7 +40,7 @@ class UserModel extends Model
     /**
      * @var string
      */
-    public $apikey;
+    public $authkey;
 
     /**
      * @var string

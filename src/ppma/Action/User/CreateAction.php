@@ -70,9 +70,9 @@ class CreateAction extends ActionImpl
             // create user
             $model = $this->userService->create($username, $email, $password);
 
-            // add apikey to hal
+            // add authkey to hal
             $hal->setData([
-                'apikey' => $model->apikey
+                'authkey' => $model->authkey
             ]);
 
             // get uri of user

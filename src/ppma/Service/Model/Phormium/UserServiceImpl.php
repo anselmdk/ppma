@@ -11,6 +11,7 @@ use ppma\Service\Model\Exception\PasswordIsRequiredException;
 use ppma\Service\Model\Exception\PasswordNeedsToBeALengthOf64Exception;
 use ppma\Service\Model\Exception\UsernameAlreadyExistsException;
 use ppma\Service\Model\Exception\UsernameIsRequiredException;
+use ppma\Service\Model\Exception\UserNotFoundException;
 use ppma\Service\Model\UserService;
 use ppma\Service\Model\PhormiumServiceImpl;
 
@@ -36,11 +37,17 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
 
     /**
      * @param string $username
-     * @return UserModel
+     * @return \Phormium\Model|UserModel
+     * @throws \ppma\Service\Model\Exception\UserNotFoundException
      */
     public function getByUsername($username)
     {
-        // TODO: Implement getByUsername() method.
+        try {
+            return UserModel::objects()->filter('username', '=', $username)->single();
+
+        } catch (\Exception $e) {
+            throw new UserNotFoundException();
+        }
     }
 
     /**
@@ -100,8 +107,8 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
         $model->username = $username;
         $model->slug     = $this->slugUsername($model->username);
         $model->email    = $email;
-        $model->password = $password;
-        $model->apikey   = sha1(rand());
+        $model->password = password_hash($password, PASSWORD_BCRYPT, ['costs' => 31]);
+        $model->authkey  = sha1(rand() . password_hash(rand(), PASSWORD_BCRYPT, ['costs' => 31]));
         $model->save();
 
         return $model;

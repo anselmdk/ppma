@@ -21,6 +21,7 @@ $guy->sendPOST('/users', [
 $guy->seeResponseCodeIs(201);
 $guy->seeHttpHeader('Content-Type', 'application/hal+json');
 $guy->seeResponseContainsJson(['_links' => ['user' => ['href' => '/users/jane-doe']]]);
+$guy->seeResponseContains('"authkey"');
 $guy->seeHttpHeader('Location', '/users/jane-doe');
 
 // valid with same slug

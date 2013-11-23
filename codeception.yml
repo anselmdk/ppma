@@ -12,7 +12,7 @@ settings:
 modules:
     config:
         Db:
-            dsn: 'mysql:dbname=ppma;host=127.0.0.1'
+            dsn: 'mysql:dbname=ppma1;host=127.0.0.1'
             user: 'root'
             password: 'bitnami'
             dump: tests/_data/dump.sql

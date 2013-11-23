@@ -16,7 +16,7 @@ class PingAction extends ActionImpl
     public function run()
     {
         $hal = new Hal('/', [
-            'message' => 'pong'
+            'message' => 'pong',
         ]);
 
         $this->response->send($hal->asJson(), 200, ['Content-Type' => 'application/hal+json']);

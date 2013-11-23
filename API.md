@@ -50,7 +50,7 @@ Content-Type: application/hal+json
 
 ## User
 
-### Benutzer erstellen
+### Create User
 
 Erfordert keine besonderen Rechter
 
@@ -110,3 +110,37 @@ Content-Type: application/hal+json
 	* 4: `password` is not in request
 	* 5: `password` is not hashed
 * `message`: description of `code`
+
+
+## Auth
+
+
+### Get Key / Login
+
+Erfordert keine besonderen Rechter
+
+#### Request
+
+```
+GET /users/janedoe/auth/
+5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8
+```
+
+#### Response (OK)
+
+```
+200 OK
+Content-Type: application/json
+```
+```
+{
+	"key": "f30d2f04433f0db4265ddc7d39eeeb5440e65fa5"
+}
+```
+
+#### Response (Error)
+
+```
+400 Bad Request
+```
+

@@ -15,7 +15,8 @@
         "rych/random": "1.0.*@dev",
         "pklink/dotor": "0.2.*",
         "nocarrier/hal": "0.9.4",
-        "swiftmailer/swiftmailer": "v5.0.2"
+        "swiftmailer/swiftmailer": "v5.0.2",
+        "ircmaxell/password-compat": "1.0.3"
     },
     "require-dev": {
         "codeception/codeception": "1.8.0.1",
