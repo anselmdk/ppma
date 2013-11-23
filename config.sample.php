@@ -9,6 +9,18 @@ return [
         'password' => ''
     ],
 
+    'mail' => [
+        'from' => 'ppma@pklink.github.com',
+        'smtp' => [
+            'host'     => 'smtp.mailgun.org',
+            'port'     => 25,
+            'username' => 'postmaster@domain.com',
+            'password' => '',
+            'tls'      => false,
+            'dryrun'   => false
+        ]
+    ],
+
     'log' => [
         'writer'  => [
             [
@@ -37,10 +49,22 @@ return [
             'id' => '\ppma\Service\Response\Json\ResponseServiceImpl',
         ],
 
+        // orm
         'orm' => [
             'id' => '\ppma\Service\Orm\Impl\PhormiumServiceImpl',
-        ]
+        ],
 
+        // smtp
+        'smtp' => [
+            'id' => '\ppma\Service\Smpt\SwiftServiceImpl',
+        ],
+
+    ],
+
+    'testing' => [
+        'mail' => [
+            'recipient' => 'yourmail@domain.com',
+        ]
     ],
 
     'version' => '1.0.0-alpha',

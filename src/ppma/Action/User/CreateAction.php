@@ -14,6 +14,7 @@ use ppma\Service\Model\Exception\UsernameAlreadyExistsException;
 use ppma\Service\Model\Exception\UsernameIsRequiredException;
 use ppma\Service\Model\UserService;
 use ppma\Service\Request\HttpFoundationServiceImpl;
+use ppma\Service\SmtpService;
 
 class CreateAction extends ActionImpl
 {
@@ -35,13 +36,19 @@ class CreateAction extends ActionImpl
     protected $userService;
 
     /**
+     * @var SmtpService
+     */
+    protected $mail;
+
+    /**
      * @return array
      */
     public function services()
     {
         return array_merge(parent::services(), [
             array_merge(Config::get('services.model.user'), ['target' => 'userService']),
-            array_merge(Config::get('services.request'),       ['target' => 'request'])
+            array_merge(Config::get('services.request'),    ['target' => 'request']),
+            array_merge(Config::get('services.smtp'),       ['target' => 'mail'])
         ]);
     }
 
@@ -52,8 +59,6 @@ class CreateAction extends ActionImpl
     {
         // create hal object
         $hal    = new Hal('/users');
-        $header = ['Content-Type' => 'application/hal+json'];
-        $status = 201;
 
         try
         {
@@ -77,57 +82,82 @@ class CreateAction extends ActionImpl
             $hal->addLink('user', $uri);
 
             // add created resource to header
-            $header['Location'] = $uri;
+            $header = [
+                'Content-Type' => 'application/hal+json',
+                'Location'     => $uri
+            ];
+
+            // send message to user
+            try {
+                $this->mail->sendMessage(
+                    [$model->email => $model->username],
+                    'Your account for ppma was created',
+                    sprintf("Hi %s,\n\nblah blah blah.\n\n---\n\npow, pow, pow!", $model->username)
+                );
+            } catch (\Exception $e) { }
+
+            // send response
+            $this->response->send($hal->asJson(), 201, $header);
 
         // no username
         } catch (UsernameIsRequiredException $e) {
-            $status = 400;
             $hal->setData([
                 'code'    => self::USERNAME_IS_REQUIRED,
                 'message' => '`username` is required'
             ]);
 
+            $header = ['Content-Type' => 'application/hal+json'];
+            $this->response->send($hal->asJson(), 400, $header);
+
         } catch (UsernameAlreadyExistsException $e) {
-            $status = 400;
             $hal->setData([
                 'code'    => self::USERNAME_ALREADY_EXISTS,
                 'message' => '`username` already exists in database'
             ]);
 
+            $header = ['Content-Type' => 'application/hal+json'];
+            $this->response->send($hal->asJson(), 400, $header);
+
         // no email
         } catch (EmailIsRequiredException $e) {
-            $status = 400;
             $hal->setData([
                 'code'    => self::EMAIL_IS_REQUIRED,
                 'message' => '`email` is required'
             ]);
 
+            $header = ['Content-Type' => 'application/hal+json'];
+            $this->response->send($hal->asJson(), 400, $header);
+
         // no password
         } catch (PasswordIsRequiredException $e) {
-            $status = 400;
             $hal->setData([
                 'code'    => self::PASSWORD_IS_REQUIRED,
                 'message' => '`password` is required'
             ]);
 
+            $header = ['Content-Type' => 'application/hal+json'];
+            $this->response->send($hal->asJson(), 400, $header);
+
         // no password
         } catch (PasswordNeedsToBeALengthOf64Exception $e) {
-            $status = 400;
             $hal->setData([
                 'code'    => self::PASSWORD_IS_INVALID,
                 'message' => '`password` is not a sha256 hash'
             ]);
 
+            $header = ['Content-Type' => 'application/hal+json'];
+            $this->response->send($hal->asJson(), 400, $header);
+
         // unknown error
         } catch (\Exception $e) {
-            $status = 400;
             $hal->setData([
                 'code'    => 999,
                 'message' => $e->getMessage()
             ]);
-        }
 
-        $this->response->send($hal->asJson(), $status, $header);
+            $header = ['Content-Type' => 'application/hal+json'];
+            $this->response->send($hal->asJson(), 400, $header);
+        }
     }
 
 } 
