@@ -6,7 +6,7 @@ return [
         'host'     => '127.0.0.1',
         'name'     => 'ppma',
         'username' => 'root',
-        'password' => 'bitnami'
+        'password' => ''
     ],
 
     'log' => [
