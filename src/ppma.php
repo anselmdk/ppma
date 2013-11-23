@@ -26,7 +26,7 @@ class ppma
         {
             $catcher = new UniversalErrorCatcher_Catcher();
             $catcher->registerCallback(function(\Exception $e) {
-                /* @var \ppma\Service\Response\Json\DispatchServiceImpl $response */
+                /* @var \ppma\Service\Response\Json\ResponseServiceImpl $response */
                 $response = ServiceFactory::get(Config::get('services.response'));
 
                 $response->send([

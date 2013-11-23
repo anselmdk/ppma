@@ -6,7 +6,7 @@ namespace ppma\Service\Response\Json;
 
 use ppma\Service\ResponseService;
 
-class RequestServiceImpl implements ResponseService
+class ResponseServiceImpl implements ResponseService
 {
 
     /**
