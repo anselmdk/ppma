@@ -12,7 +12,7 @@ abstract class ActionImpl implements Action
 {
 
     /**
-     * @var Service\Response\Json\ResponseServiceImpl
+     * @var Service\Response\JsonService
      */
     protected $response;
 

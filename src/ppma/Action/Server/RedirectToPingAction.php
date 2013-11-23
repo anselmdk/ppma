@@ -10,12 +10,14 @@ class RedirectToPingAction extends ActionImpl
 {
 
     /**
-     * @return void
+     * @return \ppma\Service\ResponseService
      */
     public function run()
     {
-        $header = ['Location' => '/ping'];
-        $this->response->send(null, 303, $header);
+        return $this->response
+            ->setStatus(300)
+            ->addHeader('Location', '/ping')
+        ;
     }
 
 } 

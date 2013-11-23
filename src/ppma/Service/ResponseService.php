@@ -10,11 +10,43 @@ interface ResponseService extends Service
 {
 
     /**
-     * @param mixed $data
-     * @param int $status
-     * @param array $header
-     * @return void
+     * @param string $name
+     * @param string $value
+     * @return ResponseService
      */
-    public function send($data, $status = 200, $header =[]);
+    public function addHeader($name, $value);
+
+    /**
+     * @return string
+     */
+    public function getBody();
+
+    /**
+     * @return array
+     */
+    public function getHeader();
+
+    /**
+     * @return int
+     */
+    public function getStatus();
+
+    /**
+     * @param mixed $body
+     * @return ResponseService
+     */
+    public function setBody($body);
+
+    /**
+     * @param array $header
+     * @return ResponseService
+     */
+    public function setHeader(array $header);
+
+    /**
+     * @param int $status
+     * @return ResponseService
+     */
+    public function setStatus($status);
 
 }

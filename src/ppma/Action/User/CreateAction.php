@@ -53,10 +53,13 @@ class CreateAction extends ActionImpl
     }
 
     /**
-     * @return void
+     * @return \ppma\Service\ResponseService
      */
     public function run()
     {
+        // add content-type to response header
+        $this->response->addHeader('Content-Type', 'application/hal+json');
+
         // create hal object
         $hal    = new Hal('/users');
 
@@ -81,12 +84,6 @@ class CreateAction extends ActionImpl
             // add link to user profile
             $hal->addLink('user', $uri);
 
-            // add created resource to header
-            $header = [
-                'Content-Type' => 'application/hal+json',
-                'Location'     => $uri
-            ];
-
             // send message to user
             try {
                 $this->mail->sendMessage(
@@ -97,7 +94,11 @@ class CreateAction extends ActionImpl
             } catch (\Exception $e) { }
 
             // send response
-            $this->response->send($hal->asJson(), 201, $header);
+            return $this->response
+                ->setData(json_decode($hal->asJson()))
+                ->setStatus(201)
+                ->addHeader('Location', $uri)
+            ;
 
         // no username
         } catch (UsernameIsRequiredException $e) {
@@ -106,8 +107,10 @@ class CreateAction extends ActionImpl
                 'message' => '`username` is required'
             ]);
 
-            $header = ['Content-Type' => 'application/hal+json'];
-            $this->response->send($hal->asJson(), 400, $header);
+            return $this->response
+                ->setData(json_decode($hal->asJson()))
+                ->setStatus(400)
+            ;
 
         } catch (UsernameAlreadyExistsException $e) {
             $hal->setData([
@@ -115,8 +118,10 @@ class CreateAction extends ActionImpl
                 'message' => '`username` already exists in database'
             ]);
 
-            $header = ['Content-Type' => 'application/hal+json'];
-            $this->response->send($hal->asJson(), 400, $header);
+            return $this->response
+                ->setData(json_decode($hal->asJson()))
+                ->setStatus(400)
+            ;
 
         // no email
         } catch (EmailIsRequiredException $e) {
@@ -125,8 +130,10 @@ class CreateAction extends ActionImpl
                 'message' => '`email` is required'
             ]);
 
-            $header = ['Content-Type' => 'application/hal+json'];
-            $this->response->send($hal->asJson(), 400, $header);
+            return $this->response
+                ->setData(json_decode($hal->asJson()))
+                ->setStatus(400)
+            ;
 
         // no password
         } catch (PasswordIsRequiredException $e) {
@@ -135,8 +142,10 @@ class CreateAction extends ActionImpl
                 'message' => '`password` is required'
             ]);
 
-            $header = ['Content-Type' => 'application/hal+json'];
-            $this->response->send($hal->asJson(), 400, $header);
+            return $this->response
+                ->setData(json_decode($hal->asJson()))
+                ->setStatus(400)
+            ;
 
         // no password
         } catch (PasswordNeedsToBeALengthOf64Exception $e) {
@@ -145,8 +154,10 @@ class CreateAction extends ActionImpl
                 'message' => '`password` is not a sha256 hash'
             ]);
 
-            $header = ['Content-Type' => 'application/hal+json'];
-            $this->response->send($hal->asJson(), 400, $header);
+            return $this->response
+                ->setData(json_decode($hal->asJson()))
+                ->setStatus(400)
+            ;
 
         // unknown error
         } catch (\Exception $e) {
@@ -155,8 +166,10 @@ class CreateAction extends ActionImpl
                 'message' => $e->getMessage()
             ]);
 
-            $header = ['Content-Type' => 'application/hal+json'];
-            $this->response->send($hal->asJson(), 400, $header);
+            return $this->response
+                ->setData(json_decode($hal->asJson()))
+                ->setStatus(400)
+            ;
         }
     }
 

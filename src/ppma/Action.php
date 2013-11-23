@@ -4,6 +4,8 @@
 namespace ppma;
 
 
+use ppma\Service\ResponseService;
+
 interface Action extends Serviceable
 {
 
@@ -24,7 +26,7 @@ interface Action extends Serviceable
     public function init($args = []);
 
     /**
-     * @return void
+     * @return ResponseService
      */
     public function run();
 

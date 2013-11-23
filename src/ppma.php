@@ -59,9 +59,27 @@ class ppma
         $caller = function($id, $args = []) {
             /* @var \ppma\Action $action */
             $action = ActionFactory::get($id);
+
+            // trigger `before`-event
             $action->before();
+
+            // init action
             $action->init($args);
-            $action->run();
+
+            // run action
+            $response = $action->run();
+
+            // output action
+            header(sprintf('HTTP/1.1 %d', $response->getStatus()));
+
+            foreach ($response->getHeader() as $name => $value)
+            {
+                header(sprintf('%s: %s', $name, $value));
+            }
+
+            echo $response->getBody();
+
+            // triger `after`-event
             $action->after();
         };
 

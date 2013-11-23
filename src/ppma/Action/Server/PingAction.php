@@ -11,7 +11,7 @@ class PingAction extends ActionImpl
 {
 
     /**
-     * @return void
+     * @return \ppma\Service\ResponseService
      */
     public function run()
     {
@@ -19,7 +19,12 @@ class PingAction extends ActionImpl
             'message' => 'pong',
         ]);
 
-        $this->response->send($hal->asJson(), 200, ['Content-Type' => 'application/hal+json']);
+        return $this->response
+            ->setData(json_decode($hal->asJson()))
+            ->setStatus(200)
+            ->addHeader('Content-Type', 'application/hal+json')
+        ;
+        //$this->response->send($hal->asJson(), 200, ['Content-Type' => 'application/hal+json']);
     }
 
 } 

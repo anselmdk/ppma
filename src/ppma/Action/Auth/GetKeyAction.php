@@ -35,9 +35,8 @@ class GetKeyAction extends ActionImpl
         $this->username = $args['username'];
     }
 
-
     /**
-     * @return void
+     * @return \ppma\Service\Response\JsonService|\ppma\Service\ResponseService
      */
     public function run()
     {
@@ -47,17 +46,19 @@ class GetKeyAction extends ActionImpl
 
             // verify password
             if (password_verify($this->password, $model->password)) {
-                $this->response->send([
-                    'key' => $model->authkey
-                ]);
-            }
-            else {
-                $this->response->send(null, 400);
+                return $this->response->addData('key', $model->authkey);
             }
 
         } catch (UserNotFoundException $e) {
-            $this->response->send(null, 400);
+        } catch (\Exception $e) {
+            return $this->response
+                ->addData('code', 999)
+                ->addData('message', $e->getMessage())
+                ->setStatus(500)
+            ;
         }
+
+        return $this->response->setStatus(400);
     }
 
     /**
