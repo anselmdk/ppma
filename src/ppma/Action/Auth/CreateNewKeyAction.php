@@ -49,7 +49,7 @@ class CreateNewKeyAction extends ActionImpl
      */
     public function init($args = [])
     {
-        Logger::debug('execute init()', __CLASS__);
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
         $this->slug    = $args['slug'];
         $this->authkey  = $this->request->header('X-Authkey');
@@ -60,7 +60,7 @@ class CreateNewKeyAction extends ActionImpl
      */
     public function services()
     {
-        Logger::debug('execute services()', __CLASS__);
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
         return array_merge(parent::services(), [
             array_merge(Config::get('services.request'),    ['target' => 'request']),
@@ -74,7 +74,7 @@ class CreateNewKeyAction extends ActionImpl
      */
     public function run()
     {
-        Logger::debug('execute run()', __CLASS__);
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
         // get user
         try {

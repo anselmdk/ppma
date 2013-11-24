@@ -4,6 +4,7 @@
 namespace ppma\Service\Response\Impl;
 
 
+use ppma\Logger;
 use ppma\Service\ResponseService;
 
 /**
@@ -20,6 +21,7 @@ class AccessDeniedImpl implements ResponseService
      */
     public function addHeader($name, $value)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return $this;
     }
 
@@ -28,6 +30,7 @@ class AccessDeniedImpl implements ResponseService
      */
     public function getBody()
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return '';
     }
 
@@ -36,6 +39,7 @@ class AccessDeniedImpl implements ResponseService
      */
     public function getHeader()
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return [];
     }
 
@@ -44,6 +48,7 @@ class AccessDeniedImpl implements ResponseService
      */
     public function getStatusCode()
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return 0;
     }
 
@@ -53,6 +58,7 @@ class AccessDeniedImpl implements ResponseService
      */
     public function setBody($body)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return $this;
     }
 
@@ -62,6 +68,7 @@ class AccessDeniedImpl implements ResponseService
      */
     public function setHeader(array $header)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return $this;
     }
 
@@ -71,6 +78,7 @@ class AccessDeniedImpl implements ResponseService
      */
     public function setStatusCode($status)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return $this;
     }
 
@@ -80,6 +88,7 @@ class AccessDeniedImpl implements ResponseService
      */
     public function init($args = [])
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return $this;
     }
 

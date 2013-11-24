@@ -5,6 +5,7 @@ namespace ppma\Service\Model\Phormium;
 
 
 use Cocur\Slugify\Slugify;
+use ppma\Logger;
 use ppma\Model\UserModel;
 use ppma\Service\Model\Exception\EmailIsRequiredException;
 use ppma\Service\Model\Exception\PasswordIsRequiredException;
@@ -30,6 +31,8 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
      */
     public function create(UserModel $model)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         $this->validateEmail($model->email);
         $this->validatePassword($model->password);
         $this->validateUsername($model->username);
@@ -46,6 +49,8 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
      */
     public function createNewAuthKey(UserModel $model)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         $model->authkey = $this->generateAuthkey();
         $model->save();
 
@@ -57,6 +62,8 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
      */
     private function generateAuthkey()
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         $authkey = sha1((new Random())->getRandomBytes(42));
 
         if (UserModel::objects()->filter('authkey', '=', $authkey)->exists())
@@ -72,6 +79,7 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
      */
     public function getAll()
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return UserModel::objects()->fetch();
     }
 
@@ -81,6 +89,7 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
      */
     public function getById($id)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return UserModel::get($id);
     }
 
@@ -91,6 +100,8 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
      */
     public function getBySlug($slug)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         try {
             return UserModel::objects()->filter('slug', '=', $slug)->single();
 
@@ -103,7 +114,10 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
      * @param array $args
      * @return mixed
      */
-    public function init($args = []) { }
+    public function init($args = [])
+    {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+    }
 
     /**
      * @param string $username
@@ -112,6 +126,7 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
      */
     protected function slugUsername($username, $counter = 1)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         $slug = (new Slugify(Slugify::MODEARRAY))->slugify($username);
 
         if (UserModel::objects()->filter('slug', '=', $slug)->exists())
@@ -136,6 +151,8 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
      */
     public function updateEmail(UserModel $model, $email)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         $model->email = $email;
         $model->save();
     }
@@ -148,6 +165,8 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
      */
     public function updatePassword(UserModel $model, $password)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         try {
             $this->validatePassword($password);
         } catch (PasswordNeedsToBeALengthOf64Exception $e) {
@@ -169,6 +188,8 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
      */
     public function update(UserModel $model, $validate = null)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         if ($validate == null)
         {
             $validate = ['email', 'password', 'username'];
@@ -198,6 +219,8 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
      */
     private function validateEmail($email)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         // check if email is empty
         if (strlen($email) == 0)
         {
@@ -212,6 +235,8 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
      */
     private function validatePassword($password)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         // check if password is set
         if (strlen($password) == 0)
         {
@@ -233,6 +258,8 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
      */
     private function validateUsername($username, UserModel $user = null)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         // check if username is empty
         if (strlen($username) == 0)
         {

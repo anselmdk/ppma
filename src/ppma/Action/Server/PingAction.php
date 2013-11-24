@@ -16,7 +16,7 @@ class PingAction extends ActionImpl
      */
     public function run()
     {
-        Logger::debug('execute run()', __CLASS__);
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
         $hal = new Hal('/', [
             'message' => 'pong',

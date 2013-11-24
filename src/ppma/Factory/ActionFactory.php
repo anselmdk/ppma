@@ -5,6 +5,7 @@ namespace ppma\Factory;
 
 
 use ppma\Action;
+use ppma\Logger;
 
 class ActionFactory
 {
@@ -20,6 +21,8 @@ class ActionFactory
      */
     protected static function create($id)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         /* @var \ppma\Action $action */
         $action = new $id();
 
@@ -35,6 +38,8 @@ class ActionFactory
      */
     public static function get($id)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         if (!isset(self::$actions[$id]))
         {
             self::$actions[$id] = self::create($id);

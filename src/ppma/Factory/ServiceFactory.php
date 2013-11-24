@@ -6,6 +6,7 @@ namespace ppma\Factory;
 
 use ppma\Exception\InstanceIsNotAService;
 use ppma\Exception\ServiceDoesNotExist;
+use ppma\Logger;
 use ppma\Service;
 use ppma\Serviceable;
 
@@ -24,6 +25,8 @@ class ServiceFactory
      */
     public static function adorn(Serviceable $object)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         foreach ($object->services() as $config)
         {
             // check if index 'target' exist
@@ -50,6 +53,8 @@ class ServiceFactory
      */
     protected static function create($config)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         // check if index 'id' exist
         if (!isset($config['id']))
         {
@@ -93,6 +98,8 @@ class ServiceFactory
      */
     public static function get($config)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         $key = md5(serialize($config));
 
         if (!isset(self::$services[$key]))

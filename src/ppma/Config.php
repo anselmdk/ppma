@@ -22,6 +22,8 @@ class Config
      */
     public static function get($key, $default = null)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         if (!(self::$dotor instanceof Dotor))
         {
             throw new \InvalidArgumentException(sprintf('%s is not initialized', __CLASS__));
@@ -35,6 +37,7 @@ class Config
      */
     public static function init($config = [])
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         self::$dotor = new Dotor($config);
     }
 
@@ -44,6 +47,7 @@ class Config
      */
     public static function url($name)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return self::get('url.base') . self::get('url.' . $name);
     }
 

@@ -4,6 +4,7 @@
 namespace ppma\Service\Response;
 
 
+use ppma\Logger;
 use ppma\Service\ResponseService;
 
 class ResponseServiceImpl implements ResponseService
@@ -30,6 +31,7 @@ class ResponseServiceImpl implements ResponseService
      */
     public function init($args = [])
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
     }
 
     /**
@@ -39,6 +41,8 @@ class ResponseServiceImpl implements ResponseService
      */
     public function addHeader($name, $value)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         $this->header[$name] = $value;
         return $this;
     }
@@ -48,6 +52,7 @@ class ResponseServiceImpl implements ResponseService
      */
     public function getBody()
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return $this->body;
     }
 
@@ -56,6 +61,7 @@ class ResponseServiceImpl implements ResponseService
      */
     public function getHeader()
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return $this->header;
     }
 
@@ -64,6 +70,7 @@ class ResponseServiceImpl implements ResponseService
      */
     public function getStatusCode()
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return $this->status;
     }
 
@@ -73,6 +80,8 @@ class ResponseServiceImpl implements ResponseService
      */
     public function setBody($body)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         $this->body = $body;
         return $this;
     }
@@ -83,6 +92,8 @@ class ResponseServiceImpl implements ResponseService
      */
     public function setHeader(array $header)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         $this->header = $header;
         return $this;
     }
@@ -93,6 +104,8 @@ class ResponseServiceImpl implements ResponseService
      */
     public function setStatusCode($status)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         $this->status = $status;
         return $this;
     }

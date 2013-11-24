@@ -4,6 +4,7 @@
 namespace ppma\Service\Request;
 
 
+use ppma\Logger;
 use ppma\Service;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -22,6 +23,7 @@ class HttpFoundationServiceImpl implements Service\RequestService
      */
     public function init($args = [])
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         $this->instance = Request::createFromGlobals();
     }
 
@@ -32,6 +34,7 @@ class HttpFoundationServiceImpl implements Service\RequestService
      */
     public function get($name, $default = null)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return $this->instance->query->get($name);
     }
 
@@ -42,6 +45,7 @@ class HttpFoundationServiceImpl implements Service\RequestService
      */
     public function header($name, $default = null)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return $this->instance->headers->get($name, $default);
     }
 
@@ -52,6 +56,7 @@ class HttpFoundationServiceImpl implements Service\RequestService
      */
     public function post($name, $default = null)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return $this->instance->request->get($name, $default);
     }
 

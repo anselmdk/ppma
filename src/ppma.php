@@ -3,6 +3,7 @@
 use ppma\Config;
 use ppma\Factory\ActionFactory;
 use ppma\Factory\ServiceFactory;
+use ppma\Logger;
 use ppma\Service\Response\Impl\AccessDeniedImpl;
 use ppma\Service\ResponseService;
 
@@ -20,6 +21,8 @@ class ppma
      */
     public function __construct($config = [])
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         // initialize ppma\Config
         Config::init($config);
 
@@ -66,6 +69,8 @@ class ppma
      */
     protected function registerRoutes()
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         $caller = function($id, $args = []) {
             /* @var \ppma\Action $action */
             $action = ActionFactory::get($id);
@@ -127,11 +132,13 @@ class ppma
      */
     public function run()
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         dispatch();
     }
 
     protected function sendResponse(ResponseService $response)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         header(sprintf('HTTP/1.1 %d', $response->getStatusCode()));
 
         foreach ($response->getHeader() as $name => $value)

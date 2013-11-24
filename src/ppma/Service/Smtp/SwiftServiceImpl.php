@@ -5,6 +5,7 @@ namespace ppma\Service\Smtp;
 
 
 use ppma\Config;
+use ppma\Logger;
 use ppma\Service\SmtpService;
 use Swift_Mailer;
 use Swift_Message;
@@ -24,6 +25,8 @@ class SwiftServiceImpl implements SmtpService
      */
     public function init($args = [])
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         $host     = Config::get('mail.smtp.host');
         $port     = Config::get('mail.smtp.port');
         $username = Config::get('mail.smtp.username');
@@ -46,6 +49,8 @@ class SwiftServiceImpl implements SmtpService
      */
     public function sendMessage($to, $subject, $message)
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         /* @var \Swift_Mime_Message $message */
         $message = Swift_Message::newInstance($subject)
             ->setFrom(array(Config::get('mail.from', 'ppma@pklink.github.com')))

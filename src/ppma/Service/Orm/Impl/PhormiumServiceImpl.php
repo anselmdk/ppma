@@ -6,6 +6,7 @@ namespace ppma\Service\Orm\Impl;
 
 use Phormium\DB;
 use ppma\Config;
+use ppma\Logger;
 use ppma\Service\Orm\PhormiumService;
 
 class PhormiumServiceImpl implements PhormiumService
@@ -17,6 +18,8 @@ class PhormiumServiceImpl implements PhormiumService
      */
     public function init($args = [])
     {
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
+
         // config phormium
         DB::configure([
             'databases' => [

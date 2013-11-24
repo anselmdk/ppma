@@ -36,7 +36,7 @@ class GetKeyAction extends ActionImpl
      */
     public function init($args = [])
     {
-        Logger::debug('execute init()', __CLASS__);
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         parent::init($args);
 
         $this->password = $args['password'];
@@ -48,7 +48,7 @@ class GetKeyAction extends ActionImpl
      */
     public function run()
     {
-        Logger::debug('execute run()', __CLASS__);
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
         try {
             // get user
@@ -72,7 +72,7 @@ class GetKeyAction extends ActionImpl
      */
     public function services()
     {
-        Logger::debug('execute services()', __CLASS__);
+        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
         return array_merge(parent::services(), [
             array_merge(Config::get('services.model.user'), ['target' => 'userService']),
