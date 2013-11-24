@@ -14,7 +14,6 @@ class GetKeyAction extends ActionImpl
 {
 
     const AUTHENTICATION_FAILED = 1;
-    const UNKNOW_ERROR          = 999;
 
 
     /**
@@ -60,14 +59,7 @@ class GetKeyAction extends ActionImpl
                 return $this->response->addData('key', $model->authkey);
             }
 
-        } catch (UserNotFoundException $e) {
-        } catch (\Exception $e) {
-            return $this->response
-                ->addData('code', self::UNKNOW_ERROR)
-                ->addData('message', $e->getMessage())
-                ->setStatusCode(500)
-            ;
-        }
+        } catch (UserNotFoundException $e) { }
 
         return $this->response
             ->addData('code', self::AUTHENTICATION_FAILED)

@@ -20,8 +20,9 @@ class CreateNewKeyAction extends ActionImpl
 
     use AuthTrait;
 
+
     const FORBIDDEN     = 101;
-    const UNKNOWN_ERROR = 999;
+
 
     /**
      * @var string
@@ -99,13 +100,6 @@ class CreateNewKeyAction extends ActionImpl
         } catch (UserNotFoundException $e) {
             error(403);
             return new AccessDeniedImpl();
-
-        } catch (\Exception $e) {
-            return $this->response
-                ->addData('code', self::UNKNOWN_ERROR)
-                ->addData('message', $e->getMessage())
-                ->setStatusCode(500)
-            ;
         }
     }
 

@@ -18,9 +18,10 @@ class UpdateAction extends ActionImpl
 
     use AuthTrait;
 
+
     const PASSWORD_IS_INVALID     = 1;
     const FORBIDDEN               = 101;
-    const UNKNOWN_ERROR           = 999;
+
 
     /**
      * @var HttpFoundationServiceImpl
@@ -114,19 +115,6 @@ class UpdateAction extends ActionImpl
             ]);
 
             return $this->response->setBody($hal->asJson());
-
-        // unknown error
-        } catch (\Exception $e) {
-            Logger::error(sprintf("%s\n%s", get_class($e), $e->getTraceAsString()));
-
-            $hal->setData([
-                'code'    => self::UNKNOWN_ERROR,
-                'message' => $e->getMessage()
-            ]);
-
-            return $this->response
-                ->setBody($hal->asJson())
-                ->setStatusCode(500);
         }
     }
 

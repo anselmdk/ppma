@@ -26,7 +26,7 @@ class CreateAction extends ActionImpl
     const EMAIL_IS_REQUIRED       = 3;
     const PASSWORD_IS_REQUIRED    = 4;
     const PASSWORD_IS_INVALID     = 5;
-    const UNKNOWN_ERROR           = 999;
+
 
     /**
      * @var HttpFoundationServiceImpl
@@ -153,15 +153,6 @@ class CreateAction extends ActionImpl
             $hal->setData([
                 'code'    => self::PASSWORD_IS_INVALID,
                 'message' => '`password` is not a sha256 hash'
-            ]);
-
-            return $this->response->setBody($hal->asJson());
-
-        // unknown error
-        } catch (\Exception $e) {
-            $hal->setData([
-                'code'    => self::UNKNOWN_ERROR,
-                'message' => $e->getMessage()
             ]);
 
             return $this->response->setBody($hal->asJson());
