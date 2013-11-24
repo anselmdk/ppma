@@ -11,12 +11,10 @@ interface UserService extends Service
 {
 
     /**
-     * @param string $username
-     * @param string $email
-     * @param string $password
-     * @return UserModel
+     * @param UserModel $model;
+     * @return void
      */
-    public function create($username, $email, $password);
+    public function create(UserModel $model);
 
     /**
      * @param UserModel $model

@@ -24,59 +24,23 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
 
 
     /**
-     * @param string $username
-     * @param string $email
-     * @param string $password
-     * @return UserModel
+     * @param UserModel $model
      * @throws \ppma\Service\Model\Exception\UsernameIsRequiredException
      * @throws \ppma\Service\Model\Exception\EmailIsRequiredException
      * @throws \ppma\Service\Model\Exception\PasswordNeedsToBeALengthOf64Exception
      * @throws \ppma\Service\Model\Exception\UsernameAlreadyExistsException
      * @throws \ppma\Service\Model\Exception\PasswordIsRequiredException
      */
-    public function create($username, $email, $password)
+    public function create(UserModel $model)
     {
-        $model = new UserModel();
-
-        // check if username is empty
-        if (strlen($username) == 0)
-        {
-            throw new UsernameIsRequiredException();
-        }
-
-        // check if is username already taken
-        if (UserModel::objects()->filter('username', '=', $username)->exists())
-        {
-            throw new UsernameAlreadyExistsException();
-        }
-
-        // check if email is empty
-        if (strlen($email) == 0)
-        {
-            throw new EmailIsRequiredException();
-        }
-
-        // check if password is empty
-        if (strlen($password) == 0)
-        {
-            throw new PasswordIsRequiredException();
-        }
-
-        // check password
-        try {
-            $this->validatePassword($password);
-        } catch (PasswordNeedsToBeALengthOf64Exception $e) {
-            throw $e;
-        }
-
-        $model->username = $username;
+        $this->validateEmail($model->email);
+        $this->validatePassword($model->password);
+        $this->validateUsername($model->username);
         $model->slug     = $this->slugUsername($model->username);
-        $model->email    = $email;
-        $model->password = password_hash($password, PASSWORD_BCRYPT, ['costs' => 31]);
+        $model->password = password_hash($model->password, PASSWORD_BCRYPT, ['costs' => 31]);
         $model->authkey  = $this->generateAuthkey();
-        $model->save();
 
-        return $model;
+        $model->save();
     }
 
     /**
