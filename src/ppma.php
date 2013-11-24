@@ -3,6 +3,7 @@
 use ppma\Config;
 use ppma\Factory\ActionFactory;
 use ppma\Factory\ServiceFactory;
+use ppma\Service\Response\Impl\AccessDeniedImpl;
 use ppma\Service\ResponseService;
 
 class ppma
@@ -77,6 +78,11 @@ class ppma
 
             // run action
             $response = $action->run();
+
+            if ($response instanceof AccessDeniedImpl)
+            {
+                error(403);
+            }
 
             // output action
             $this->sendResponse($response);

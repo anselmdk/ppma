@@ -12,6 +12,7 @@ use ppma\Logger;
 use ppma\Service\Model\Exception\UserNotFoundException;
 use ppma\Service\Model\UserService;
 use ppma\Service\RequestService;
+use ppma\Service\Response\Impl\AccessDeniedImpl;
 use ppma\Service\ResponseService;
 
 class CreateNewKeyAction extends ActionImpl
@@ -97,6 +98,7 @@ class CreateNewKeyAction extends ActionImpl
 
         } catch (UserNotFoundException $e) {
             error(403);
+            return new AccessDeniedImpl();
 
         } catch (\Exception $e) {
             return $this->response
