@@ -7,7 +7,6 @@ namespace ppma\Action\User;
 use Nocarrier\Hal;
 use ppma\Action\ActionImpl;
 use ppma\Action\AuthTrait;
-use ppma\Action\Exception\AccessDeniedException;
 use ppma\Config;
 use ppma\Logger;
 use ppma\Service\Model\Exception\PasswordNeedsToBeALengthOf64Exception;

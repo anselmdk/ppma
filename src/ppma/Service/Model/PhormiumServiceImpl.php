@@ -4,8 +4,8 @@
 namespace ppma\Service\Model;
 
 
-use ppma\Service\ModelService;
 use ppma\Config;
+use ppma\Service\ModelService;
 use ppma\Service\Orm\PhormiumService;
 use ppma\Service;
 

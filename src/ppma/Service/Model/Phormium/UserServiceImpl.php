@@ -12,8 +12,8 @@ use ppma\Service\Model\Exception\PasswordNeedsToBeALengthOf64Exception;
 use ppma\Service\Model\Exception\UsernameAlreadyExistsException;
 use ppma\Service\Model\Exception\UsernameIsRequiredException;
 use ppma\Service\Model\Exception\UserNotFoundException;
-use ppma\Service\Model\UserService;
 use ppma\Service\Model\PhormiumServiceImpl;
+use ppma\Service\Model\UserService;
 use Rych\Random\Random;
 
 

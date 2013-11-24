@@ -7,7 +7,6 @@ namespace ppma\Action\Auth;
 use Nocarrier\Hal;
 use ppma\Action\ActionImpl;
 use ppma\Action\AuthTrait;
-use ppma\Action\Exception\AccessDeniedException;
 use ppma\Config;
 use ppma\Logger;
 use ppma\Service\Model\Exception\UserNotFoundException;
@@ -97,6 +96,8 @@ class CreateNewKeyAction extends ActionImpl
                 ->addHeader('Content-Type', 'application/hal+json');
 
         } catch (UserNotFoundException $e) {
+            error(403);
+
         } catch (\Exception $e) {
             return $this->response
                 ->addData('code', self::UNKNOWN_ERROR)

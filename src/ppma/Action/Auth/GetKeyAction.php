@@ -8,7 +8,6 @@ use ppma\Action\ActionImpl;
 use ppma\Config;
 use ppma\Logger;
 use ppma\Service\Model\Exception\UserNotFoundException;
-use ppma\Service\Model\Phormium\UserServiceImpl;
 use ppma\Service\Model\UserService;
 
 class GetKeyAction extends ActionImpl

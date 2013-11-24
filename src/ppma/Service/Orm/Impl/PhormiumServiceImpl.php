@@ -4,9 +4,9 @@
 namespace ppma\Service\Orm\Impl;
 
 
-use ppma\Service\Orm\PhormiumService;
-use ppma\Config;
 use Phormium\DB;
+use ppma\Config;
+use ppma\Service\Orm\PhormiumService;
 
 class PhormiumServiceImpl implements PhormiumService
 {

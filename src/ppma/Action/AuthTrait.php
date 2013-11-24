@@ -7,7 +7,6 @@ namespace ppma\Action;
 use ppma\Logger;
 use ppma\Model\UserModel;
 use ppma\Service\RequestService;
-use ppma\Service\ResponseService;
 
 trait AuthTrait
 {
