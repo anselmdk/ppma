@@ -50,7 +50,7 @@ class CreateNewKeyAction extends ActionImpl
     {
         Logger::debug('execute init()', __CLASS__);
 
-        $this->$slug    = $args['slug'];
+        $this->slug    = $args['slug'];
         $this->authkey  = $this->request->header('X-Authkey');
     }
 

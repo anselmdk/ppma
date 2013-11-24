@@ -8,6 +8,7 @@ use Nocarrier\Hal;
 use ppma\Action\ActionImpl;
 use ppma\Config;
 use ppma\Logger;
+use ppma\Model\UserModel;
 use ppma\Service\Model\Exception\EmailIsRequiredException;
 use ppma\Service\Model\Exception\PasswordIsRequiredException;
 use ppma\Service\Model\Exception\PasswordNeedsToBeALengthOf64Exception;
@@ -74,13 +75,16 @@ class CreateAction extends ActionImpl
 
         try
         {
-            // get attributes
-            $username = $this->request->post('username');
-            $email    = $this->request->post('email');
-            $password = $this->request->post('password');
+            // create model
+            $model = new UserModel();
+
+            // set attributes
+            $model->username = $this->request->post('username');
+            $model->email    = $this->request->post('email');
+            $model->password = $this->request->post('password');
 
             // create user
-            $model = $this->userService->create($username, $email, $password);
+            $this->userService->create($model);
 
             // add authkey to hal
             $hal->setData([

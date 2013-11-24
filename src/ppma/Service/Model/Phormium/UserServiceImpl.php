@@ -208,9 +208,16 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
     /**
      * @param string $password
      * @throws \ppma\Service\Model\Exception\PasswordNeedsToBeALengthOf64Exception
+     * @throws \ppma\Service\Model\Exception\PasswordIsRequiredException
      */
     private function validatePassword($password)
     {
+        // check if password is set
+        if (strlen($password) == 0)
+        {
+            throw new PasswordIsRequiredException();
+        }
+
         // check if password is sha256 (has a length of 64)
         if (strlen($password) != 64)
         {

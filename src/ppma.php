@@ -90,11 +90,11 @@ class ppma
         on('GET', '/ping', function() use ($caller) { $caller('\ppma\Action\Server\PingAction'); });
 
         // auth
-        on('GET', '/users/:username/auth/:password', function($username, $password) use ($caller) {
-            $caller('\ppma\Action\Auth\GetKeyAction', ['username' => $username, 'password' => $password]); }
+        on('GET', '/users/:slug/auth/:password', function($slug, $password) use ($caller) {
+            $caller('\ppma\Action\Auth\GetKeyAction', ['slug' => $slug, 'password' => $password]); }
         );
 
-        on('POST', '/users/:slug/auth', function($slig) use ($caller) {
+        on('POST', '/users/:slug/auth', function($slug) use ($caller) {
                 $caller('\ppma\Action\Auth\CreateNewKeyAction', ['slug' => $slug]); }
         );
 

@@ -9,6 +9,7 @@ use ppma\Config;
 use ppma\Logger;
 use ppma\Service\Model\Exception\UserNotFoundException;
 use ppma\Service\Model\Phormium\UserServiceImpl;
+use ppma\Service\Model\UserService;
 
 class GetKeyAction extends ActionImpl
 {
@@ -23,14 +24,14 @@ class GetKeyAction extends ActionImpl
     private $password;
 
     /**
-     * @var UserServiceImpl
+     * @var UserService
      */
     protected $userService;
 
     /**
      * @var string
      */
-    private $username;
+    private $slug;
 
     /**
      * @param array $args
@@ -41,7 +42,7 @@ class GetKeyAction extends ActionImpl
         parent::init($args);
 
         $this->password = $args['password'];
-        $this->username = $args['username'];
+        $this->slug     = $args['slug'];
     }
 
     /**
@@ -53,7 +54,7 @@ class GetKeyAction extends ActionImpl
 
         try {
             // get user
-            $model = $this->userService->getByUsername($this->username);
+            $model = $this->userService->getBySlug($this->slug);
 
             // verify password
             if (password_verify($this->password, $model->password)) {
