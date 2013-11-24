@@ -151,11 +151,40 @@ X-Authkey: f30d2f04433f0db4265ddc7d39eeeb5440e65fa5
 
 All values are optional
 
-#### Response
+#### Response (OK)
 
 ```
 200 OK
+Content-Type: application/hal+json
 ```
+```
+{
+	"_links": {
+		"self": "/users/janedoe"
+	}
+}
+```
+
+#### Response (Error)
+
+```
+400 Bad Request
+Content-Type: application/hal+json
+```
+```
+{
+	"_links": {
+		"self": "/users/janedoe"
+	},
+	"code": <code>
+	"message": <message>
+}
+```
+
+* `code`: error code
+	* 1: `password` is not hashed
+* `message`: description of `code`
+
 
 ### Delete User
 

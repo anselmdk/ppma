@@ -36,9 +36,22 @@ interface UserService extends Service
     public function getById($id);
 
     /**
+     * @param string $slug
+     * @return mixed
+     */
+    public function getBySlug($slug);
+
+    /**
      * @param string $username
      * @return UserModel
      */
     public function getByUsername($username);
+
+    /**
+     * @param UserModel $model
+     * @param null|array
+     * @return void
+     */
+    public function update(UserModel $model, $validate = null);
 
 }

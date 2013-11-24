@@ -101,6 +101,10 @@ class ppma
         // user
         on('POST', '/users', function() use ($caller) { $caller('\ppma\Action\User\CreateAction'); });
 
+        on('PUT', '/users/:slug', function($slug) use ($caller) {
+            $caller('\ppma\Action\User\UpdateAction', ['slug' => $slug]);
+        });
+
         // 404-handler
         error(404, function() use ($caller) {
             $caller('\ppma\Action\Error\NotFoundAction');
