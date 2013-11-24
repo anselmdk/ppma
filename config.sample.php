@@ -25,7 +25,13 @@ return [
         'writer'  => [
             [
                 'id'      => '\ppma\Logger\Writer\EchoWriterImpl',
-                'enabled' => true,
+                'enabled' => false,
+            ],
+            [
+                'id'      => '\ppma\Logger\Writer\FileWriterImpl',
+                'enabled' => false,
+                'path'    => __DIR__ . '/runtime/logs/application.log',
+                'level'   => ['error', 'warn'], // error, warn, info, debug
             ]
         ],
     ],

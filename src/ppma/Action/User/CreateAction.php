@@ -7,6 +7,7 @@ namespace ppma\Action\User;
 use Nocarrier\Hal;
 use ppma\Action\ActionImpl;
 use ppma\Config;
+use ppma\Logger;
 use ppma\Service\Model\Exception\EmailIsRequiredException;
 use ppma\Service\Model\Exception\PasswordIsRequiredException;
 use ppma\Service\Model\Exception\PasswordNeedsToBeALengthOf64Exception;
@@ -46,6 +47,8 @@ class CreateAction extends ActionImpl
      */
     public function services()
     {
+        Logger::debug('execute services()', __CLASS__);
+
         return array_merge(parent::services(), [
             array_merge(Config::get('services.model.user'), ['target' => 'userService']),
             array_merge(Config::get('services.request'),    ['target' => 'request']),
@@ -58,6 +61,8 @@ class CreateAction extends ActionImpl
      */
     public function run()
     {
+        Logger::debug('execute run()', __CLASS__);
+
         // prepare response
         $this->response
             ->addHeader('Content-Type', 'application/hal+json')

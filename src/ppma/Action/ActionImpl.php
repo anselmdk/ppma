@@ -6,6 +6,7 @@ namespace ppma\Action;
 
 use ppma\Action;
 use ppma\Config;
+use ppma\Logger;
 use ppma\Service;
 
 abstract class ActionImpl implements Action
@@ -21,6 +22,7 @@ abstract class ActionImpl implements Action
      */
     public function after()
     {
+        Logger::debug('execute after()', __CLASS__);
     }
 
     /**
@@ -28,6 +30,7 @@ abstract class ActionImpl implements Action
      */
     public function before()
     {
+        Logger::debug('execute before()', __CLASS__);
     }
 
     /**
@@ -36,6 +39,7 @@ abstract class ActionImpl implements Action
      */
     public function init($args = [])
     {
+        Logger::debug('execute init()', __CLASS__);
     }
 
     /**
@@ -43,6 +47,8 @@ abstract class ActionImpl implements Action
      */
     public function services()
     {
+        Logger::debug('execute services()', __CLASS__);
+
         return [
             array_merge(Config::get('services.response'), ['target' => 'response']),
         ];
@@ -56,6 +62,7 @@ abstract class ActionImpl implements Action
      */
     public function setService($target, Service $service)
     {
+        Logger::debug('execute setServices()', __CLASS__);
         $this->$target = $service;
     }
 

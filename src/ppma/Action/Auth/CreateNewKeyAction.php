@@ -9,6 +9,7 @@ use ppma\Action\ActionImpl;
 use ppma\Action\AuthTrait;
 use ppma\Action\Exception\AccessDeniedException;
 use ppma\Config;
+use ppma\Logger;
 use ppma\Service\Model\Exception\UserNotFoundException;
 use ppma\Service\Model\UserService;
 use ppma\Service\RequestService;
@@ -47,6 +48,8 @@ class CreateNewKeyAction extends ActionImpl
      */
     public function init($args = [])
     {
+        Logger::debug('execute init()', __CLASS__);
+
         $this->username = $args['username'];
         $this->authkey  = $this->request->header('X-Authkey');
     }
@@ -56,6 +59,8 @@ class CreateNewKeyAction extends ActionImpl
      */
     public function services()
     {
+        Logger::debug('execute services()', __CLASS__);
+
         return array_merge(parent::services(), [
             array_merge(Config::get('services.request'),    ['target' => 'request']),
             array_merge(Config::get('services.model.user'), ['target' => 'userService']),
@@ -68,6 +73,8 @@ class CreateNewKeyAction extends ActionImpl
      */
     public function run()
     {
+        Logger::debug('execute run()', __CLASS__);
+
         // get user
         try {
             // get user

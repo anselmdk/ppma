@@ -6,6 +6,7 @@ namespace ppma\Action\Server;
 
 use Nocarrier\Hal;
 use ppma\Action\ActionImpl;
+use ppma\Logger;
 
 class PingAction extends ActionImpl
 {
@@ -15,6 +16,8 @@ class PingAction extends ActionImpl
      */
     public function run()
     {
+        Logger::debug('execute run()', __CLASS__);
+
         $hal = new Hal('/', [
             'message' => 'pong',
         ]);

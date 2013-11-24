@@ -22,28 +22,33 @@ class ppma
         // initialize ppma\Config
         Config::init($config);
 
-        // set error handler in DEV_MODE
-        if (DEV_MODE)
-        {
-            $catcher = new UniversalErrorCatcher_Catcher();
-            $catcher->registerCallback(function(\Exception $e) {
-                /* @var \ppma\Service\Response\Impl\JsonServiceImpl $response */
-                $response = ServiceFactory::get(Config::get('services.response'));
+        // set error handler
+        $catcher = new UniversalErrorCatcher_Catcher();
+        $catcher->registerCallback(function(\Exception $e) {
+            /* @var \ppma\Service\Response\Impl\JsonServiceImpl $response */
+            $response = ServiceFactory::get(Config::get('services.response'));
 
+            if (DEV_MODE)
+            {
                 $response
                     ->addData('type', get_class($e))
                     ->addData('message', $e->getMessage())
                     ->addData('file', $e->getFile())
                     ->addData('line', $e->getLine())
                     ->addData('trace', $e->getTrace())
-                    ->setStatusCode(500)
                 ;
+            }
+            else
+            {
+                $response->addData('message', 'see log for more information');
+            }
+            $response->setStatusCode(500);
 
-                $this->sendResponse($response);
-                exit;
-            });
-            $catcher->start();
-        }
+
+            $this->sendResponse($response);
+            exit;
+        });
+        $catcher->start();
 
         // config dispatch
         config('dispatch.router', 'index.php');
