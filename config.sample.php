@@ -13,12 +13,12 @@ return [
         'from' => 'ppma@pklink.github.com',
         'smtp' => [
             'host'     => 'smtp.mailgun.org',
-            'port'     => 25,
+            'port'     => 587,
             'username' => 'postmaster@domain.com',
             'password' => '',
-            'tls'      => false,
-            'dryrun'   => false
-        ]
+            'tls'      => true,
+        ],
+        'dryrun'   => false
     ],
 
     'log' => [
