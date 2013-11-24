@@ -107,7 +107,7 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
      */
     public function getAll()
     {
-        // TODO: Implement getAll() method.
+        return UserModel::objects()->fetch();
     }
 
     /**
@@ -116,7 +116,7 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
      */
     public function getById($id)
     {
-        // TODO: Implement getById() method.
+        return UserModel::get($id);
     }
 
     /**
