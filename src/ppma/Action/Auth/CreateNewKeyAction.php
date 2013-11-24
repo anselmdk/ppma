@@ -97,7 +97,6 @@ class CreateNewKeyAction extends ActionImpl
                 ->addHeader('Content-Type', 'application/hal+json');
 
         } catch (UserNotFoundException $e) {
-        } catch (AccessDeniedException $e) {
         } catch (\Exception $e) {
             return $this->response
                 ->addData('code', self::UNKNOWN_ERROR)
@@ -105,12 +104,6 @@ class CreateNewKeyAction extends ActionImpl
                 ->setStatusCode(500)
             ;
         }
-
-        return $this->response
-            ->addData('code', self::FORBIDDEN)
-            ->addData('message', 'access forbidden')
-            ->setStatusCode(403)
-        ;
     }
 
 } 

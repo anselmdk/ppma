@@ -105,6 +105,11 @@ class ppma
             $caller('\ppma\Action\User\UpdateAction', ['slug' => $slug]);
         });
 
+        // 403-handler
+        error(403, function() use ($caller) {
+            $caller('\ppma\Action\Error\AccessDeniedAction');
+        });
+
         // 404-handler
         error(404, function() use ($caller) {
             $caller('\ppma\Action\Error\NotFoundAction');

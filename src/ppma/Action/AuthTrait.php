@@ -4,7 +4,6 @@
 namespace ppma\Action;
 
 
-use ppma\Action\Exception\AccessDeniedException;
 use ppma\Logger;
 use ppma\Model\UserModel;
 use ppma\Service\RequestService;
@@ -16,7 +15,6 @@ trait AuthTrait
     /**
      * @param UserModel $user
      * @param RequestService $request
-     * @throws Exception\AccessDeniedException
      */
     protected function checkAccess(UserModel $user, RequestService $request)
     {
@@ -28,23 +26,8 @@ trait AuthTrait
         if ($authkey === null || $user->authkey != $authkey)
         {
             Logger::warn(sprintf('access denied for user "%s" with `id` %d', $user->username, $user->id), __CLASS__);
-            throw new AccessDeniedException();
+            error(403);
         }
-    }
-
-    /**
-     * @param ResponseService $response
-     * @return ResponseService
-     */
-    protected function prepare403Response(ResponseService $response)
-    {
-        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
-
-        return $response
-            ->addData('code', 101)
-            ->addData('message', 'access forbidden')
-            ->setStatusCode(403)
-        ;
     }
 
 } 

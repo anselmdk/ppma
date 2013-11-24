@@ -108,9 +108,6 @@ class UpdateAction extends ActionImpl
                 ->setStatusCode(200)
             ;
 
-        } catch (AccessDeniedException $e) {
-            return $this->prepare403Response($this->response);
-
         } catch (PasswordNeedsToBeALengthOf64Exception $e) {
             $hal->setData([
                 'code'    => self::PASSWORD_IS_INVALID,
