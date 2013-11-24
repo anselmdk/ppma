@@ -1,5 +1,7 @@
 <?php
 
+define('DEV_MODE', false);
+
 return [
 
     'database' => [

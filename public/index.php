@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // set mode
-define('DEV_MODE', true);
+if (!defined('DEV_MODE')) define('DEV_MODE', false);
 
 // load config
 $config = require(__DIR__ . '/../config.php');
