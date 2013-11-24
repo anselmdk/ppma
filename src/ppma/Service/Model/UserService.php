@@ -40,12 +40,6 @@ interface UserService extends Service
     public function getBySlug($slug);
 
     /**
-     * @param string $username
-     * @return UserModel
-     */
-    public function getByUsername($username);
-
-    /**
      * @param UserModel $model
      * @param null|array
      * @return void

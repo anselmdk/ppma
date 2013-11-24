@@ -31,7 +31,7 @@ class CreateNewKeyAction extends ActionImpl
     /**
      * @var string
      */
-    protected $username;
+    protected $slug;
 
     /**
      * @var RequestService
@@ -50,7 +50,7 @@ class CreateNewKeyAction extends ActionImpl
     {
         Logger::debug('execute init()', __CLASS__);
 
-        $this->username = $args['username'];
+        $this->$slug    = $args['slug'];
         $this->authkey  = $this->request->header('X-Authkey');
     }
 
@@ -78,7 +78,7 @@ class CreateNewKeyAction extends ActionImpl
         // get user
         try {
             // get user
-            $model = $this->userService->getByUsername($this->username);
+            $model = $this->userService->getBySlug($this->slug);
 
             // check access
             $this->checkAccess($model, $this->request);
@@ -112,6 +112,5 @@ class CreateNewKeyAction extends ActionImpl
             ->setStatusCode(403)
         ;
     }
-
 
 } 

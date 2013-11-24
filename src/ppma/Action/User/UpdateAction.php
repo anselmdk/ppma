@@ -77,7 +77,7 @@ class UpdateAction extends ActionImpl
         try
         {
             // get user
-            $model = $this->userService->getByUsername($this->slug);
+            $model = $this->userService->getBySlug($this->slug);
 
             // check access
             $this->checkAccess($model, $this->request);

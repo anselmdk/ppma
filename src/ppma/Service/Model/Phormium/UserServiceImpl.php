@@ -20,9 +20,6 @@ use Rych\Random\Random;
 class UserServiceImpl extends PhormiumServiceImpl implements UserService
 {
 
-
-
-
     /**
      * @param UserModel $model
      * @throws \ppma\Service\Model\Exception\UsernameIsRequiredException
@@ -96,22 +93,6 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
     {
         try {
             return UserModel::objects()->filter('slug', '=', $slug)->single();
-
-        } catch (\Exception $e) {
-            throw new UserNotFoundException();
-        }
-    }
-
-
-    /**
-     * @param string $username
-     * @return \Phormium\Model|UserModel
-     * @throws \ppma\Service\Model\Exception\UserNotFoundException
-     */
-    public function getByUsername($username)
-    {
-        try {
-            return UserModel::objects()->filter('username', '=', $username)->single();
 
         } catch (\Exception $e) {
             throw new UserNotFoundException();

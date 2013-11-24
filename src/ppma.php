@@ -94,8 +94,8 @@ class ppma
             $caller('\ppma\Action\Auth\GetKeyAction', ['username' => $username, 'password' => $password]); }
         );
 
-        on('POST', '/users/:username/auth', function($username) use ($caller) {
-                $caller('\ppma\Action\Auth\CreateNewKeyAction', ['username' => $username]); }
+        on('POST', '/users/:slug/auth', function($slig) use ($caller) {
+                $caller('\ppma\Action\Auth\CreateNewKeyAction', ['slug' => $slug]); }
         );
 
         // user
