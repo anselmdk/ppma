@@ -11,30 +11,17 @@ class JsonServiceImpl extends ResponseServiceImpl implements JsonService
 {
 
     /**
-     * @var array
-     */
-    protected $data = [];
-
-    /**
      * @param string $name
      * @param mixed $value
      * @return JsonService
      */
     public function addData($name, $value)
     {
-        $this->data[$name] = $value;
+        $data        = $this->getData();
+        $data[$name] = $value;
+        $this->setData($data);
+
         return $this;
-    }
-
-
-    public function getBody()
-    {
-        if (count($this->data) == 0)
-        {
-            return null;
-        }
-
-        return json_encode($this->getData());
     }
 
     /**
@@ -42,7 +29,7 @@ class JsonServiceImpl extends ResponseServiceImpl implements JsonService
      */
     public function getData()
     {
-        return $this->data;
+        return json_decode($this->getBody(), true);
     }
 
     /**
@@ -67,7 +54,7 @@ class JsonServiceImpl extends ResponseServiceImpl implements JsonService
      */
     public function setData($data = [])
     {
-        $this->data = $data;
+        $this->setBody(json_encode($data));
         return $this;
     }
 

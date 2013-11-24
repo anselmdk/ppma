@@ -99,7 +99,7 @@ class CreateAction extends ActionImpl
 
             // send response
             return $this->response
-                ->setData(json_decode($hal->asJson()))
+                ->setBody($hal->asJson())
                 ->setStatusCode(201)
                 ->addHeader('Location', $uri)
             ;
@@ -111,7 +111,7 @@ class CreateAction extends ActionImpl
                 'message' => '`username` is required'
             ]);
 
-            return $this->response->setData(json_decode($hal->asJson()));
+            return $this->response->setBody($hal->asJson());
 
         } catch (UsernameAlreadyExistsException $e) {
             $hal->setData([
@@ -119,7 +119,7 @@ class CreateAction extends ActionImpl
                 'message' => '`username` already exists in database'
             ]);
 
-            return $this->response->setData(json_decode($hal->asJson()));
+            return $this->response->setBody($hal->asJson());
 
         // no email
         } catch (EmailIsRequiredException $e) {
@@ -128,7 +128,7 @@ class CreateAction extends ActionImpl
                 'message' => '`email` is required'
             ]);
 
-            return $this->response->setData(json_decode($hal->asJson()));
+            return $this->response->setBody($hal->asJson());
 
         // no password
         } catch (PasswordIsRequiredException $e) {
@@ -137,7 +137,7 @@ class CreateAction extends ActionImpl
                 'message' => '`password` is required'
             ]);
 
-            return $this->response->setData(json_decode($hal->asJson()));
+            return $this->response->setBody($hal->asJson());
 
         // no password
         } catch (PasswordNeedsToBeALengthOf64Exception $e) {
@@ -146,7 +146,7 @@ class CreateAction extends ActionImpl
                 'message' => '`password` is not a sha256 hash'
             ]);
 
-            return $this->response->setData(json_decode($hal->asJson()));
+            return $this->response->setBody($hal->asJson());
 
         // unknown error
         } catch (\Exception $e) {
@@ -155,7 +155,7 @@ class CreateAction extends ActionImpl
                 'message' => $e->getMessage()
             ]);
 
-            return $this->response->setData(json_decode($hal->asJson()));
+            return $this->response->setBody($hal->asJson());
         }
     }
 
