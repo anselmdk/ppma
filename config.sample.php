@@ -1,7 +1,5 @@
 <?php
 
-define('DEV_MODE', false);
-
 return [
 
     'database' => [
@@ -75,6 +73,7 @@ return [
         ]
     ],
 
-    'version' => '1.0.0-alpha',
+    'dev-mode' => true,
+    'version'  => '1.0.0-alpha',
 
 ];

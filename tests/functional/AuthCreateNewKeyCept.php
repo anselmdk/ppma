@@ -6,7 +6,6 @@ $scenario->groups(['auth']);
 $guy = new TestGuy($scenario);
 $guy->wantTo('create new key');
 
-
 // invalid (no auth header)
 $guy->sendPOST('/users/janedoe/auth');
 $guy->seeResponseCodeIs(403);

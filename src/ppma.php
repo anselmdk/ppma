@@ -28,7 +28,7 @@ class ppma
             /* @var \ppma\Service\Response\Impl\JsonServiceImpl $response */
             $response = ServiceFactory::get(Config::get('services.response'));
 
-            if (DEV_MODE)
+            if (Config::get('dev-mode'))
             {
                 $response
                     ->addData('type', get_class($e))
