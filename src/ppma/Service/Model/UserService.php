@@ -11,6 +11,20 @@ interface UserService extends Service
 {
 
     /**
+     * @param string $username
+     * @param string $email
+     * @param string $password
+     * @return UserModel
+     */
+    public function create($username, $email, $password);
+
+    /**
+     * @param UserModel $model
+     * @return UserModel
+     */
+    public function createNewAuthKey(UserModel $model);
+
+    /**
      * @return UserModel[]
      */
     public function getAll();
@@ -26,13 +40,5 @@ interface UserService extends Service
      * @return UserModel
      */
     public function getByUsername($username);
-
-    /**
-     * @param string $username
-     * @param string $email
-     * @param string $password
-     * @return UserModel
-     */
-    public function create($username, $email, $password);
 
 }

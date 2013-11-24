@@ -19,46 +19,6 @@ use Rych\Random\Random;
 
 class UserServiceImpl extends PhormiumServiceImpl implements UserService
 {
-    /**
-     * @return UserModel[]
-     */
-    public function getAll()
-    {
-        // TODO: Implement getAll() method.
-    }
-
-    /**
-     * @param int $id
-     * @return UserModel
-     */
-    public function getById($id)
-    {
-        // TODO: Implement getById() method.
-    }
-
-    /**
-     * @param string $username
-     * @return \Phormium\Model|UserModel
-     * @throws \ppma\Service\Model\Exception\UserNotFoundException
-     */
-    public function getByUsername($username)
-    {
-        try {
-            return UserModel::objects()->filter('username', '=', $username)->single();
-
-        } catch (\Exception $e) {
-            throw new UserNotFoundException();
-        }
-    }
-
-    /**
-     * @param array $args
-     * @return mixed
-     */
-    public function init($args = [])
-    {
-        // TODO: Implement init() method.
-    }
 
     /**
      * @param string $username
@@ -109,10 +69,78 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
         $model->slug     = $this->slugUsername($model->username);
         $model->email    = $email;
         $model->password = password_hash($password, PASSWORD_BCRYPT, ['costs' => 31]);
-        $model->authkey  = sha1((new Random())->getRandomBytes(42));
+        $model->authkey  = $this->generateAuthkey();
         $model->save();
 
         return $model;
+    }
+
+    /**
+     * @param UserModel $model
+     * @return UserModel
+     */
+    public function createNewAuthKey(UserModel $model)
+    {
+        $model->authkey = $this->generateAuthkey();
+        $model->save();
+
+        return $model;
+    }
+
+    /**
+     * @return string
+     */
+    protected function generateAuthkey()
+    {
+        $authkey = sha1((new Random())->getRandomBytes(42));
+
+        if (UserModel::objects()->filter('authkey', '=', $authkey)->exists())
+        {
+            return $this->generateAuthkey();
+        }
+
+        return $authkey;
+    }
+
+    /**
+     * @return UserModel[]
+     */
+    public function getAll()
+    {
+        // TODO: Implement getAll() method.
+    }
+
+    /**
+     * @param int $id
+     * @return UserModel
+     */
+    public function getById($id)
+    {
+        // TODO: Implement getById() method.
+    }
+
+    /**
+     * @param string $username
+     * @return \Phormium\Model|UserModel
+     * @throws \ppma\Service\Model\Exception\UserNotFoundException
+     */
+    public function getByUsername($username)
+    {
+        try {
+            return UserModel::objects()->filter('username', '=', $username)->single();
+
+        } catch (\Exception $e) {
+            throw new UserNotFoundException();
+        }
+    }
+
+    /**
+     * @param array $args
+     * @return mixed
+     */
+    public function init($args = [])
+    {
+        // TODO: Implement init() method.
     }
 
     /**

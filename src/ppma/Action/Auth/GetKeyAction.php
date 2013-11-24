@@ -31,6 +31,9 @@ class GetKeyAction extends ActionImpl
      */
     private $username;
 
+    /**
+     * @param array $args
+     */
     public function init($args = [])
     {
         parent::init($args);

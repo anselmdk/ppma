@@ -21,6 +21,13 @@ interface RequestService extends Service
      * @param mixed $default
      * @return mixed
      */
+    public function header($name, $default = null);
+
+    /**
+     * @param string $name
+     * @param mixed $default
+     * @return mixed
+     */
     public function post($name, $default = null);
 
 } 

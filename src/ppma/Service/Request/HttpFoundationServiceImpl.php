@@ -40,6 +40,16 @@ class HttpFoundationServiceImpl implements Service\RequestService
      * @param mixed $default
      * @return mixed
      */
+    public function header($name, $default = null)
+    {
+        return $this->instance->headers->get($name, $default);
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $default
+     * @return mixed
+     */
     public function post($name, $default = null)
     {
         return $this->instance->request->get($name, $default);

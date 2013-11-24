@@ -154,3 +154,25 @@ Content-Type: application/json
 	* 1: authentication failed
 * `message`: description of `code`
 
+### Create new key
+
+
+#### Request
+
+```
+POST /users/janedoe/auth
+X-Authkey: f30d2f04433f0db4265ddc7d39eeeb5440e65fa5
+```
+
+#### Response
+
+```
+200 OK
+Content-Type: application/hal+json
+```
+```
+{
+	"key": "e500fe5aaa59109a1d81eb11cf4360ee9c2be304"
+}
+```
+
