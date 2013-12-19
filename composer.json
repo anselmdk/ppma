@@ -8,9 +8,9 @@
     "require": {
         "symfony/http-foundation": "v2.4.0",
         "cocur/slugify": "v0.2.3",
-        "dispatch/dispatch": "2.6.*",
-        "phormium/phormium": "0.4",
-        "rych/phpass": "3.0.*@beta",
+        "dispatch/dispatch": "2.6.3",
+        "phormium/phormium": "0.5",
+        "rych/phpass": "v3.0.0beta1",
         "keboola/php-encryption": "0.2.1",
         "rych/random": "v0.1.0",
         "pklink/dotor": "0.2",
@@ -19,7 +19,7 @@
         "ircmaxell/password-compat": "1.0.3"
     },
     "require-dev": {
-        "codeception/codeception": "1.8.0.1",
-        "fp/universal-error-catcher": "1.0.*"
+        "codeception/codeception": "1.8.1",
+        "fp/universal-error-catcher": "1.0.2"
     }
 }
