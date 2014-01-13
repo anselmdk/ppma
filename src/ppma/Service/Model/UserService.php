@@ -45,5 +45,4 @@ interface UserService extends Service
      * @return void
      */
     public function update(UserModel $model, $validate = null);
-
 }

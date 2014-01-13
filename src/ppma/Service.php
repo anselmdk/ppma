@@ -12,5 +12,4 @@ interface Service
      * @return mixed
      */
     public function init($args = []);
-
 }

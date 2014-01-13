@@ -50,5 +50,4 @@ interface Writer
      * @return void
      */
     public function warn($msg, $context = null);
-
 }

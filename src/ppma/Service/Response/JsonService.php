@@ -26,5 +26,4 @@ interface JsonService extends ResponseService
      * @return JsonService
      */
     public function setData($data = []);
-
-} 
+}

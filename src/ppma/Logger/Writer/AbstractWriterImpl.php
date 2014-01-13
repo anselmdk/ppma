@@ -38,5 +38,4 @@ abstract class AbstractWriterImpl implements Writer
                 throw new InvalidLevelException();
         }
     }
-
 }

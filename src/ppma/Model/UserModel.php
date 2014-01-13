@@ -11,11 +11,13 @@ class UserModel extends Model
     /**
      * @var array
      */
+    // @codingStandardsIgnoreStart
     protected static $_meta = array(
         'database' => 'ppma',
         'table'    => 'user',
         'pk'       => 'id'
     );
+    // @codingStandardsIgnoreEnd
 
     /**
      * @var int
@@ -46,5 +48,4 @@ class UserModel extends Model
      * @var string
      */
     public $slug;
-
 }

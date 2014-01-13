@@ -24,8 +24,7 @@ class Config
     {
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
-        if (!(self::$dotor instanceof Dotor))
-        {
+        if (!(self::$dotor instanceof Dotor)) {
             throw new \InvalidArgumentException(sprintf('%s is not initialized', __CLASS__));
         }
 
@@ -50,5 +49,4 @@ class Config
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return self::get('url.base') . self::get('url.' . $name);
     }
-
 }

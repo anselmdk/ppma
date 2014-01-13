@@ -59,7 +59,8 @@ class GetKeyAction extends ActionImpl
                 return $this->response->addData('key', $model->authkey);
             }
 
-        } catch (UserNotFoundException $e) { }
+        } catch (UserNotFoundException $e) {
+        }
 
         return $this->response
             ->addData('code', self::AUTHENTICATION_FAILED)
@@ -78,5 +79,4 @@ class GetKeyAction extends ActionImpl
             array_merge(Config::get('services.model.user'), ['target' => 'userService']),
         ]);
     }
-
-} 
+}

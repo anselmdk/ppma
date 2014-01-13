@@ -16,5 +16,4 @@ interface SmtpService extends Service
      * @return mixed
      */
     public function sendMessage($to, $subject, $message);
-
-} 
+}

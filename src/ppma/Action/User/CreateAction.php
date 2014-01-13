@@ -51,8 +51,8 @@ class CreateAction extends ActionImpl
 
         return array_merge(parent::services(), [
             array_merge(Config::get('services.model.user'), ['target' => 'userService']),
-            array_merge(Config::get('services.request'),    ['target' => 'request']),
-            array_merge(Config::get('services.smtp'),       ['target' => 'mail'])
+            array_merge(Config::get('services.request'), ['target' => 'request']),
+            array_merge(Config::get('services.smtp'), ['target' => 'mail'])
         ]);
     }
 
@@ -66,8 +66,7 @@ class CreateAction extends ActionImpl
         // prepare response
         $this->response->setStatusCode(400);
 
-        try
-        {
+        try {
             // create model
             $model = new UserModel();
 
@@ -89,7 +88,8 @@ class CreateAction extends ActionImpl
                     'Your account for ppma was created',
                     sprintf("Hi %s,\n\nblah blah blah.\n\n---\n\npow, pow, pow!", $model->username)
                 );
-            } catch (\Exception $e) { }
+            } catch (\Exception $e) {
+            }
 
             // send response
             return $this->response
@@ -133,5 +133,4 @@ class CreateAction extends ActionImpl
             ]);
         }
     }
-
-} 
+}

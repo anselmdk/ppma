@@ -27,11 +27,9 @@ class ServiceFactory
     {
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
-        foreach ($object->services() as $config)
-        {
+        foreach ($object->services() as $config) {
             // check if index 'target' exist
-            if (!isset($config['target']))
-            {
+            if (!isset($config['target'])) {
                 throw new \InvalidArgumentException('"target" is not set');
             }
 
@@ -56,16 +54,14 @@ class ServiceFactory
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
         // check if index 'id' exist
-        if (!isset($config['id']))
-        {
+        if (!isset($config['id'])) {
             throw new \InvalidArgumentException('"id" is not set');
         }
 
         $id = $config['id'];
 
         // check if class $id exist
-        if (!class_exists($id))
-        {
+        if (!class_exists($id)) {
             throw new ServiceDoesNotExist($id);
         }
 
@@ -74,14 +70,12 @@ class ServiceFactory
         $service = new $id();
 
         // check if $service really a service
-        if (!($service instanceof Service))
-        {
+        if (!($service instanceof Service)) {
             throw new InstanceIsNotAService($id);
         }
 
         // attach services if object serviceable
-        if ($service instanceof Serviceable)
-        {
+        if ($service instanceof Serviceable) {
             /* @var Serviceable $service */
             self::adorn($service);
         }
@@ -102,13 +96,11 @@ class ServiceFactory
 
         $key = md5(serialize($config));
 
-        if (!isset(self::$services[$key]))
-        {
+        if (!isset(self::$services[$key])) {
             self::$services[$key] = self::create($config);
 
         }
 
         return self::$services[$key];
     }
-
 }

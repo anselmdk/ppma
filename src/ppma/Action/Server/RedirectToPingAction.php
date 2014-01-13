@@ -22,5 +22,4 @@ class RedirectToPingAction extends ActionImpl
             ->addHeader('Location', '/ping')
         ;
     }
-
-} 
+}

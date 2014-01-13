@@ -91,5 +91,4 @@ class AccessDeniedImpl implements ResponseService
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return $this;
     }
-
-} 
+}

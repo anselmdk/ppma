@@ -48,5 +48,4 @@ interface ResponseService extends Service
      * @return ResponseService
      */
     public function setStatusCode($status);
-
 }

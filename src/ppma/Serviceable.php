@@ -18,5 +18,4 @@ interface Serviceable
      * @return void
      */
     public function setService($target, Service $service);
-
 }

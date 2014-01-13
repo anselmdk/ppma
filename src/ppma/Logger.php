@@ -68,10 +68,8 @@ class Logger
      */
     public static function init($config = [])
     {
-        foreach ($config['writer'] as $writerConfig)
-        {
-            if (isset($writerConfig['enabled']) && !$writerConfig['enabled'])
-            {
+        foreach ($config['writer'] as $writerConfig) {
+            if (isset($writerConfig['enabled']) && !$writerConfig['enabled']) {
                 continue;
             }
 
@@ -91,8 +89,7 @@ class Logger
      */
     public static function log($level, $message, $context = null)
     {
-        foreach (self::$writer as $writer)
-        {
+        foreach (self::$writer as $writer) {
             switch($level)
             {
                 case Logger::DEBUG:
@@ -122,5 +119,4 @@ class Logger
     {
         self::log(Logger::WARN, $message, $context);
     }
-
 }

@@ -4,6 +4,6 @@
 namespace ppma\Service\Model\Exception;
 
 
-class UsernameIsRequiredException extends \Exception {
-
-} 
+class UsernameIsRequiredException extends \Exception
+{
+}

@@ -8,5 +8,4 @@ use ppma\Service;
 
 interface PhormiumService extends Service
 {
-
-} 
+}

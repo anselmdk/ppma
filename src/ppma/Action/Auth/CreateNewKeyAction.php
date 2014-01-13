@@ -62,7 +62,7 @@ class CreateNewKeyAction extends ActionImpl
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
         return array_merge(parent::services(), [
-            array_merge(Config::get('services.request'),    ['target' => 'request']),
+            array_merge(Config::get('services.request'), ['target' => 'request']),
             array_merge(Config::get('services.model.user'), ['target' => 'userService']),
         ]);
     }
@@ -95,5 +95,4 @@ class CreateNewKeyAction extends ActionImpl
             return new AccessDeniedImpl();
         }
     }
-
-} 
+}

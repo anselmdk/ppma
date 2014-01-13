@@ -65,5 +65,4 @@ abstract class ActionImpl implements Action
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         $this->$target = $service;
     }
-
-} 
+}

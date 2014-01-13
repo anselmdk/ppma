@@ -59,5 +59,4 @@ class HttpFoundationServiceImpl implements Service\RequestService
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         return $this->instance->request->get($name, $default);
     }
-
-} 
+}

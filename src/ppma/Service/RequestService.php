@@ -29,5 +29,4 @@ interface RequestService extends Service
      * @return mixed
      */
     public function post($name, $default = null);
-
-} 
+}

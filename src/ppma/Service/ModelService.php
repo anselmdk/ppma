@@ -9,5 +9,4 @@ use ppma\Serviceable;
 
 interface ModelService extends Service, Serviceable
 {
-
-} 
+}

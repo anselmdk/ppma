@@ -109,5 +109,4 @@ class ResponseServiceImpl implements ResponseService
         $this->status = $status;
         return $this;
     }
-
 }

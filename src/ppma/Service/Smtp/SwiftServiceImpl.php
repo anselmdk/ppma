@@ -59,11 +59,8 @@ class SwiftServiceImpl implements SmtpService
         ;
 
         // Send the message
-        if (!Config::get('mail.dryrun', false))
-        {
+        if (!Config::get('mail.dryrun', false)) {
             $this->mailer->send($message);
         }
     }
-
-
-} 
+}

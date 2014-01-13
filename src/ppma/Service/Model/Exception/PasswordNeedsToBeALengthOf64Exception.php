@@ -4,6 +4,6 @@
 namespace ppma\Service\Model\Exception;
 
 
-class PasswordNeedsToBeALengthOf64Exception extends \Exception {
-
-} 
+class PasswordNeedsToBeALengthOf64Exception extends \Exception
+{
+}

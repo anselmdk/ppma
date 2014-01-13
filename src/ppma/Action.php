@@ -29,5 +29,4 @@ interface Action extends Serviceable
      * @return ResponseService
      */
     public function run();
-
-} 
+}

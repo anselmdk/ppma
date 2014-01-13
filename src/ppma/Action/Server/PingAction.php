@@ -21,5 +21,4 @@ class PingAction extends ActionImpl
             'message' => 'pong',
         ])->setStatusCode(200);
     }
-
-} 
+}

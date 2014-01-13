@@ -24,7 +24,8 @@ class PhormiumServiceImpl implements PhormiumService
         DB::configure([
             'databases' => [
                 'ppma' => [
-                    'dsn' => sprintf('mysql:host=%s;dbname=%s',
+                    'dsn' => sprintf(
+                        'mysql:host=%s;dbname=%s',
                         Config::get('database.host', 'localhost'),
                         Config::get('database.name', 'ppma')
                     ),
@@ -35,5 +36,4 @@ class PhormiumServiceImpl implements PhormiumService
             'logging' => false
         ]);
     }
-
 }

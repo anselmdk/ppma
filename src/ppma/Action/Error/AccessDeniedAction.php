@@ -24,5 +24,4 @@ class AccessDeniedAction extends ActionImpl
             ->setStatusCode(403)
         ;
     }
-
 }

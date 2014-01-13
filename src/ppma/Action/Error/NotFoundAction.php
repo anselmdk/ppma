@@ -24,5 +24,4 @@ class NotFoundAction extends ActionImpl
             ->setStatusCode(404)
         ;
     }
-
 }

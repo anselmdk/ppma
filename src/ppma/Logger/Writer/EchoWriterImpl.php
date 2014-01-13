@@ -44,7 +44,9 @@ class EchoWriterImpl extends AbstractWriterImpl
      * @param array $config
      * @return void
      */
-    public function init($config = []) { }
+    public function init($config = [])
+    {
+    }
 
     /**
      * @param string $msg
@@ -55,5 +57,4 @@ class EchoWriterImpl extends AbstractWriterImpl
     {
         printf("%-8s %-40s %s\n", 'WARN:', $context, $msg);
     }
-
 }

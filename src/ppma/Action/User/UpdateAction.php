@@ -46,7 +46,7 @@ class UpdateAction extends ActionImpl
 
         return array_merge(parent::services(), [
             array_merge(Config::get('services.model.user'), ['target' => 'userService']),
-            array_merge(Config::get('services.request'),    ['target' => 'request'])
+            array_merge(Config::get('services.request'), ['target' => 'request'])
         ]);
     }
 
@@ -70,8 +70,7 @@ class UpdateAction extends ActionImpl
             ->setStatusCode(400)
         ;
 
-        try
-        {
+        try {
             // get user
             $model = $this->userService->getBySlug($this->slug);
 
@@ -82,15 +81,13 @@ class UpdateAction extends ActionImpl
             $validate = [];
 
             // set email
-            if ($this->request->post('email', false) !== false)
-            {
+            if ($this->request->post('email', false) !== false) {
                 $model->email = $this->request->post('email');
                 $validate[]   = 'email';
             }
 
             // set password
-            if ($this->request->post('password', false) !== false)
-            {
+            if ($this->request->post('password', false) !== false) {
                 $model->password = $this->request->post('password');
                 $validate[]      = 'password';
             }
@@ -108,5 +105,4 @@ class UpdateAction extends ActionImpl
             ]);
         }
     }
-
-} 
+}

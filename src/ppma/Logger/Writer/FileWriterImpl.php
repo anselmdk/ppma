@@ -24,8 +24,7 @@ class FileWriterImpl extends AbstractWriterImpl
      */
     public function debug($msg, $context = null)
     {
-        if (!in_array('debug', $this->level))
-        {
+        if (!in_array('debug', $this->level)) {
             return;
         }
 
@@ -40,8 +39,7 @@ class FileWriterImpl extends AbstractWriterImpl
      */
     public function error($msg, $context = null)
     {
-        if (!in_array('error', $this->level))
-        {
+        if (!in_array('error', $this->level)) {
             return;
         }
 
@@ -56,8 +54,7 @@ class FileWriterImpl extends AbstractWriterImpl
      */
     public function info($msg, $context = null)
     {
-        if (!in_array('info', $this->level))
-        {
+        if (!in_array('info', $this->level)) {
             return;
         }
 
@@ -71,8 +68,7 @@ class FileWriterImpl extends AbstractWriterImpl
      */
     public function init($config = [])
     {
-        if (!isset($config['path']))
-        {
+        if (!isset($config['path'])) {
             throw new \Exception('path to log file is not set');
         }
 
@@ -87,8 +83,7 @@ class FileWriterImpl extends AbstractWriterImpl
      */
     public function warn($msg, $context = null)
     {
-        if (!in_array('warn', $this->level))
-        {
+        if (!in_array('warn', $this->level)) {
             return;
         }
 
@@ -102,13 +97,11 @@ class FileWriterImpl extends AbstractWriterImpl
     protected function write($message)
     {
         // create file if is not exist
-        if (!file_exists($this->path))
-        {
+        if (!file_exists($this->path)) {
             touch($this->path);
             chmod($this->path, 0777);
         }
 
         file_put_contents($this->path, $message . "\n", FILE_APPEND);
     }
-
 }

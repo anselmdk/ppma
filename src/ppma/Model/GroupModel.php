@@ -12,11 +12,13 @@ class GroupModel extends Model
     /**
      * @var array
      */
+    // @codingStandardsIgnoreStart
     protected static $_meta = array(
         'database' => 'ppma',
         'table'    => 'group',
         'pk'       => 'id'
     );
+    // @codingStandardsIgnoreEnd
 
     /**
      * @var int
@@ -27,5 +29,4 @@ class GroupModel extends Model
      * @var string
      */
     public $password;
-
 }

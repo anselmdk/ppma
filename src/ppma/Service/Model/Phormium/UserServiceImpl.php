@@ -17,7 +17,6 @@ use ppma\Service\Model\PhormiumServiceImpl;
 use ppma\Service\Model\UserService;
 use Rych\Random\Random;
 
-
 class UserServiceImpl extends PhormiumServiceImpl implements UserService
 {
 
@@ -66,8 +65,7 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
 
         $authkey = sha1((new Random())->getRandomBytes(42));
 
-        if (UserModel::objects()->filter('authkey', '=', $authkey)->exists())
-        {
+        if (UserModel::objects()->filter('authkey', '=', $authkey)->exists()) {
             return $this->generateAuthkey();
         }
 
@@ -129,10 +127,8 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         $slug = (new Slugify(Slugify::MODEARRAY))->slugify($username);
 
-        if (UserModel::objects()->filter('slug', '=', $slug)->exists())
-        {
-            if ($counter != 1)
-            {
+        if (UserModel::objects()->filter('slug', '=', $slug)->exists()) {
+            if ($counter != 1) {
                 $slug = substr($slug, 0, -2);
             }
 
@@ -190,23 +186,19 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
     {
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
-        if ($validate == null)
-        {
+        if ($validate == null) {
             $validate = ['email', 'password', 'username'];
         }
 
-        if (in_array('email', $validate))
-        {
+        if (in_array('email', $validate)) {
             $this->validateEmail($model->email);
         }
 
-        if (in_array('password', $validate))
-        {
+        if (in_array('password', $validate)) {
             $this->validatePassword($model->password);
         }
 
-        if (in_array('username', $validate))
-        {
+        if (in_array('username', $validate)) {
             $this->validateUsername($model->username, $model);
         }
 
@@ -222,8 +214,7 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
         // check if email is empty
-        if (strlen($email) == 0)
-        {
+        if (strlen($email) == 0) {
             throw new EmailIsRequiredException();
         }
     }
@@ -238,14 +229,12 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
         // check if password is set
-        if (strlen($password) == 0)
-        {
+        if (strlen($password) == 0) {
             throw new PasswordIsRequiredException();
         }
 
         // check if password is sha256 (has a length of 64)
-        if (strlen($password) != 64)
-        {
+        if (strlen($password) != 64) {
             throw new PasswordNeedsToBeALengthOf64Exception();
         }
     }
@@ -261,8 +250,7 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
         // check if username is empty
-        if (strlen($username) == 0)
-        {
+        if (strlen($username) == 0) {
             throw new UsernameIsRequiredException();
         }
 
@@ -270,13 +258,10 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
         $dbuser = UserModel::objects()->filter('username', '=', $username)->single(true);
 
         // check if is username already taken
-        if ($dbuser instanceof UserModel)
-        {
-            if (($user instanceof UserModel && $user->id != $dbuser->id) || !($user instanceof UserModel))
-            {
+        if ($dbuser instanceof UserModel) {
+            if (($user instanceof UserModel && $user->id != $dbuser->id) || !($user instanceof UserModel)) {
                 throw new UsernameAlreadyExistsException();
             }
         }
     }
-
 }

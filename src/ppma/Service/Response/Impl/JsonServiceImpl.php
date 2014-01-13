@@ -44,8 +44,7 @@ class JsonServiceImpl extends ResponseServiceImpl implements JsonService
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
         $header = parent::getHeader();
 
-        if (!isset($header['Content-Type']))
-        {
+        if (!isset($header['Content-Type'])) {
             $header['Content-Type'] = 'application/json';
         }
 
@@ -64,6 +63,4 @@ class JsonServiceImpl extends ResponseServiceImpl implements JsonService
         $this->setBody(json_encode($data));
         return $this;
     }
-
-
-} 
+}

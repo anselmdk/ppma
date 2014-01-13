@@ -40,12 +40,10 @@ class ActionFactory
     {
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
-        if (!isset(self::$actions[$id]))
-        {
+        if (!isset(self::$actions[$id])) {
             self::$actions[$id] = self::create($id);
         }
 
         return self::$actions[$id];
     }
-
 }
