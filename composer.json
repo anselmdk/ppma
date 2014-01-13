@@ -6,7 +6,7 @@
     },
 
     "require": {
-        "symfony/http-foundation": "v2.4.0",
+        "symfony/http-foundation": "v2.4.1",
         "cocur/slugify": "v0.3.0",
         "dispatch/dispatch": "3.5.0",
         "phormium/phormium": "0.5",
