@@ -9,11 +9,11 @@ $guy->wantTo('test server');
 // redirect to ping
 $guy->sendGET('/');
 $guy->seeResponseCodeIs(200);
-$guy->seeHttpHeader('Content-Type', 'application/hal+json');
-$guy->seeResponseContainsJson(['_links' => ['self' => ['href' => '/']], 'message' => 'pong']);
+$guy->seeResponseIsJson();
+$guy->seeResponseContainsJson(['message' => 'pong']);
 
 // ping
 $guy->sendGET('/ping');
 $guy->seeResponseCodeIs(200);
-$guy->seeHttpHeader('Content-Type', 'application/hal+json');
-$guy->seeResponseContainsJson(['_links' => ['self' => ['href' => '/']], 'message' => 'pong']);
+$guy->seeResponseIsJson();
+$guy->seeResponseContainsJson(['message' => 'pong']);

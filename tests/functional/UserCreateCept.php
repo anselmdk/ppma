@@ -19,8 +19,7 @@ $guy->sendPOST('/users', [
     'password' => '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'
 ]);
 $guy->seeResponseCodeIs(201);
-$guy->seeHttpHeader('Content-Type', 'application/hal+json');
-$guy->seeResponseContainsJson(['_links' => ['user' => ['href' => '/users/jane-doe']]]);
+$guy->seeResponseIsJson();
 $guy->seeResponseContains('"authkey"');
 $guy->seeHttpHeader('Location', '/users/jane-doe');
 
@@ -48,7 +47,7 @@ $guy->sendPOST('/users', [
     'password' => '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'
 ]);
 $guy->seeResponseCodeIs(400);
-$guy->seeHttpHeader('Content-Type', 'application/hal+json');
+$guy->seeResponseIsJson();
 $guy->seeResponseContainsJson(['code' => 1]);
 
 // existing username
@@ -58,7 +57,7 @@ $guy->sendPOST('/users', [
     'password' => '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'
 ]);
 $guy->seeResponseCodeIs(400);
-$guy->seeHttpHeader('Content-Type', 'application/hal+json');
+$guy->seeResponseIsJson();
 $guy->seeResponseContainsJson(['code' => 2]);
 
 // without email
@@ -67,7 +66,7 @@ $guy->sendPOST('/users', [
     'password' => '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8'
 ]);
 $guy->seeResponseCodeIs(400);
-$guy->seeHttpHeader('Content-Type', 'application/hal+json');
+$guy->seeResponseIsJson();
 $guy->seeResponseContainsJson(['code' => 3]);
 
 // without password
@@ -76,7 +75,7 @@ $guy->sendPOST('/users', [
     'email'    => 'jane@doe.net',
 ]);
 $guy->seeResponseCodeIs(400);
-$guy->seeHttpHeader('Content-Type', 'application/hal+json');
+$guy->seeResponseIsJson();
 $guy->seeResponseContainsJson(['code' => 4]);
 
 // with invalid password
@@ -86,5 +85,5 @@ $guy->sendPOST('/users', [
     'password' => '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d'
 ]);
 $guy->seeResponseCodeIs(400);
-$guy->seeHttpHeader('Content-Type', 'application/hal+json');
+$guy->seeResponseIsJson();
 $guy->seeResponseContainsJson(['code' => 5]);

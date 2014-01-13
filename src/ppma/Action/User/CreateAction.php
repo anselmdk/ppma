@@ -4,7 +4,6 @@
 namespace ppma\Action\User;
 
 
-use Nocarrier\Hal;
 use ppma\Action\ActionImpl;
 use ppma\Config;
 use ppma\Logger;
@@ -65,13 +64,7 @@ class CreateAction extends ActionImpl
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
         // prepare response
-        $this->response
-            ->addHeader('Content-Type', 'application/hal+json')
-            ->setStatusCode(400)
-        ;
-
-        // create hal object
-        $hal    = new Hal('/users');
+        $this->response->setStatusCode(400);
 
         try
         {
@@ -86,16 +79,8 @@ class CreateAction extends ActionImpl
             // create user
             $this->userService->create($model);
 
-            // add authkey to hal
-            $hal->setData([
-                'authkey' => $model->authkey
-            ]);
-
             // get uri of user
             $uri = sprintf('/users/%s', $model->slug);
-
-            // add link to user profile
-            $hal->addLink('user', $uri);
 
             // send message to user
             try {
@@ -108,54 +93,44 @@ class CreateAction extends ActionImpl
 
             // send response
             return $this->response
-                ->setBody($hal->asJson())
+                ->setData(['authkey' => $model->authkey])
                 ->setStatusCode(201)
                 ->addHeader('Location', $uri)
             ;
 
         // no username
         } catch (UsernameIsRequiredException $e) {
-            $hal->setData([
+            return $this->response->setData([
                 'code'    => self::USERNAME_IS_REQUIRED,
                 'message' => '`username` is required'
             ]);
 
-            return $this->response->setBody($hal->asJson());
-
         } catch (UsernameAlreadyExistsException $e) {
-            $hal->setData([
+            return $this->response->setData([
                 'code'    => self::USERNAME_ALREADY_EXISTS,
                 'message' => '`username` already exists in database'
             ]);
 
-            return $this->response->setBody($hal->asJson());
-
         // no email
         } catch (EmailIsRequiredException $e) {
-            $hal->setData([
+            return $this->response->setData([
                 'code'    => self::EMAIL_IS_REQUIRED,
                 'message' => '`email` is required'
             ]);
 
-            return $this->response->setBody($hal->asJson());
-
         // no password
         } catch (PasswordIsRequiredException $e) {
-            $hal->setData([
+            return $this->response->setData([
                 'code'    => self::PASSWORD_IS_REQUIRED,
                 'message' => '`password` is required'
             ]);
 
-            return $this->response->setBody($hal->asJson());
-
         // no password
         } catch (PasswordNeedsToBeALengthOf64Exception $e) {
-            $hal->setData([
+            return $this->response->setData([
                 'code'    => self::PASSWORD_IS_INVALID,
                 'message' => '`password` is not a sha256 hash'
             ]);
-
-            return $this->response->setBody($hal->asJson());
         }
     }
 

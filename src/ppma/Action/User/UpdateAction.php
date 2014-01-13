@@ -4,7 +4,6 @@
 namespace ppma\Action\User;
 
 
-use Nocarrier\Hal;
 use ppma\Action\ActionImpl;
 use ppma\Action\AuthTrait;
 use ppma\Config;
@@ -71,9 +70,6 @@ class UpdateAction extends ActionImpl
             ->setStatusCode(400)
         ;
 
-        // create hal object
-        $hal = new Hal('/users/' . $this->slug);
-
         try
         {
             // get user
@@ -103,18 +99,13 @@ class UpdateAction extends ActionImpl
             $this->userService->update($model, $validate);
 
             // send response
-            return $this->response
-                ->setBody($hal->asJson())
-                ->setStatusCode(200)
-            ;
+            return $this->response->setStatusCode(200);
 
         } catch (PasswordNeedsToBeALengthOf64Exception $e) {
-            $hal->setData([
+            return $this->response->setData([
                 'code'    => self::PASSWORD_IS_INVALID,
                 'message' => '`password` is not a sha256 hash'
             ]);
-
-            return $this->response->setBody($hal->asJson());
         }
     }
 

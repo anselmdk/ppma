@@ -4,7 +4,6 @@
 namespace ppma\Action\Auth;
 
 
-use Nocarrier\Hal;
 use ppma\Action\ActionImpl;
 use ppma\Action\AuthTrait;
 use ppma\Config;
@@ -51,7 +50,7 @@ class CreateNewKeyAction extends ActionImpl
     {
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
-        $this->slug    = $args['slug'];
+        $this->slug     = $args['slug'];
         $this->authkey  = $this->request->header('X-Authkey');
     }
 
@@ -87,15 +86,9 @@ class CreateNewKeyAction extends ActionImpl
             // create new key
             $this->userService->createNewAuthKey($model);
 
-            // create hal object
-            $hal = new Hal(sprintf('/users/%s/auth', $model->slug), [
+            return $this->response->setData([
                 'key' => $model->authkey
             ]);
-            $hal->addLink('user', sprintf('/users/%s', $model->slug));
-
-            return $this->response
-                ->setBody($hal->asJson())
-                ->addHeader('Content-Type', 'application/hal+json');
 
         } catch (UserNotFoundException $e) {
             error(403);

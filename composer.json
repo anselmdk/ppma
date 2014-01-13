@@ -14,7 +14,6 @@
         "keboola/php-encryption": "0.2.1",
         "rych/random": "v0.1.0",
         "pklink/dotor": "0.2",
-        "nocarrier/hal": "0.9.4",
         "swiftmailer/swiftmailer": "v5.0.3",
         "ircmaxell/password-compat": "1.0.3"
     },
