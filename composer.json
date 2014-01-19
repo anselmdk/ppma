@@ -7,7 +7,7 @@
 
     "require": {
         "symfony/http-foundation": "v2.4.1",
-        "cocur/slugify": "v0.3.0",
+        "cocur/slugify": "v0.4.0",
         "dispatch/dispatch": "3.5.0",
         "phormium/phormium": "0.5",
         "rych/phpass": "v3.0.0beta1",
