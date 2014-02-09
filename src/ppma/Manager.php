@@ -48,18 +48,20 @@ class Manager
      */
     protected function registerServices()
     {
-        $this->app->service('db', function () {
-            $service = new \ppma\Service\Database();
+        $prepare = function ($id) {
+            /* @var Service $service */
+            $service = new $id();
             $service->setApplication($this->app);
             $service->init();
             return $service;
+        };
+
+        $this->app->service('db', function () use ($prepare) {
+            return $prepare('\ppma\Service\Database');
         });
 
-        $this->app->service('user-service', function () {
-            $service = new \ppma\Service\Model\User();
-            $service->setApplication($this->app);
-            $service->init();
-            return $service;
+        $this->app->service('user-service', function () use ($prepare) {
+            return $prepare('\ppma\Service\Model\User');
         });
     }
 
@@ -88,16 +90,16 @@ class Manager
         };
 
         // server
-        $this->app->get('/', function (Json $response) use ($caller) {
-            return $caller('\ppma\Action\Server\RedirectToPingAction', [$response]);
+        $this->app->get('/', function (Json $res) use ($caller) {
+            return $caller('\ppma\Action\Server\RedirectToPingAction', [$res]);
         });
 
-        $this->app->get('/ping', function (Json $response) use ($caller) {
-            return $caller('\ppma\Action\Server\PingAction', [$response]);
+        $this->app->get('/ping', function (Json $res) use ($caller) {
+            return $caller('\ppma\Action\Server\PingAction', [$res]);
         });
 
-        $this->app->post('/users/[.+:slug]/auth', function (Request $request, Json $response, Hahns $app) use ($caller) {
-            return $caller('\ppma\Action\Auth\CreateNewKeyAction', [$request, $response, $app]);
+        $this->app->post('/users/[.+:slug]/auth', function (Request $req, Json $res, Hahns $app) use ($caller) {
+            return $caller('\ppma\Action\Auth\CreateNewKeyAction', [$req, $res, $app]);
         });
     }
 
