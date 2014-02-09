@@ -6,6 +6,7 @@ namespace ppma\Action\Auth;
 
 use ppma\Action\ActionImpl;
 use ppma\Action\AuthTrait;
+use ppma\Exception\Response\ForbiddenException;
 use ppma\Logger;
 use ppma\Service\Model\Exception\UserNotFoundException;
 
@@ -18,6 +19,7 @@ class CreateNewKeyAction extends ActionImpl
 
     /**
      * @return string
+     * @throws \ppma\Exception\Response\ForbiddenException
      */
     public function run()
     {
@@ -32,6 +34,9 @@ class CreateNewKeyAction extends ActionImpl
             // get user
             $model = $service->getBySlug($slug);
 
+            // check access
+            $this->checkAccess($model, $this->request);
+
             // create new key
             $service->createNewAuthKey($model);
 
@@ -40,7 +45,9 @@ class CreateNewKeyAction extends ActionImpl
             ]);
 
         } catch (UserNotFoundException $e) {
-            return null;
+            throw new ForbiddenException(CreateNewKeyAction::FORBIDDEN, CreateNewKeyAction::FORBIDDEN);
+        } catch (ForbiddenException $e) {
+            throw new ForbiddenException(CreateNewKeyAction::FORBIDDEN, CreateNewKeyAction::FORBIDDEN);
         }
     }
 }

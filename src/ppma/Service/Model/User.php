@@ -6,7 +6,7 @@ namespace ppma\Service\Model;
 
 use Cocur\Slugify\Slugify;
 use ppma\Logger;
-use ppma\Model\UserModel;
+use ppma\Model\User as UserModel;
 use ppma\Service\Model\Exception\EmailIsRequiredException;
 use ppma\Service\Model\Exception\PasswordIsRequiredException;
 use ppma\Service\Model\Exception\PasswordNeedsToBeALengthOf64Exception;
@@ -81,7 +81,7 @@ class User extends ModelImpl
 
     /**
      * @param int $id
-     * @return UserModel
+     * @return User
      */
     public function getById($id)
     {

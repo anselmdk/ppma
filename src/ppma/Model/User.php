@@ -5,7 +5,7 @@ namespace ppma\Model;
 
 use Phormium\Model;
 
-class UserModel extends Model
+class User extends Model
 {
 
     /**

@@ -5,6 +5,8 @@ namespace ppma;
 use Hahns\Hahns;
 use Hahns\Request;
 use Hahns\Response\Json;
+use Hahns\Response;
+use ppma\Exception\Response\ForbiddenException;
 use ppma\Factory\ActionFactory;
 use ppma\Logger;
 
@@ -109,6 +111,17 @@ class Manager
     public function run()
     {
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
-        $this->app->run();
+
+        try {
+            $this->app->run();
+        } catch (ForbiddenException $e) {
+            /* @var Json $response */
+            $response = $this->app->service('json-response');
+            echo $response->send([
+                'code'    => $e->getCode(),
+                'message' => $e->getMessage()
+            ], Response::CODE_FORBIDDEN);
+        }
+
     }
 }
