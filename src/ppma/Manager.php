@@ -1,10 +1,14 @@
 <?php
 
-use ppma\Config;
+namespace ppma;
+
+use Hahns\Hahns;
+use Hahns\Request;
+use Hahns\Response\Json;
 use ppma\Factory\ActionFactory;
 use ppma\Logger;
 
-class ppma
+class Manager
 {
 
     /**
@@ -13,7 +17,7 @@ class ppma
     protected $controller = [];
 
     /**
-     * @var \Hahns\Hahns
+     * @var Hahns
      */
     protected $app;
 
@@ -29,10 +33,10 @@ class ppma
         Config::init($config);
 
         // create instance of Hahns
-        $this->app = new \Hahns\Hahns(true);
+        $this->app = new Hahns(true);
 
         // create and init logger
-        \ppma\Logger::init(Config::get('log'));
+        Logger::init(Config::get('log'));
 
         // register routes
         $this->registerServices();
@@ -84,15 +88,15 @@ class ppma
         };
 
         // server
-        $this->app->get('/', function (\Hahns\Response\Json $response) use ($caller) {
+        $this->app->get('/', function (Json $response) use ($caller) {
             return $caller('\ppma\Action\Server\RedirectToPingAction', [$response]);
         });
 
-        $this->app->get('/ping', function (\Hahns\Response\Json $response) use ($caller) {
+        $this->app->get('/ping', function (Json $response) use ($caller) {
             return $caller('\ppma\Action\Server\PingAction', [$response]);
         });
 
-        $this->app->post('/users/[.+:slug]/auth', function (\Hahns\Request $request, \Hahns\Response\Json $response, \Hahns\Hahns $app) use ($caller) {
+        $this->app->post('/users/[.+:slug]/auth', function (Request $request, Json $response, Hahns $app) use ($caller) {
             return $caller('\ppma\Action\Auth\CreateNewKeyAction', [$request, $response, $app]);
         });
     }

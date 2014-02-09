@@ -4,13 +4,10 @@
 namespace ppma\Action\Auth;
 
 
-use Behat\Mink\Exception\Exception;
 use ppma\Action\ActionImpl;
 use ppma\Action\AuthTrait;
 use ppma\Logger;
 use ppma\Service\Model\Exception\UserNotFoundException;
-use ppma\Service\Response\Impl\AccessDeniedImpl;
-use ppma\Service\ResponseService;
 
 class CreateNewKeyAction extends ActionImpl
 {
@@ -20,7 +17,7 @@ class CreateNewKeyAction extends ActionImpl
     const FORBIDDEN = 101;
 
     /**
-     * @return ResponseService
+     * @return string
      */
     public function run()
     {
@@ -43,10 +40,7 @@ class CreateNewKeyAction extends ActionImpl
             ]);
 
         } catch (UserNotFoundException $e) {
-            var_dump($e);
-            die();
-            error(403);
-            return new AccessDeniedImpl();
+            return null;
         }
     }
 }

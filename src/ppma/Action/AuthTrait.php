@@ -6,16 +6,15 @@ namespace ppma\Action;
 
 use ppma\Logger;
 use ppma\Model\UserModel;
-use ppma\Service\RequestService;
 
 trait AuthTrait
 {
 
     /**
      * @param UserModel $user
-     * @param RequestService $request
+     * @param $request
      */
-    protected function checkAccess(UserModel $user, RequestService $request)
+    protected function checkAccess(UserModel $user, $request)
     {
         /*
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);

@@ -6,4 +6,4 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $config = require(__DIR__ . '/../config.php');
 
 // create and run app
-(new ppma($config))->run();
+(new Manager($config))->run();
