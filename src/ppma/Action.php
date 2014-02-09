@@ -4,9 +4,11 @@
 namespace ppma;
 
 
-use ppma\Service\ResponseService;
+use Hahns\Hahns;
+use Hahns\Request;
+use Hahns\Response\Json;
 
-interface Action extends Serviceable
+interface Action
 {
 
     /**
@@ -20,13 +22,25 @@ interface Action extends Serviceable
     public function before();
 
     /**
-     * @param array $args
-     * @return void
-     */
-    public function init($args = []);
-
-    /**
-     * @return ResponseService
+     * @return mixed
      */
     public function run();
+
+    /**
+     * @param Request $request
+     * @return void
+     */
+    public function setRequest(Request $request);
+
+    /**
+     * @param Hahns $app
+     * @return void
+     */
+    public function setApplication(Hahns $app);
+
+    /**
+     * @param Json $response
+     * @return void
+     */
+    public function setResponse(Json $response);
 }

@@ -4,6 +4,9 @@
 namespace ppma\Factory;
 
 
+use Hahns\Hahns;
+use Hahns\Request;
+use Hahns\Response\Json;
 use ppma\Action;
 use ppma\Logger;
 
@@ -11,39 +14,28 @@ class ActionFactory
 {
 
     /**
-     * @var Action[]
-     */
-    protected static $actions = [];
-
-    /**
      * @param string $id
+     * @param array $args
      * @return Action
      */
-    protected static function create($id)
+    public static function create($id, $args = [])
     {
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
         /* @var \ppma\Action $action */
         $action = new $id();
 
-        // adorn action with services
-        ServiceFactory::adorn($action);
-
-        return $action;
-    }
-
-    /**
-     * @param string $id
-     * @return Action
-     */
-    public static function get($id)
-    {
-        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
-
-        if (!isset(self::$actions[$id])) {
-            self::$actions[$id] = self::create($id);
+        // set arguments
+        foreach ($args as $arg) {
+            if ($arg instanceof Json) {
+                $action->setResponse($arg);
+            } elseif ($arg instanceof Request) {
+                $action->setRequest($arg);
+            } elseif ($arg instanceof Hahns) {
+                $action->setApplication($arg);
+            }
         }
 
-        return self::$actions[$id];
+        return $action;
     }
 }

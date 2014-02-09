@@ -6,9 +6,8 @@
     },
 
     "require": {
-        "symfony/http-foundation": "v2.4.1",
+        "pklink/hahns": "0.7.1",
         "cocur/slugify": "v0.4.0",
-        "dispatch/dispatch": "3.5.0",
         "phormium/phormium": "0.5",
         "rych/phpass": "v3.0.0beta1",
         "keboola/php-encryption": "0.2.1",
@@ -18,7 +17,6 @@
         "ircmaxell/password-compat": "1.0.3"
     },
     "require-dev": {
-        "codeception/codeception": "1.8.1",
-        "fp/universal-error-catcher": "1.0.2"
+        "codeception/codeception": "1.8.1"
     }
 }

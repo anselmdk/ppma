@@ -2,10 +2,7 @@
 
 use ppma\Config;
 use ppma\Factory\ActionFactory;
-use ppma\Factory\ServiceFactory;
 use ppma\Logger;
-use ppma\Service\Response\Impl\AccessDeniedImpl;
-use ppma\Service\ResponseService;
 
 class ppma
 {
@@ -14,6 +11,11 @@ class ppma
      * @var array ['id' => 'instance of controller']
      */
     protected $controller = [];
+
+    /**
+     * @var \Hahns\Hahns
+     */
+    protected $app;
 
     /**
      * @param array $config
@@ -26,42 +28,35 @@ class ppma
         // initialize ppma\Config
         Config::init($config);
 
-        // set error handler
-        $catcher = new UniversalErrorCatcher_Catcher();
-        $catcher->registerCallback(function(\Exception $e) {
-            /* @var \ppma\Service\Response\Impl\JsonServiceImpl $response */
-            $response = ServiceFactory::get(Config::get('services.response'));
-
-            if (Config::get('dev-mode'))
-            {
-                $response
-                    ->addData('type', get_class($e))
-                    ->addData('message', $e->getMessage())
-                    ->addData('file', $e->getFile())
-                    ->addData('line', $e->getLine())
-                    ->addData('trace', $e->getTrace())
-                ;
-            }
-            else
-            {
-                $response->addData('message', 'see log for more information');
-            }
-            $response->setStatusCode(500);
-
-
-            $this->sendResponse($response);
-            exit;
-        });
-        $catcher->start();
-
-        // config dispatch
-        config('dispatch.router', 'index.php');
+        // create instance of Hahns
+        $this->app = new \Hahns\Hahns(true);
 
         // create and init logger
         \ppma\Logger::init(Config::get('log'));
 
         // register routes
+        $this->registerServices();
         $this->registerRoutes();
+    }
+
+    /**
+     * @return void
+     */
+    protected function registerServices()
+    {
+        $this->app->service('db', function () {
+            $service = new \ppma\Service\Database();
+            $service->setApplication($this->app);
+            $service->init();
+            return $service;
+        });
+
+        $this->app->service('user-service', function () {
+            $service = new \ppma\Service\Model\User();
+            $service->setApplication($this->app);
+            $service->init();
+            return $service;
+        });
     }
 
     /**
@@ -71,59 +66,34 @@ class ppma
     {
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
-        $caller = function($id, $args = []) {
+        $caller = function ($id, $args = []) {
             /* @var \ppma\Action $action */
-            $action = ActionFactory::get($id);
+            $action = ActionFactory::create($id, $args);
 
             // trigger `before`-event
             $action->before();
 
-            // init action
-            $action->init($args);
-
             // run action
             $response = $action->run();
 
-            if ($response instanceof AccessDeniedImpl)
-            {
-                error(403);
-            }
-
-            // output action
-            $this->sendResponse($response);
-
             // triger `after`-event
             $action->after();
+
+            // return response
+            return $response;
         };
 
         // server
-        on('GET', '/', function() use ($caller) { $caller('\ppma\Action\Server\RedirectToPingAction'); });
-        on('GET', '/ping', function() use ($caller) { $caller('\ppma\Action\Server\PingAction'); });
-
-        // auth
-        on('GET', '/users/:slug/auth/:password', function($slug, $password) use ($caller) {
-            $caller('\ppma\Action\Auth\GetKeyAction', ['slug' => $slug, 'password' => $password]); }
-        );
-
-        on('POST', '/users/:slug/auth', function($slug) use ($caller) {
-                $caller('\ppma\Action\Auth\CreateNewKeyAction', ['slug' => $slug]); }
-        );
-
-        // user
-        on('POST', '/users', function() use ($caller) { $caller('\ppma\Action\User\CreateAction'); });
-
-        on('PUT', '/users/:slug', function($slug) use ($caller) {
-            $caller('\ppma\Action\User\UpdateAction', ['slug' => $slug]);
+        $this->app->get('/', function (\Hahns\Response\Json $response) use ($caller) {
+            return $caller('\ppma\Action\Server\RedirectToPingAction', [$response]);
         });
 
-        // 403-handler
-        error(403, function() use ($caller) {
-            $caller('\ppma\Action\Error\AccessDeniedAction');
+        $this->app->get('/ping', function (\Hahns\Response\Json $response) use ($caller) {
+            return $caller('\ppma\Action\Server\PingAction', [$response]);
         });
 
-        // 404-handler
-        error(404, function() use ($caller) {
-            $caller('\ppma\Action\Error\NotFoundAction');
+        $this->app->post('/users/[.+:slug]/auth', function (\Hahns\Request $request, \Hahns\Response\Json $response, \Hahns\Hahns $app) use ($caller) {
+            return $caller('\ppma\Action\Auth\CreateNewKeyAction', [$request, $response, $app]);
         });
     }
 
@@ -133,20 +103,6 @@ class ppma
     public function run()
     {
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
-        dispatch();
+        $this->app->run();
     }
-
-    protected function sendResponse(ResponseService $response)
-    {
-        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
-        header(sprintf('HTTP/1.1 %d', $response->getStatusCode()));
-
-        foreach ($response->getHeader() as $name => $value)
-        {
-            header(sprintf('%s: %s', $name, $value));
-        }
-
-        echo $response->getBody();
-    }
-
 }

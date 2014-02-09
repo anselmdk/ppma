@@ -7,7 +7,7 @@ namespace ppma\Logger\Writer;
 use ppma\Logger\Writer;
 use ppma\Logger;
 
-class EchoWriterImpl extends AbstractWriterImpl
+class EchoWriterImpl extends WriterImpl
 {
 
     /**

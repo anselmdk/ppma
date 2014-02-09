@@ -4,12 +4,19 @@
 namespace ppma;
 
 
+use Hahns\Hahns;
+
 interface Service
 {
 
     /**
-     * @param array $args
-     * @return mixed
+     * @return void
      */
-    public function init($args = []);
+    public function init();
+
+    /**
+     * @param Hahns $app
+     * @return void
+     */
+    public function setApplication(Hahns $app);
 }

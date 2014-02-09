@@ -6,12 +6,13 @@ namespace ppma\Service\Smtp;
 
 use ppma\Config;
 use ppma\Logger;
+use ppma\Service\ServiceImpl;
 use ppma\Service\SmtpService;
 use Swift_Mailer;
 use Swift_Message;
 use Swift_SmtpTransport;
 
-class SwiftServiceImpl implements SmtpService
+class Swift extends ServiceImpl implements SmtpService
 {
 
     /**

@@ -36,37 +36,6 @@ return [
         ],
     ],
 
-    // services
-    'services' => [
-        // orm/database services
-        'model' => [
-            'user'  => [
-                'id' => '\ppma\Service\Model\Phormium\UserServiceImpl',
-            ],
-        ],
-
-        // request
-        'request' => [
-            'id' => '\ppma\Service\Request\HttpFoundationServiceImpl'
-        ],
-
-        // response
-        'response' => [
-            'id' => '\ppma\Service\Response\Json\ResponseServiceImpl',
-        ],
-
-        // orm
-        'orm' => [
-            'id' => '\ppma\Service\Orm\Impl\PhormiumServiceImpl',
-        ],
-
-        // smtp
-        'smtp' => [
-            'id' => '\ppma\Service\Smpt\SwiftServiceImpl',
-        ],
-
-    ],
-
     'testing' => [
         'mail' => [
             'recipient' => 'yourmail@domain.com',

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ppma\Service\Model\Phormium;
+namespace ppma\Service\Model;
 
 
 use Cocur\Slugify\Slugify;
@@ -13,11 +13,9 @@ use ppma\Service\Model\Exception\PasswordNeedsToBeALengthOf64Exception;
 use ppma\Service\Model\Exception\UsernameAlreadyExistsException;
 use ppma\Service\Model\Exception\UsernameIsRequiredException;
 use ppma\Service\Model\Exception\UserNotFoundException;
-use ppma\Service\Model\PhormiumServiceImpl;
-use ppma\Service\Model\UserService;
 use Rych\Random\Random;
 
-class UserServiceImpl extends PhormiumServiceImpl implements UserService
+class User extends ModelImpl
 {
 
     /**
@@ -93,7 +91,7 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
 
     /**
      * @param string $slug
-     * @return \Phormium\Model
+     * @return UserModel
      * @throws \ppma\Service\Model\Exception\UserNotFoundException
      */
     public function getBySlug($slug)
@@ -106,15 +104,6 @@ class UserServiceImpl extends PhormiumServiceImpl implements UserService
         } catch (\Exception $e) {
             throw new UserNotFoundException();
         }
-    }
-
-    /**
-     * @param array $args
-     * @return mixed
-     */
-    public function init($args = [])
-    {
-        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
     }
 
     /**

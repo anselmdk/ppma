@@ -4,8 +4,10 @@
 namespace ppma\Action;
 
 
+use Hahns\Hahns;
+use Hahns\Request;
+use Hahns\Response\Json;
 use ppma\Action;
-use ppma\Config;
 use ppma\Logger;
 use ppma\Service;
 
@@ -13,7 +15,17 @@ abstract class ActionImpl implements Action
 {
 
     /**
-     * @var Service\Response\JsonService
+     * @var Hahns
+     */
+    protected $app;
+
+    /**
+     * @var Request
+     */
+    protected $request;
+
+    /**
+     * @var Json
      */
     protected $response;
 
@@ -34,35 +46,30 @@ abstract class ActionImpl implements Action
     }
 
     /**
-     * @param array $args
+     * @param Hahns $app
      * @return void
      */
-    public function init($args = [])
+    public function setApplication(Hahns $app)
     {
-        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
-    }
-
-    /**
-     * @return array ['propertyName' => 'class name of service']
-     */
-    public function services()
-    {
-        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
-
-        return [
-            array_merge(Config::get('services.response'), ['target' => 'response']),
-        ];
+        $this->app = $app;
     }
 
 
     /**
-     * @param string $target
-     * @param Service $service
+     * @param Request $request
      * @return void
      */
-    public function setService($target, Service $service)
+    public function setRequest(Request $request)
     {
-        Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
-        $this->$target = $service;
+        $this->request = $request;
+    }
+
+    /**
+     * @param Json $response
+     * @return void
+     */
+    public function setResponse(Json $response)
+    {
+        $this->response = $response;
     }
 }

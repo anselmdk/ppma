@@ -8,7 +8,7 @@ use ppma\Logger\Exception\InvalidLevelException;
 use ppma\Logger\Writer;
 use ppma\Logger;
 
-abstract class AbstractWriterImpl implements Writer
+abstract class WriterImpl implements Writer
 {
 
     /**
