@@ -60,6 +60,10 @@ class Manager
         $this->app->service('user-service', function () use ($prepare) {
             return $prepare('\ppma\Service\Model\User');
         });
+
+        $this->app->service('password', function () use ($prepare) {
+            return $prepare('\ppma\Service\Password');
+        });
     }
 
     /**
@@ -95,8 +99,13 @@ class Manager
             return $caller('\ppma\Action\Server\PingAction', [$res]);
         });
 
+        // auth
         $this->app->post('/users/[.+:slug]/auth', function (Request $req, Json $res, Hahns $app) use ($caller) {
             return $caller('\ppma\Action\Auth\CreateNewKeyAction', [$req, $res, $app]);
+        });
+
+        $this->app->get('/users/[.+:slug]/auth/[.+:password]', function (Request $req, Json $res, Hahns $app) use ($caller) {
+            return $caller('\ppma\Action\Auth\AuthAction', [$req, $res, $app]);
         });
     }
 
