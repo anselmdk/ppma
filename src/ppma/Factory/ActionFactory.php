@@ -4,7 +4,6 @@
 namespace ppma\Factory;
 
 
-use Hahns\Hahns;
 use Hahns\Request;
 use Hahns\Response\Json;
 use ppma\Action;
@@ -31,8 +30,6 @@ class ActionFactory
                 $action->setResponse($arg);
             } elseif ($arg instanceof Request) {
                 $action->setRequest($arg);
-            } elseif ($arg instanceof Hahns) {
-                $action->setApplication($arg);
             }
         }
 

@@ -77,6 +77,9 @@ class Manager
             /* @var \ppma\Action $action */
             $action = ActionFactory::create($id, $args);
 
+            // set application to action
+            $action->setApplication($this->app);
+
             // trigger `before`-event
             $action->before();
 
@@ -100,12 +103,12 @@ class Manager
         });
 
         // auth
-        $this->app->post('/users/[.+:slug]/auth', function (Request $req, Json $res, Hahns $app) use ($caller) {
-            return $caller('\ppma\Action\Auth\CreateNewKeyAction', [$req, $res, $app]);
+        $this->app->post('/users/[.+:slug]/auth', function (Request $req, Json $res) use ($caller) {
+            return $caller('\ppma\Action\Auth\CreateNewKeyAction', [$req, $res]);
         });
 
-        $this->app->get('/users/[.+:slug]/auth/[.+:password]', function (Request $req, Json $res, Hahns $app) use ($caller) {
-            return $caller('\ppma\Action\Auth\AuthAction', [$req, $res, $app]);
+        $this->app->get('/users/[.+:slug]/auth/[.+:password]', function (Request $req, Json $res) use ($caller) {
+            return $caller('\ppma\Action\Auth\AuthAction', [$req, $res]);
         });
     }
 
