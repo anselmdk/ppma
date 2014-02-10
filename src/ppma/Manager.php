@@ -14,11 +14,6 @@ class Manager
 {
 
     /**
-     * @var array ['id' => 'instance of controller']
-     */
-    protected $controller = [];
-
-    /**
      * @var Hahns
      */
     protected $app;
