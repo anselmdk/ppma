@@ -57,7 +57,7 @@ class Manager
             return $prepare('\ppma\Service\Database');
         });
 
-        $this->app->service('user-service', function () use ($prepare) {
+        $this->app->service('user', function () use ($prepare) {
             return $prepare('\ppma\Service\Model\User');
         });
 
@@ -109,6 +109,11 @@ class Manager
 
         $this->app->get('/users/[.+:slug]/auth/[.+:password]', function (Request $req, Json $res) use ($caller) {
             return $caller('\ppma\Action\Auth\AuthAction', [$req, $res]);
+        });
+
+        // user
+        $this->app->post('/users', function (Request $req, Json $res) use ($caller) {
+            return $caller('\ppma\Action\User\CreateAction', [$req, $res]);
         });
     }
 
