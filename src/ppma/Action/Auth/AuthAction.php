@@ -7,7 +7,6 @@ namespace ppma\Action\Auth;
 use ppma\Action\ActionImpl;
 use ppma\Action\Auth\Exception\WrongPasswordException;
 use ppma\Action\AuthTrait;
-use ppma\Exception\Response\ForbiddenException;
 use ppma\Logger;
 use ppma\Service\Model\Exception\UserNotFoundException;
 
@@ -31,7 +30,7 @@ class AuthAction extends ActionImpl
         // get user
         try {
             /* @var \ppma\Service\Model\User $service */
-            $service = $this->app->service('user-service');
+            $service = $this->app->service('user');
 
             // get user
             $model = $service->getBySlug($slug);
