@@ -28,7 +28,7 @@ class CreateNewKeyAction extends ActionImpl
         // get user
         try {
             /* @var \ppma\Service\Model\User $service */
-            $service = $this->app->service('user-service');
+            $service = $this->app->service('user');
             $slug    = $this->request->get('slug');
 
             // get user
