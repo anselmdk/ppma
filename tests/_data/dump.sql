@@ -40,3 +40,10 @@ CREATE TABLE `group_has_user` (
 INSERT INTO `group_has_user` (`groupId`, `userId`, `isManager`)
   VALUES
   (1, 1, 1);
+
+CREATE TABLE signature
+(
+  id INT PRIMARY KEY NOT NULL,
+  signature VARCHAR(32) NOT NULL,
+  expired_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
