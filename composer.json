@@ -6,7 +6,7 @@
     },
 
     "require": {
-        "pklink/hahns": "0.7.1",
+        "pklink/hahns": "0.7.2",
         "cocur/slugify": "v0.4.0",
         "phormium/phormium": "0.5",
         "keboola/php-encryption": "0.2.1",
@@ -16,6 +16,6 @@
         "ircmaxell/password-compat": "1.0.3"
     },
     "require-dev": {
-        "codeception/codeception": "1.8.1"
+        "codeception/codeception": "1.8.3"
     }
 }
