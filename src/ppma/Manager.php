@@ -26,14 +26,11 @@ class Manager
     {
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
-        // initialize ppma\Config
-        Config::init($config);
-
         // create instance of Hahns
-        $this->app = new Hahns(true);
+        $this->app = new Hahns($config);
 
         // create and init logger
-        Logger::init(Config::get('log'));
+        Logger::init($this->app->config('log'));
 
         // register routes
         $this->registerServices();

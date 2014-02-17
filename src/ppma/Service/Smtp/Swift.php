@@ -4,7 +4,6 @@
 namespace ppma\Service\Smtp;
 
 
-use ppma\Config;
 use ppma\Logger;
 use ppma\Service\ServiceImpl;
 use ppma\Service\SmtpService;
@@ -28,11 +27,11 @@ class Swift extends ServiceImpl implements SmtpService
     {
         Logger::debug(sprintf('execute %s()', __METHOD__), __CLASS__);
 
-        $host     = Config::get('mail.smtp.host');
-        $port     = Config::get('mail.smtp.port');
-        $username = Config::get('mail.smtp.username');
-        $password = Config::get('mail.smtp.password');
-        $security = (Config::get('mail.smtp.tls', false) ? 'tls' : null);
+        $host     = $this->app->config('mail.smtp.host');
+        $port     = $this->app->config('mail.smtp.port');
+        $username = $this->app->config('mail.smtp.username');
+        $password = $this->app->config('mail.smtp.password');
+        $security = ($this->app->config('mail.smtp.tls') ? 'tls' : null);
 
         $transport = Swift_SmtpTransport::newInstance($host, $port, $security)
             ->setUsername($username)
@@ -54,13 +53,13 @@ class Swift extends ServiceImpl implements SmtpService
 
         /* @var \Swift_Mime_Message $message */
         $message = Swift_Message::newInstance($subject)
-            ->setFrom(array(Config::get('mail.from', 'ppma@pklink.github.com')))
+            ->setFrom(array($this->app->config('mail.from')))
             ->setTo($to)
             ->setBody($message)
         ;
 
         // Send the message
-        if (!Config::get('mail.dryrun', false)) {
+        if (!is_null($this->app->config('mail.dryrun'))) {
             $this->mailer->send($message);
         }
     }

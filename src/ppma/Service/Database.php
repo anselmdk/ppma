@@ -5,7 +5,6 @@ namespace ppma\Service;
 
 
 use Phormium\DB;
-use ppma\Config;
 use ppma\Logger;
 
 class Database extends ServiceImpl
@@ -30,11 +29,11 @@ class Database extends ServiceImpl
                     'ppma' => [
                         'dsn' => sprintf(
                             'mysql:host=%s;dbname=%s',
-                            Config::get('database.host', 'localhost'),
-                            Config::get('database.name', 'ppma')
+                            $this->app->config('database.host'),
+                            $this->app->config('database.name')
                         ),
-                        'username' => Config::get('database.username', 'root'),
-                        'password' => Config::get('database.password', '')
+                        'username' => $this->app->config('database.username'),
+                        'password' => $this->app->config('database.password')
                     ],
                 ],
                 'logging' => false
