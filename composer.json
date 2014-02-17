@@ -12,7 +12,6 @@
         "pklink/hahns": "0.7.4",
         "cocur/slugify": "v0.4.0",
         "phormium/phormium": "0.5",
-        "keboola/php-encryption": "0.2.1",
         "rych/random": "v0.1.0",
         "swiftmailer/swiftmailer": "v5.0.3",
         "ircmaxell/password-compat": "1.0.3",
