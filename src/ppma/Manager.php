@@ -6,6 +6,11 @@ use Hahns\Hahns;
 use Hahns\Request;
 use Hahns\Response\Json;
 use Hahns\Response;
+use ppma\Action\Auth\AuthAction;
+use ppma\Action\Auth\CreateNewKeyAction;
+use ppma\Action\Server\PingAction;
+use ppma\Action\Server\RedirectToPingAction;
+use ppma\Action\User\CreateAction;
 use ppma\Exception\Response\ForbiddenException;
 use ppma\Factory\ActionFactory;
 use ppma\Logger;
@@ -92,25 +97,25 @@ class Manager
 
         // server
         $this->app->get('/', function (Json $res) use ($caller) {
-            return $caller('\ppma\Action\Server\RedirectToPingAction', [$res]);
+            return $caller(RedirectToPingAction::class, [$res]);
         });
 
         $this->app->get('/ping', function (Json $res) use ($caller) {
-            return $caller('\ppma\Action\Server\PingAction', [$res]);
+            return $caller(PingAction::class, [$res]);
         });
 
         // auth
         $this->app->post('/users/[.+:slug]/auth', function (Request $req, Json $res) use ($caller) {
-            return $caller('\ppma\Action\Auth\CreateNewKeyAction', [$req, $res]);
+            return $caller(CreateNewKeyAction::class, [$req, $res]);
         });
 
         $this->app->get('/users/[.+:slug]/auth/[.+:password]', function (Request $req, Json $res) use ($caller) {
-            return $caller('\ppma\Action\Auth\AuthAction', [$req, $res]);
+            return $caller(AuthAction::class, [$req, $res]);
         });
 
         // user
         $this->app->post('/users', function (Request $req, Json $res) use ($caller) {
-            return $caller('\ppma\Action\User\CreateAction', [$req, $res]);
+            return $caller(CreateAction::class, [$req, $res]);
         });
     }
 
