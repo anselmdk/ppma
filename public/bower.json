@@ -1,0 +1,24 @@
+{
+    "name": "ppma",
+    "version": "1.0.0",
+    "homepage": "https://github.com/pklink/ppma",
+    "authors": [
+        "Pierre Klink <dev@klinks.info>"
+    ],
+    "description": "password manager for php5",
+    "main": "assets/js/ppma.js",
+    "license": "MIT",
+    "private": true,
+    "dependencies": {
+        "requirejs": "2.1.11",
+        "semantic-ui": "0.15.2",
+        "canjs": "2.0.7"
+    },
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ]
+}

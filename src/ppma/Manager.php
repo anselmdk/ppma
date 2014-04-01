@@ -117,6 +117,21 @@ class Manager
         $this->app->post('/users', function (Request $req, Json $res) use ($caller) {
             return $caller(CreateAction::class, [$req, $res]);
         });
+
+
+        //http://localhost:8000/api.php?entries
+        // entries
+        $this->app->get('/entries', function (Json $res) use ($caller) {
+            return $res->send([
+                'data' => [[
+                    'name' => 'google.com'
+                ], [
+                    'name' => 'amazon.com'
+                ], [
+                    'name' => 'buch.de'
+                ]]
+            ]);
+        });
     }
 
     /**
