@@ -1,0 +1,12 @@
+<div class="ui vertical menu">
+    <div class="header item"><i class="open folder icon"></i> Categories</div>
+    {{#each categories}}
+        <a class="item" href="#!categories/{{slug}}" can-click="activate">{{name}}</a>
+    {{/each}}
+
+    <div class="header item"><i class="tags icon"></i> Tags</div>
+    {{#each tags}}
+        <a class="item" href="#!categories/{{slug}}" can-click="activate">{{name}}</a>
+    {{/each}}
+</div>
+

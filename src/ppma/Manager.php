@@ -119,16 +119,83 @@ class Manager
         });
 
 
-        //http://localhost:8000/api.php?entries
         // entries
         $this->app->get('/entries', function (Json $res) use ($caller) {
             return $res->send([
                 'data' => [[
-                    'name' => 'google.com'
+                    'name' => 'google.com',
+                    'slug' => 'google-com',
+                    'categories' => [[
+                        'name' => 'Social Network',
+                        'slug' => 'social-network'
+                    ]]
                 ], [
-                    'name' => 'amazon.com'
+                    'name' => 'amazon.com',
+                    'slug' => 'amazon-com',
+                    'categories' => [[
+                        'name' => 'Shops',
+                        'slug' => 'shops'
+                    ]]
                 ], [
-                    'name' => 'buch.de'
+                    'name' => 'buch.de',
+                    'slug' => 'buch-de',
+                    'categories' => [[
+                        'name' => 'Shops',
+                        'slug' => 'shops'
+                    ]]
+                ]]
+            ]);
+        });
+
+        // categories
+        $this->app->get('/categories', function (Json $res) use ($caller) {
+            return $res->send([
+                'data' => [[
+                    'name' => 'Shops',
+                    'slug' => 'shops'
+                ], [
+                    'name' => 'Social Networks',
+                    'slug' => 'social-networks'
+                ]]
+            ]);
+        });
+
+        // categories/shops
+        $this->app->get('/categories/shops', function (Json $res) use ($caller) {
+            return $res->send([
+                'name' => 'Shops',
+                'slug' => 'shops',
+                'entries' => [[
+                    'name' => 'amazon.com',
+                    'slug' => 'amazon-com'
+                ], [
+                    'name' => 'buch.de',
+                    'slug' => 'buch-de'
+                ]]
+            ]);
+        });
+
+        // categories/social-networks
+        $this->app->get('/categories/social-networks', function (Json $res) use ($caller) {
+            return $res->send([
+                'name' => 'Social Networks',
+                'slug' => 'social-networks',
+                'entries' => [[
+                    'name' => 'google.com',
+                    'slug' => 'google-com'
+                ]]
+            ]);
+        });
+
+        // tags
+        $this->app->get('/tags', function (Json $res) use ($caller) {
+            return $res->send([
+                'data' => [[
+                    'name' => 'shop',
+                    'slug' => 'shop'
+                ], [
+                    'name' => 'internet',
+                    'slug' => 'internet'
                 ]]
             ]);
         });

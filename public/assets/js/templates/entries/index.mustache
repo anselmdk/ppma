@@ -1,0 +1,45 @@
+<div>
+    <h1 class="ui medium header">
+        <i class="open folder icon"></i> All Entries
+    </h1>
+
+    {{#if models.length}}
+        <table class="ui basic table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th colspan="2">Tags</th>
+            </tr>
+            </thead>
+            <tbody>
+                {{#each models}}
+                    <tr>
+                        <td><a href="#">{{name}}</a></td>
+                        <td><a href="#">internet</a>, <a href="#">bla</a></td>
+                        <td>
+                            <div class="ui right aligned basic segment">
+                                <a can-click="edit"><i class="circular inverted small pencil icon"></i> </a>
+                                <a can-click="delete"><i class="circular inverted small remove icon"></i> </a>
+                            </div>
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div id="entry-delete-modal" class="ui modal">
+            <i class="close icon"></i>
+            <div class="header">
+                Delete Entry
+            </div>
+            <div class="content">
+                Do you really want to delete this entry?
+            </div>
+            <div class="actions">
+                <div class="ui red deny button"><i class="remove icon"></i> Nop!</div>
+                <div class="ui green approve button"><i class="checkmark icon"></i> Yep!</div>
+            </div>
+        </div>
+    {{else}}
+        <p>There are no entries. C'mon create some...</p>
+    {{/if}}
+</div>

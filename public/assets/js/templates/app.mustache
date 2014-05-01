@@ -11,6 +11,9 @@
             <a class="item">
                 <i class="tags icon"></i> Tags
             </a>
+            <a class="ui item">
+                <i class="sign out icon"></i> Logout
+            </a>
             <div class="right menu">
                 <div class="item">
                     <div class="ui icon input">
@@ -18,21 +21,17 @@
                         <i class="search link icon"></i>
                     </div>
                 </div>
-                <a class="ui item">
-                    Logout
-                </a>
             </div>
         </div>
     </div>
 
-    <div class="twelve wide column">
-        <div class="ui segment">
-            <entry-list />
-        </div>
-    </div>
     <div class="four wide column">
-        <div class="ui segment">
-            asd
+        <submenu />
+    </div>
+    <div class="twelve wide column">
+        <div class="ui raised segment" id="content">
+            <entries-index></entries-index>
+            <entries-categories></entries-categories>
         </div>
     </div>
 </div>

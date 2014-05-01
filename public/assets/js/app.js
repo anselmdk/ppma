@@ -8,7 +8,42 @@ require.config({
 });
 
 
-require(['jquery', 'can', 'semantic', 'components/entries'], function($, can) {
-    var view = can.view('templates/app', {});
-    $('body').html(view).hide().fadeIn();
+require([
+    'jquery',
+    'can',
+    'controls/categories',
+    'semantic',
+    'components/submenu',
+    'components/entries/index'
+], function($, can, Categories) {
+
+    new (can.Control({
+
+        init: function(el) {
+            // load app template
+            var app = can.view('templates/app', {});
+
+            // append template
+            el.html(app).hide();
+
+            // get content el
+            var content = el.find('#content');
+
+            // show only entries/index
+            content.children().hide();
+            content.find('entries-index').show();
+
+            // show app
+            el.fadeIn('fast');
+
+            // init controller
+            new Categories(content);
+
+            // start routing
+            can.route.ready();
+        }
+
+
+    }))('body');
+
 });
