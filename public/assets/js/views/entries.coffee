@@ -4,7 +4,7 @@ define [
   'collections/entries'
   'views/entry'
   'text!/assets/js/templates/entries/index.hbs'
-], (Backbone, Handlebars, Entries, EntryView, template) ->
+], (Backbone, Handlebars, EntryCollection, EntryView, template) ->
 
   return Backbone.View.extend(
 
@@ -16,7 +16,7 @@ define [
       @render()
 
       # create collection
-      @entries = new Entries();
+      @entries = new EntryCollection();
 
       # listen to collection
       @listenTo @entries, 'add', @addEntry

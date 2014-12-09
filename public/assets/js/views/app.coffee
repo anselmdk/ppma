@@ -6,7 +6,7 @@ define [
   'views/components/navigation'
   'router'
   'text!/assets/js/templates/app.hbs'
-], (Backbone, Handlebars, Entries, DashboardView, NavigationViewComponent, Router, template) ->
+], (Backbone, Handlebars, EntriesView, DashboardView, NavigationViewComponent, Router, template) ->
 
   return Backbone.View.extend(
 
@@ -19,7 +19,7 @@ define [
       # init view
       @views =
         dashboard: new DashboardView()
-        entries: new Entries()
+        entries: new EntriesView()
 
       @listenTo Router, 'route:entries', @showEntries
       @listenTo Router, 'route:dashboard', @showDashboard
