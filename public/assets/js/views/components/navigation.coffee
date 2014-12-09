@@ -1,22 +1,23 @@
 define [
   'backbone'
-], (Backbone) ->
+  'router'
+], (Backbone, Router) ->
 
   return Backbone.View.extend(
 
     el: '#navigation'
 
-    events:
-      'click a': 'setActive'
+    initialize: ->
+      @listenTo Router, 'route:dashboard', -> @setActive 'dashboard'
+      @listenTo Router, 'route:entries', -> @setActive 'entries'
 
 
     clearActives: ->
       actives = @$el.find '.active'
       actives.removeClass 'active'
 
-    setActive: (event) ->
+    setActive: (clz) ->
       @clearActives()
-      target = @$ event.currentTarget
-      target.addClass 'active'
+      @$('.' + clz).addClass 'active'
 
   )
