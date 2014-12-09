@@ -9,7 +9,7 @@ define [
     initialize: ->
       # compile template
       @template = Handlebars.compile template
-
+      @render()
 
     render: ->
       # add template to dom

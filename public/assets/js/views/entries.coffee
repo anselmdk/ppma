@@ -12,6 +12,9 @@ define [
       # compile template
       @template = Handlebars.compile template
 
+      # render
+      @render()
+
       # create collection
       @entries = new Entries();
 
@@ -21,38 +24,29 @@ define [
       # fetch collection
       @entries.fetch()
 
-
-    getTable: ->
-      @$el.find 'table'
-
-
-    getPlaceholer: ->
-      @$el.find '.no-entries'
-
-
     render: ->
-      # render template
-      html = @template()
+      # add template to dom
+      @$el.html @template()
 
-      # add to dom
-      @$el.html html
+      # save table and "no entry"-placeholder
+      @table = @$el.find 'table'
+      @placeholder = @$el.find '.no-entries'
 
       # hide table
-      @getTable().hide()
-
+      @table.hide()
 
     addEntry: (model) ->
       # create view for entry
       entry = new EntryView(
         model: model
-        el: @getTable().find 'tbody'
+        el: @table.find 'tbody'
       )
 
       # render entry
       entry.render()
 
       # show table
-      @getTable().show()
-      @getPlaceholer().hide()
+      @table.show()
+      @placeholder.hide()
 
   )

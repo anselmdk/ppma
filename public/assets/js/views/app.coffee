@@ -15,22 +15,20 @@ define [
       # compile template
       @template = Handlebars.compile template
 
-      @listenTo Router, 'route:entries', @renderEntries
-      @listenTo Router, 'route:dashboard', @renderDashboard
+      # init view
+      @views =
+        dashboard: new DashboardView()
+        entries: new Entries()
+
+      @listenTo Router, 'route:entries', @showEntries
+      @listenTo Router, 'route:dashboard', @showDashboard
       @render()
 
+    showEntries: ->
+      @content.html @views.entries.$el
 
-    renderEntries: ->
-      @entries = new Entries
-        el: @content
-      @entries.render()
-
-
-    renderDashboard: ->
-      @dashboard = new DashboardView
-        el: @content
-      @dashboard.render()
-
+    showDashboard: ->
+      @content.html @views.dashboard.$el
 
     render: ->
       # add template to dom
