@@ -3,9 +3,10 @@ define [
   'handlebars',
   'views/entries'
   'views/dashboard'
+  'views/components/navigation'
   'router'
   'text!/assets/js/templates/app.hbs'
-], (Backbone, Handlebars, Entries, DashboardView, Router, template) ->
+], (Backbone, Handlebars, Entries, DashboardView, NavigationViewComponent, Router, template) ->
 
   return Backbone.View.extend(
 
@@ -34,6 +35,11 @@ define [
       # add template to dom
       @$el.html @template()
 
+      # save compontent
       @content = @$el.find '#content'
+
+      # init dynamic components
+      new NavigationViewComponent()
+
 
   )
