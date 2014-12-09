@@ -17,8 +17,10 @@ require.config
       ]
       exports: 'Backbone'
 
-require ['views/app'], (App) ->
+require ['backbone', 'views/app', 'router'], (Backbone, App) ->
   new App()
+  Backbone.history.start()
+
 
 
 

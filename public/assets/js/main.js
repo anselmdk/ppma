@@ -19,8 +19,9 @@
     }
   });
 
-  require(['views/app'], function(App) {
-    return new App();
+  require(['backbone', 'views/app', 'router'], function(Backbone, App) {
+    new App();
+    return Backbone.history.start();
   });
 
 }).call(this);

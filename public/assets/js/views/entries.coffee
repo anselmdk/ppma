@@ -8,9 +8,6 @@ define [
 
   return Backbone.View.extend(
 
-    el: '#content'
-
-
     initialize: ->
       # compile template
       @template = Handlebars.compile template
