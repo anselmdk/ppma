@@ -1,0 +1,16 @@
+{
+  "name": "ppma",
+  "version": "1.0.0",
+  "description": "mock server for ppma",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Pierre Klink <dev@klinks.info>",
+  "license": "MIT",
+  "dependencies": {
+    "json-server": "^0.5.5"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-coffee": "^0.12.0"
+  }
+}

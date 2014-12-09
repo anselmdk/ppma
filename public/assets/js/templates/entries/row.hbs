@@ -1,0 +1,14 @@
+<tr>
+    <td><a href="#/entries/{{id}}">{{name}}</a></td>
+    <td>
+        {{#each tags}}
+            <a href="#/tags/{{.}}">{{.}}</a>
+        {{/each}}
+    </td>
+    <td>
+        <div class="ui right aligned basic segment">
+            <a href="#/entries/{{id}}/update"><i class="circular inverted small pencil icon"></i> </a>
+            <a href="#/entries/{{id}}/delete"><i class="circular inverted small remove icon"></i> </a>
+        </div>
+    </td>
+</tr>
