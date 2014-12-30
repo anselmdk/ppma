@@ -1,4 +1,4 @@
-var ppmaControllers = angular.module('ppmaControllers', ['ppmaServices']);
+var ppmaControllers = angular.module('ppmaControllers', ['ppmaServices', 'ngRoute']);
 
 
 ppmaControllers.controller('CategoryWidgetCtrl', ['$scope', 'Category', 'Entry',
@@ -13,9 +13,15 @@ ppmaControllers.controller('CategoryWidgetCtrl', ['$scope', 'Category', 'Entry',
     }]);
 
 
-ppmaControllers.controller('EntryListCtrl', ['$scope', 'Entry',
-    function ($scope, Entry) {
+ppmaControllers.controller('EntryListCtrl', ['$scope', 'Entry', '$route',
+    function ($scope, Entry, $route) {
         $scope.entries = Entry.query();
+
+        $scope.remove = function(entry) {
+            Entry.remove({entryId: entry.id}, null, function() {
+                $scope.entries.splice($scope.entries.indexOf(entry), 1);
+            });
+        };
     }]);
 
 ppmaControllers.controller('EntryUpdateCtrl', ['$scope', 'Entry', '$routeParams', '$location',
@@ -25,7 +31,7 @@ ppmaControllers.controller('EntryUpdateCtrl', ['$scope', 'Entry', '$routeParams'
         $scope.submit = function () {
             Entry.update({ entryId: $scope.entry.id }, $scope.entry);
             $location.url('/entries');
-        }
+        };
     }]);
 
 ppmaControllers.controller('EntryViewCtrl', ['$scope', 'Entry', '$routeParams',
