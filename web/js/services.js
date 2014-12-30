@@ -1,9 +1,9 @@
 var ppmaServices = angular.module('ppmaServices', ['ngResource']);
 
 ppmaServices.factory('Category', ['$resource', function($resource) {
-    return $resource('/categories/:categoryId');
+    return $resource('/api/categories/:categoryId');
 }]);
 
 ppmaServices.factory('Entry', ['$resource', function($resource) {
-    return $resource('/entries/:entryId');
+    return $resource('/api/entries/:entryId');
 }]);

@@ -1,5 +1,2 @@
-/vendor/
-/.idea/
-*.lock
-*.iml
-config.php
+vendor/
+.idea/
