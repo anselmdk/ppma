@@ -23,7 +23,7 @@ ppmaControllers.controller('EntryUpdateCtrl', ['$scope', 'Entry', '$routeParams'
         $scope.entry = Entry.get({entryId: $routeParams.id});
 
         $scope.submit = function () {
-            $scope.entry.$save();
+            Entry.update({ entryId: $scope.entry.id }, $scope.entry);
             $location.url('/entries');
         }
     }]);
