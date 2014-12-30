@@ -45,18 +45,10 @@
     </div>
 
     <div class="four wide column">
-        <div class="ui vertical menu">
-            <a class="teal item">
-                Shops
-                <div class="ui teal label">1</div>
-            </a>
-            <a class="item">
-                Coding
-                <div class="ui label">51</div>
-            </a>
-            <a class="item">
-                Stuff
-                <div class="ui label">1</div>
+        <div class="ui vertical menu" ng-controller="CategoryWidgetCtrl">
+            <a class="item" ng-repeat="category in categories" href="#/categories/{{category.id}}">
+                {{category.name}}
+                <div class="ui teal label">{{category.entryCount}}</div>
             </a>
         </div>
     </div>
@@ -64,8 +56,6 @@
 
     </div>
 </div>
-
-<div inform class="inform-animate inform-fixed inform-shadow inform-center"></div>
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-route/angular-route.min.js"></script>
