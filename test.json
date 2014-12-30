@@ -2,7 +2,9 @@
   "entries": [
     {
       "id": 1,
-      "name": "amazon.com",
+      "name": "amazon.de",
+      "username": "dev@klinks.info",
+      "url": "http://www.amazon.de",
       "tags": [
         "shop"
       ]
@@ -10,6 +12,8 @@
     {
       "id": 2,
       "name": "alternate.de",
+      "username": "dev@klinks.info",
+      "url": "http://www.alternate.de",
       "tags": [
         "shop"
       ]
@@ -17,6 +21,8 @@
     {
       "id": 3,
       "name": "github.com",
+      "username": "pklink",
+      "url": "http://github.com",
       "tags": [
         "dev",
         "opensource"

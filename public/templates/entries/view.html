@@ -1,0 +1,20 @@
+<h1 class="ui top attached medium header">{{entry.name}}</h1>
+<div class="ui attached raised segment">
+    <table class="ui very basic table">
+
+        <tr ng-repeat="entry in entries">
+            <td><a href="#/entries/{{entry.id}}">{{entry.name}}</a></td>
+            <td>
+                <a class="ui label" href="#/entries?tag={{tag}}" ng-repeat="tag in entry.tags">
+                    <i class="tag small icon"></i> {{tag}}
+                </a>
+            </td>
+            <td>
+                <div class="ui right aligned basic segment">
+                    <a href="#/entries/{{entry.id}}/update"><i class="bordered small link pencil icon"></i> </a>
+                    <a href="#/entries/{{entry.id}}/delete"><i class="bordered small link remove icon"></i> </a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

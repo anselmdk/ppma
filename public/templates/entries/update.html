@@ -1,0 +1,18 @@
+<h1 class="ui top attached medium header">Update {{entry.name}}</h1>
+<div class="ui attached raised segment">
+    <form class="ui form" ng-submit="submit()">
+        <div class="field">
+            <label for="name">Name*</label>
+            <input id="name" type="text" ng-model="entry.name" value="{{entry.name}}" />
+        </div>
+        <div class="field">
+            <label for="username">Username</label>
+            <input id="username" type="text" ng-model="entry.username" value="{{entry.username}}" />
+        </div>
+        <div class="field">
+            <label for="url">URL</label>
+            <input id="url" type="url" ng-model="entry.url" value="{{entry.url}}" />
+        </div>
+        <button type="submit" class="ui submit button">Save</button>
+    </form>
+</div>
