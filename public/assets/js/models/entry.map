@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "entry.js",
+  "sourceRoot": "",
+  "sources": [
+    "entry.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,EAAA,MAAA,CAAO,CACL,UADK,CAAP,EAEG,SAAC,QAAD,GAAA;AACD,WAAO,QAAQ,CAAC,KAAK,CAAC,MAAf,CAAA,CAAP,CADC;EAAA,CAFH,CAAA,CAAA;AAAA"
+}
