@@ -1,20 +1,16 @@
 <!DOCTYPE html>
-<html ng-app="ppma">
+<html ng-app="ppmaAppModule">
 <head>
     <title>PHP Password Manager // ppma</title>
-
-    <!-- Standard Meta -->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
     <link type="text/css" href="bower_components/semantic-ui/dist/semantic.min.css" rel="stylesheet" />
-    <link type="text/css" href="assets/css/default.css" rel="stylesheet" />
+    <link type="text/css" href="css/default.css" rel="stylesheet" />
 </head>
 <body>
 
 <div class="ui page grid">
-
 
     <div class="sixteen wide column">
         <div class="ui secondary pointing large menu" id="navigation">
@@ -43,7 +39,6 @@
             </div>
         </div>
     </div>
-
     <div class="four wide column">
         <div class="ui vertical menu">
             <a class="teal item">
@@ -66,8 +61,20 @@
 </div>
 
 
-<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/semantic-ui/dist/semantic.min.js"></script>
+<script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.min.js"></script>
-<script src="assets/js/app.js"></script>
+<script src="bower_components/angular-resource/angular-resource.min.js"></script>
+<script src="bower_components/angular-translate/angular-translate.min.js"></script>
+<script src="js/app/module.js"></script>
+<script src="js/app/configs/routes.js"></script>
+<script src="js/app/configs/translations.js"></script>
+<script src="js/entry/module.js"></script>
+<script src="js/entry/configs/translations.js"></script>
+<script src="js/entry/controllers/index.js"></script>
+<script src="js/entry/controllers/delete.js"></script>
+<script src="js/entry/services/entry.js"></script>
+
 </body>
 </html>

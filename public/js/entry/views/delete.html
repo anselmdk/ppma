@@ -1,0 +1,16 @@
+<h1 class="ui top attached medium header">{{ 'DELETE_HEAD' | translate }}</h1>
+
+<div class="ui attached raised segment" id="content">
+
+    <p>{{ 'DELETE_QUESTION' | translate }}</p>
+
+    <a href="#/entries" class="ui labeled icon negative button">
+        <i class="remove icon"></i>
+        {{ 'DELETE_NO' | translate }}
+    </a>
+    <a class="ui right labeled icon positive button" ng-click="delete()">
+        <i class="checkmark icon"></i>
+        {{ 'DELETE_YES' | translate }}
+    </a>
+
+</div>

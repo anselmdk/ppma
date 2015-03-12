@@ -1,0 +1,26 @@
+<h1 class="ui top attached medium header">{{ 'INDEX_HEAD' | translate }}</h1>
+
+<div class="ui attached raised segment" id="content">
+    <table class="ui striped very basic table">
+        <thead>
+        <tr>
+            <th class="five wide">{{ 'INDEX_TH_HEAD_NAME' | translate }}</th>
+            <th colspan="2">{{ 'INDEX_TH_HEAD_TAGS' | translate }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="entry in entries">
+            <td><a>{{entry.name}}</a></td>
+            <td>
+                <span ng-repeat="tag in entry.tags">
+                    {{tag}}
+                </span>
+            </td>
+            <td class="right aligned">
+                <a href="#/entries/{{entry.id}}/update"><i class="bordered small link pencil icon"></i> </a>
+                <a href="#/entries/{{entry.id}}/delete"><i class="bordered small link remove icon"></i> </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
