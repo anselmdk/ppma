@@ -1,25 +1,25 @@
-<h1 class="ui top attached medium header">{{ 'DELETE_HEAD' | translate }}</h1>
+<h1 class="ui top attached medium header">{{ 'UPDATE_HEAD' | translate }}</h1>
 
 <div class="ui attached raised segment" id="content">
 
     <div class="ui error message" ng-show="form.$invalid && form.$submitted">
         <i class="close icon"></i>
         <div class="header">
-            There was some errors
+            {{ 'FORM_ERROR_SUMMARY' | translate }}
         </div>
         <ul class="list">
-            <li ng-show="form.password.$error.required">Password cannot be blank</li>
+            <li ng-show="form.password.$error.required">{{ 'FORM_ERROR_PASSWORD_REQUIRED' | translate }}</li>
         </ul>
     </div>
 
     <form name="form" class="ui form" ng-submit="save()" novalidate>
 
         <div class="field">
-            <label for="name">Name</label>
+            <label for="name">{{ 'FORM_LABEL_NAME' | translate }}</label>
             <input type="text" id="name" ng-model="entry.name">
         </div>
         <div class="field">
-            <label for="category">Category</label>
+            <label for="category">{{ 'FORM_LABEL_CATEGORY' | translate }}</label>
             <select class="ui search dropdown" id="category" ng-model="entry.category">
                 <option>Internet</option>
                 <option>Stuff</option>
@@ -27,28 +27,28 @@
         </div>
         <div class="two fields">
             <div class="field">
-                <label for="username">Username</label>
+                <label for="username">{{ 'FORM_LABEL_USERNAME' | translate }}</label>
                 <input type="text" id="username" ng-model="entry.username">
             </div>
             <div class="field" ng-class="{ error: form.$submitted && form.password.$invalid }">
-                <label for="password">Password</label>
+                <label for="password">{{ 'FORM_LABEL_PASSWORD' | translate }}</label>
                 <input type="password" name="password" id="password" ng-model="entry.password" required>
             </div>
         </div>
         <div class="field">
-            <label for="url">URL</label>
+            <label for="url">{{ 'FORM_LABEL_URL' | translate }}</label>
             <input type="url" id="url" ng-model="entry.url">
         </div>
         <div class="field">
-            <label for="tags">Tags</label>
+            <label for="tags">{{ 'FORM_LABEL_TAGS' | translate }}</label>
             <input type="text" id="tags" ng-model="entry.tags">
         </div>
 
         <button type="submit" class="ui right floated positive button">
-            Create
+            {{ 'FORM_BUTTON_UPDATE' | translate }}
         </button>
         <a href="#/entries" type="submit" class="ui right floated button">
-            Cancel
+            {{ 'FORM_BUTTON_CANCEL' | translate }}
         </a>
     </form>
 
