@@ -9,6 +9,9 @@ angular.module('ppmaAppModule').config([
     ).when('/entries/:id/delete',
       controller: 'ppmaEntryDeleteController'
       templateUrl: 'js/entry/views/delete.html'
+    ).when('/entries/:id/update',
+      controller: 'ppmaEntryUpdateController'
+      templateUrl: 'js/entry/views/update.html'
     ).otherwise(
       redirectTo: '/entries'
     )

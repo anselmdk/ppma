@@ -1,0 +1,58 @@
+<h1 class="ui top attached medium header">{{ 'DELETE_HEAD' | translate }}</h1>
+
+<div class="ui attached raised segment" id="content">
+
+    <div class="ui error message" ng-show="form.$invalid && form.$submitted">
+        <i class="close icon"></i>
+        <div class="header">
+            There was some errors
+        </div>
+        <ul class="list">
+            <li ng-show="form.password.$error.required">Password cannot be blank</li>
+        </ul>
+    </div>
+
+    <form name="form" class="ui form" ng-submit="save()" novalidate>
+
+        <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" ng-model="entry.name">
+        </div>
+        <div class="field">
+            <label for="category">Category</label>
+            <select class="ui search dropdown" id="category" ng-model="entry.category">
+                <option>Internet</option>
+                <option>Stuff</option>
+            </select>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label for="username">Username</label>
+                <input type="text" id="username" ng-model="entry.username">
+            </div>
+            <div class="field" ng-class="{ error: form.$submitted && form.password.$invalid }">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" ng-model="entry.password" required>
+            </div>
+        </div>
+        <div class="field">
+            <label for="url">URL</label>
+            <input type="url" id="url" ng-model="entry.url">
+        </div>
+        <div class="field">
+            <label for="tags">Tags</label>
+            <input type="text" id="tags" ng-model="entry.tags">
+        </div>
+
+        <button type="submit" class="ui right floated positive button">
+            Create
+        </button>
+        <a href="#/entries" type="submit" class="ui right floated button">
+            Cancel
+        </a>
+    </form>
+
+
+</div>
+
+

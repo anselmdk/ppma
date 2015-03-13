@@ -1,7 +1,7 @@
 <h1 class="ui top attached medium header">{{ 'INDEX_HEAD' | translate }}</h1>
 
 <div class="ui attached raised segment" id="content">
-    <table class="ui striped very basic table">
+    <table class="ui striped  very basic table">
         <thead>
         <tr>
             <th class="five wide">{{ 'INDEX_TH_HEAD_NAME' | translate }}</th>
@@ -17,8 +17,11 @@
                 </span>
             </td>
             <td class="right aligned">
-                <a href="#/entries/{{entry.id}}/update"><i class="bordered small link pencil icon"></i> </a>
-                <a href="#/entries/{{entry.id}}/delete"><i class="bordered small link remove icon"></i> </a>
+                <a href="#/entries/{{entry.id}}/delete"><i class="bordered small link linkify icon"></i></a>
+                <a href="#/entries/{{entry.id}}/delete"><i class="bordered small link user icon"></i></a>
+                <a href="#/entries/{{entry.id}}/delete"><i class="bordered small link copy icon"></i></a>
+                <a href="#/entries/{{entry.id}}/update"><i class="bordered small link pencil icon"></i></a>
+                <a href="#/entries/{{entry.id}}/delete"><i class="bordered small link remove icon"></i></a>
             </td>
         </tr>
         </tbody>
